@@ -1,0 +1,11 @@
+Package: kiwisR
+Title: Wrapper for Querying Data from KiWIS Databases
+Version: 0.0.0.9000
+Authors@R: person("Ryan", "Whaley", email = "rdgwhaley@gmail.com", role = c("aut", "cre"))
+Description: Allows users to query KiWIS databases for hydrometric information. Currently supports three default hubs and also allows for non-default hubs to be used. 
+Depends: R (>= 3.4.2)
+License: MIT
+Encoding: UTF-8
+LazyData: true
+Imports : dplyr, lubridate
+RoxygenNote: 6.0.1
