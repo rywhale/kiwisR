@@ -44,6 +44,7 @@ Getting Station Information
 Either get the whole station information dataframe with
 
 ``` r
+# With swmc as the hub
 swmc.stn.dat <- getStationList(hub = 'swmc')
 head(swmc.stn.dat)
                      station_name station_id station_latitude station_longitude
@@ -53,12 +54,16 @@ head(swmc.stn.dat)
 ```
 
 ``` r
+# With grand as the hub
 grand.stn.dat <- getStationList(hub = 'grand')
 head(grand.stn.dat)
-
+            station_name station_id station_latitude station_longitude
+1              Aberfoyle      14575         43.45466         -80.16263
+2        Armstrong Mills      14512         43.63967         -80.26998
+3 Arthur Climate Station      14447         43.83069         -80.54082
+```
 
 or subset based on location like this
-```
 
 ``` r
 # Bbox format = (min_x, min_y, max_x, max_y)
