@@ -4,8 +4,7 @@
 \alias{getTimeseriesValues}
 \title{getTimeseriesValues}
 \usage{
-getTimeseriesValues(hub, ts.id, from = NA, to = NA,
-  date.format = "yyyy-MM-dd HH:mm:ss")
+getTimeseriesValues(hub, ts.id, from = NA, to = NA, time.stamp = TRUE)
 }
 \arguments{
 \item{hub}{The location of the API service. Default options include 'swmc', 'grand' and 'quinte'. See the README for adding additional hubs.}
@@ -13,6 +12,8 @@ getTimeseriesValues(hub, ts.id, from = NA, to = NA,
 \item{from}{The start of the date range. Defaults to yesterday.}
 
 \item{to}{The end of the date range. Defaults to today.}
+
+\item{time.stamp}{Whether or not to return timestamp with date. Defaults to TRUE.}
 
 \item{ts_id}{Timeseries identifier. Can be found using getTimeseriesList().}
 }

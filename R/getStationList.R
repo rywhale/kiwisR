@@ -5,7 +5,7 @@
 #' @param bounding.box (Optional) A comma separated string in the following format: min_x, min_y, max_x, max_y
 #' @param hub The location of the API service. Default options include 'swmc', 'grand' and 'quinte'. See the README for adding additional hubs.
 #' @return Dataframe containing station information to be passed to other functions (e.g. getTimeseriesList)
-#' @import dplyr
+#' @import dplyr httr
 #' @export
 #' @examples
 #' \dontrun{

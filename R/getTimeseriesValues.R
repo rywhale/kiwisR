@@ -6,6 +6,7 @@
 #' @param ts_id Timeseries identifier. Can be found using getTimeseriesList().
 #' @param from The start of the date range. Defaults to yesterday.
 #' @param to The end of the date range. Defaults to today.
+#' @param time.stamp Whether or not to return timestamp with date. Defaults to TRUE. 
 #' @import lubridate
 #' @export
 #' @examples
@@ -18,12 +19,19 @@ getTimeseriesValues <- function(hub,
                                 ts.id,
                                 from = NA,
                                 to = NA,
-                                date.format = "yyyy-MM-dd HH:mm:ss") {
+                                time.stamp = TRUE) {
 
   # Default date range to past 24-hours
   if(is.na(from) & is.na(to)){
     from <- today() - 1
     to <- today()
+  }
+  
+  # Date format
+  if(time.stamp == TRUE){
+    date.format = "yyyy-MM-dd HH:mm:ss"
+  }else{
+    date.format = "yyyy-MM-dd"
   }
 
   # Hub identification
@@ -66,7 +74,7 @@ getTimeseriesValues <- function(hub,
                 "&md_returnfields=ts_unitname")
 
   # Try to read file
-  status <- suppressWarnings(try(read.csv(url), silent = T))
+  status <- suppressWarnings(try(read.csv(url, row.names = NULL), silent = T))
 
   # Check for status error
   if(class(status) != "try-error"){
@@ -74,11 +82,14 @@ getTimeseriesValues <- function(hub,
     ts.dat <- suppressWarnings(read.csv(url,
                                         sep = ";",
                                         stringsAsFactors = F,
-                                        header = FALSE))
-
+                                        header = FALSE,
+                                        row.names = NULL))
     # Get parameters units
     ts_unit <- ts.dat[1,2]
-
+    
+    # Make sure values are numeric
+    ts.dat[,2] <- as.numeric(ts.dat[,2])
+    
     # Column names
     names(ts.dat) <- c("Timestamp", paste0("Value(", ts_unit, ")"))
 
@@ -90,10 +101,9 @@ getTimeseriesValues <- function(hub,
 
       # Convert Timestamps to POSIXct
       ts.dat$Timestamp <- ymd_hms(ts.dat$Timestamp)
-
-      # Reset row numbers
+      
       row.names(ts.dat) <- NULL
-
+      
       return(ts.dat)
 
     }else{

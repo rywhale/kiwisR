@@ -47,9 +47,9 @@ getTimeseriesList <- function(hub, station.id){
                 "&datasource=0",
                 "&format=csv",
                 "&station_id=", station.id)
-
+  
   # Try to read file
-  status <- suppressWarnings(try(read.csv(url), silent = T))
+  status <- suppressWarnings(try(read.csv(url, row.names = NULL), silent = T))
 
   # Check for status error
   if(class(status) != "try-error"){
@@ -57,7 +57,8 @@ getTimeseriesList <- function(hub, station.id){
     suppressWarnings(ts.dat <- read.csv(url,
                                         sep = ";",
                                         stringsAsFactors = F,
-                                        header = FALSE))
+                                        header = FALSE,
+                                        row.names = NULL))
 
     # Column names
     names(ts.dat) <- ts.dat[1,]
@@ -65,14 +66,13 @@ getTimeseriesList <- function(hub, station.id){
     # Get rid of header row and subset
     ts.dat <- ts.dat[-1, ] %>%
       select('ts_name', 'ts_id')
-
-    # Row names
+    
     row.names(ts.dat) <- NULL
-
+    
     return(ts.dat)
 
   }else{
     # Error message
-    return("The ts_id is invalid.")
+    return("The station_id is invalid.")
   }
 }

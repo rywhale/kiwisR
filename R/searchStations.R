@@ -65,22 +65,23 @@ searchStations <- function(hub, search.trm){
                                         sep = ";",
                                         stringsAsFactors = F,
                                         header = FALSE))
-
+    
     # Column names
     names(stn.dat) <- stn.dat[1,]
-
-    # Get rid of header row and station_no column
-    stn.dat <- stn.dat[-1, ] %>%
-      within(rm("station_no"))
-
-    # Row names
-    row.names(stn.dat) <- NULL
-
-    return(stn.dat)
-
-  }else{
-    # Error message
-    return(paste0("No results matching ",
-                  search.trm))
+    
+    # Check for "no matches"
+    if("No matches." %in% names(stn.dat)){
+      return("No matches found.")
+    }else{
+      # Get rid of header row and station_no column
+      stn.dat <- stn.dat[-1, ] %>%
+        within(rm("station_no"))
+      
+      # Row names
+      row.names(stn.dat) <- NULL
+      
+      return(stn.dat)
+      
+    }
   }
 }
