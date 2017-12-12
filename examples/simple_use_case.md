@@ -1,13 +1,12 @@
----
-title: "Simple Use Case"
-output: rmarkdown::github_document
----
+Simple Use Case
+================
 
-## Grab Station Information
+Grab Station Information
+------------------------
 
 We'll begin by getting some information for the station we're interested in. Note that we also specify the data hub.
 
-```{r eval = F}
+``` r
 # Search stations ending with "Peterborough"
 PtboStations <- searchStations(hub = "swmc", search.trm = "*Peterborough")
 
@@ -16,13 +15,11 @@ PtboStations
 
                    station_name station_id station_latitude station_longitude
 1 Jackson Creek at Peterborough     144619        44.302925       -78.3211367
-
-
 ```
 
 There's only one station ending with 'Peterborough', Jackson Creek at Peterborough. Let's see what timeseries are available.
 
-```{r eval = F}
+``` r
 # Get station_id for Jackson Creek at Peterborough
 JacksonID <- PtboStations$station_id[[1]]
 
@@ -39,20 +36,18 @@ JacksonTS
 4          JACKSONP.HRel.15.P  948487042
 5          JACKSONP.HRel.15.O  948486042
 ...
-
 ```
 
-Now we can grab the ts_id(s) we're interested in. Let's go for Precip.Day.Total and LVL.Day.Mean 
+Now we can grab the ts\_id(s) we're interested in. Let's go for Precip.Day.Total and LVL.Day.Mean
 
-```{r eval = FALSE}
+``` r
 PrecipID <- JacksonTS$ts_id[[22]]
 LvlID <- JacksonTS$ts_id[[93]]
-
 ```
 
-Now we're ready to get some values for those timeseries. We'll see what was going on there the first week of April 2017 by specifying the 'from' and 'to' variables. 
+Now we're ready to get some values for those timeseries. We'll see what was going on there the first week of April 2017 by specifying the 'from' and 'to' variables.
 
-```{r eval = FALSE}
+``` r
 Precip <- getTimeseriesValues(hub = "swmc", ts.id = PrecipID, from = "2017-04-01", to = "2017-04-30")
 Lvl <- getTimeseriesValues(hub = "swmc", ts.id = LvlID, from = "2017-04-01", to = "2017-04-30")
 
@@ -77,12 +72,11 @@ head(Lvl)
 4 2017-04-01 00:15:00         1.74
 5 2017-04-01 00:20:00         1.74
 6 2017-04-01 00:25:00         1.74
-
 ```
 
-Finally, let's stick the two timeseries together based on common time stamps and graph this new dataframe using ggplot. 
+Finally, let's stick the two timeseries together based on common time stamps and graph this new dataframe using ggplot.
 
-```{r eval = F}
+``` r
 # Load necessary libraries 
 library(dplyr)
 library(ggplot2)
@@ -105,6 +99,7 @@ ggplot(data = MultiTS, aes(x = Timestamp)) +
   # Legend title
   labs(color = "Parameter")
 ```
+
 Here's what that graph looks like
 
 ![](E:/hellofriend/R_packages/kiwisR/examples/simple_use_case_plot.png)
