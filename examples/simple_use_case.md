@@ -38,12 +38,18 @@ JacksonTS
 ...
 ```
 
+Grab Timeseries Information
+---------------------------
+
 Now we can grab the ts\_id(s) we're interested in. Let's go for Precip.Day.Total and LVL.Day.Mean
 
 ``` r
 PrecipID <- JacksonTS$ts_id[[22]]
 LvlID <- JacksonTS$ts_id[[93]]
 ```
+
+Grab Timeseries Values
+----------------------
 
 Now we're ready to get some values for those timeseries. We'll see what was going on there the first week of April 2017 by specifying the 'from' and 'to' variables.
 
@@ -73,6 +79,9 @@ head(Lvl)
 5 2017-04-01 00:20:00         1.74
 6 2017-04-01 00:25:00         1.74
 ```
+
+Do Stuff!
+---------
 
 Finally, let's stick the two timeseries together based on common time stamps and graph this new dataframe using ggplot.
 
