@@ -107,4 +107,4 @@ ggplot(data = MultiTS, aes(x = Timestamp)) +
 ```
 Here's what that graph looks like
 
-![](E:/hellofriend/R_packages/kiwisR/examples/simple_use_case_plot.png)
+![](simple_use_case_plot.png)
