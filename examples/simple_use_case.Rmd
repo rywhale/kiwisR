@@ -20,6 +20,8 @@ PtboStations
 
 ```
 
+## Grab Timeseries Information
+
 There's only one station ending with 'Peterborough', Jackson Creek at Peterborough. Let's see what timeseries are available.
 
 ```{r eval = F}
@@ -42,7 +44,6 @@ JacksonTS
 
 ```
 
-## Grab Timeseries Information
 Now we can grab the ts_id(s) we're interested in. Let's go for Precip.Day.Total and LVL.Day.Mean 
 
 ```{r eval = FALSE}

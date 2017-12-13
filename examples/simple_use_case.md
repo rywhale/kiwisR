@@ -17,6 +17,9 @@ PtboStations
 1 Jackson Creek at Peterborough     144619        44.302925       -78.3211367
 ```
 
+Grab Timeseries Information
+---------------------------
+
 There's only one station ending with 'Peterborough', Jackson Creek at Peterborough. Let's see what timeseries are available.
 
 ``` r
@@ -37,9 +40,6 @@ JacksonTS
 5          JACKSONP.HRel.15.O  948486042
 ...
 ```
-
-Grab Timeseries Information
----------------------------
 
 Now we can grab the ts\_id(s) we're interested in. Let's go for Precip.Day.Total and LVL.Day.Mean
 
