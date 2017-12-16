@@ -51,7 +51,7 @@ LvlID <- JacksonTS$ts_id[[93]]
 Grab Timeseries Values
 ----------------------
 
-Now we're ready to get some values for those timeseries. We'll see what was going on there the first week of April 2017 by specifying the 'from' and 'to' variables.
+Now we're ready to get some values for those timeseries. We'll see what was going on there April 2017 by specifying the 'from' and 'to' variables.
 
 ``` r
 Precip <- getTimeseriesValues(hub = "swmc", ts.id = PrecipID, from = "2017-04-01", to = "2017-04-30")
