@@ -20,11 +20,11 @@ source('R/ki_timeseries_values.R')
 ## Overview
 A wrapper for querying KiWIS APIs to retrieve hydrometric data. Users can toggle between various databases by specifying the 'hub' argument. Currently, there are three default hubs to choose from:
 
-* _swmc_ : [Ontario Surface Water Monitoring Centre]("https://www.ontario.ca/page/surface-water-monitoring")
-* _grand_ : [Grand River Conservation Authority]("https://www.grandriver.ca/en/index.aspx")
-* _quinte_ : [Quinte Conservation Authority]("http://quinteconservation.ca/site/")
+* _swmc_ : [Ontario Surface Water Monitoring Centre](https://www.ontario.ca/page/surface-water-monitoring)
+* _grand_ : [Grand River Conservation Authority](https://www.grandriver.ca/en/index.aspx)
+* _quinte_ : [Quinte Conservation Authority](http://quinteconservation.ca/site/)
 
-All data is returned as tidy [tibbles]("https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html"). 
+All data is returned as tidy [tibbles](https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html). 
 
 ## Installation
 To install ```kiwisR``` you first need to install ```remotes```. 
@@ -159,4 +159,4 @@ specify the ```hub``` argument with
 
 http://kiwis.grandriver.ca/KiWIS/KiWIS?
 
-If you'd like to have a hub added to the defaults, please [Submit an Issue]("https://github.com/rywhale/kiwisR/issues")
+If you'd like to have a hub added to the defaults, please [Submit an Issue](https://github.com/rywhale/kiwisR/issues)

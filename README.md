@@ -7,11 +7,11 @@ Overview
 
 A wrapper for querying KiWIS APIs to retrieve hydrometric data. Users can toggle between various databases by specifying the 'hub' argument. Currently, there are three default hubs to choose from:
 
--   *swmc* : [Ontario Surface Water Monitoring Centre](%22https://www.ontario.ca/page/surface-water-monitoring%22)
--   *grand* : [Grand River Conservation Authority](%22https://www.grandriver.ca/en/index.aspx%22)
--   *quinte* : [Quinte Conservation Authority](%22http://quinteconservation.ca/site/%22)
+-   *swmc* : [Ontario Surface Water Monitoring Centre](https://www.ontario.ca/page/surface-water-monitoring)
+-   *grand* : [Grand River Conservation Authority](https://www.grandriver.ca/en/index.aspx)
+-   *quinte* : [Quinte Conservation Authority](http://quinteconservation.ca/site/)
 
-All data is returned as tidy [tibbles](%22https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html%22).
+All data is returned as tidy [tibbles](https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html).
 
 Installation
 ------------
@@ -298,4 +298,4 @@ specify the `hub` argument with
 
 <http://kiwis.grandriver.ca/KiWIS/KiWIS>?
 
-If you'd like to have a hub added to the defaults, please [Submit an Issue](%22https://github.com/rywhale/kiwisR/issues%22)
+If you'd like to have a hub added to the defaults, please [Submit an Issue](https://github.com/rywhale/kiwisR/issues)
