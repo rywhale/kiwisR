@@ -1,191 +1,162 @@
 ---
-title: "kiwisR"
-output: rmarkdown::github_document
+title: kiwisR
+output: github_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+source('R/ki_timeseries_list.R')
+source('R/ki_station_list.R')
+source('R/ki_timeseries_values.R')
 ```
 
 ## Overview
 A wrapper for querying KiWIS APIs to retrieve hydrometric data. Users can toggle between various databases by specifying the 'hub' argument. Currently, there are three default hubs to choose from:
 
-1. 'swmc' - Ontario Surface Water Monitoring Centre
+* _swmc_ : [Ontario Surface Water Monitoring Centre]("https://www.ontario.ca/page/surface-water-monitoring")
+* _grand_ : [Grand River Conservation Authority]("https://www.grandriver.ca/en/index.aspx")
+* _quinte_ : [Quinte Conservation Authority]("http://quinteconservation.ca/site/")
 
-2. 'grand' - Grand River Conservation Authority
-
-3. 'quinte' - Quinte Conservation Authority
-
-You can use this package for a KiWIS hub not included in this list by feeding the location of the API service to the 'hub' argument. In general, this is everything that comes before '/KiWIS/KiWIS?service=kisters' in the URL. For example:
-
-If your URL looks like 'http://kiwis.grandriver.ca/KiWIS/KiWIS?service=kisters&type=queryServices&request=getRequestInfo&datasource=0&format=html'
-
-you'd specify the hub argument with 
-'http://kiwis.grandriver.ca/
-
+All data is returned as tidy [tibbles]("https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html"). 
 
 ## Installation
-```{r eval = F}
+To install ```kiwisR``` you first need to install ```remotes```. 
+
+```{r eval = FALSE}
 install.packages("remotes")
-remotes::install_github("rywhale/kiwisR")
+remotes::install_github('rywhale/kiwisR')
 ```
 
 Then load the package with
 
-```{r eval = F}
+```{r eval = FALSE}
 library(kiwisR)
 ```
 
-Note: If you are unable to install this way due to firewall restrictions, try downloading a zip version of the project (click "Clone or download") and then
+## Usage
 
-```{r eval = F}
-remotes::install_local("path_to_zip")
-```
+### Get Station Information
 
-## Getting Station Information
+#### All Available Stations
 
-Either get the whole station information dataframe with 
-```{r eval = F}
+By default, ```ki_station_list()``` returns a tibble containing information for all available stations for the select hub. 
+
+```{r}
 # With swmc as the hub
-swmc.stn.dat <- getStationList(hub = 'swmc')
-head(swmc.stn.dat)
-                     station_name station_id station_latitude station_longitude
-1                    ABBOTSFORD A     133535         49.03308        -122.36667
-2                        ABERDEEN     121939         45.45000         -98.43308
-3                  ABITIBI CANYON     148200         49.91642         -81.56667
-```
+ki_station_list(hub = 'swmc')
 
-```{r eval = F}
 # With grand as the hub
-grand.stn.dat <- getStationList(hub = 'grand')
-head(grand.stn.dat)
-            station_name station_id station_latitude station_longitude
-1              Aberfoyle      14575         43.45466         -80.16263
-2        Armstrong Mills      14512         43.63967         -80.26998
-3 Arthur Climate Station      14447         43.83069         -80.54082
-```
-
-or subset based on location like this
-
-```{r eval = F}
-# Bbox format = (min_x, min_y, max_x, max_y)
-bbox <- "-80.126038,43.458297,-79.002481,43.969098"
-stns <- getStationList(hub = 'swmc', bounding.box = bbox)
-head(stns)
-                  station_name station_id station_latitude station_longitude
-1                 ALBION HILLS     137457         43.93308         -79.83333
-2 Acton Sewage Treatment Plant     149765         43.63114         -80.01667
-3                  BELFOUNTAIN     147848         43.79975         -80.01667
+ki_station_list(hub = 'grand')
 
 ```
 
-You can also search for stations by name. This function allows the use of * as a wildcard.
+#### Within Bounding Box
 
-```{r eval = F}
-# By exact name
-my.stn <- searchStations(hub = 'swmc', "Lake Ontario at Toronto")
-my.stn
-             station_name station_id station_latitude station_longitude
-1 Lake Ontario at Toronto     144186      43.64169322      -79.38030507
+You can also specify a bounding box to look within for stations. The bounding box should be either
 
+* A vector like this ```c(min_x, min_y, max_x, max_y)```
+* Or a comma separated string like this ```"min_x,min_y,max_x,max_y"```
+
+```{r}
+# With vector
+my_bounding_box <- c("-80.126038", "43.458297", "-79.002481", "43.969098")
+my_stations <- ki_station_list(hub = 'swmc', bounding_box = my_bounding_box)
+my_stations
+
+# With comma separated string
+my_bounding_box <- "-80.126038,43.458297,-79.002481,43.969098"
+my_stations <- ki_station_list(hub = 'swmc', bounding_box = my_bounding_box)
+my_stations
+
+```
+
+#### By Search Term
+You can also narrow search results using a search term. This supports the use of ```*``` as a wildcard.
+
+```{r}
 # All stations starting with 'A'
-a.stns <- searchStations(hub = 'swmc', "A*")
-head(a.stns)
-     station_name station_id station_latitude station_longitude
-1    ABBOTSFORD A     133535      49.03307961      -122.3666708
-2         ALERT A     132255      82.51666993       -62.2830803
-3      ALEXANDRIA     147654      45.31666964      -74.61666967
+my_stations <- ki_station_list(hub = 'swmc', search_term = "A*")
+my_stations
 
-# All stations ending with 'Oshawa'
-oshawa.stns <- searchStations(hub = 'swmc', "*Oshawa")
-oshawa.stns
-              station_name station_id station_latitude station_longitude
-1 Harmony Creek at Oshawa     144396      43.88334204      -78.81585606
-2  Oshawa Creek at Oshawa     144342      43.92808201      -78.89113781
+# All stations starting with 'Oshawa'
+my_stations <- ki_station_list(hub = 'swmc', search_term = "Oshawa*")
+my_stations
+```
+
+### Get Time Series Information
+
+You can use the ```station_id``` column returned using ```ki_station_list()``` to figure out
+which time series are available for a given station. 
+
+#### One Station
+
+```{r}
+# Single station_id
+available_ts <- ki_timeseries_list(hub = 'swmc', station_id = "144659")
+available_ts
 
 ```
 
+#### Multiple Stations
+If you provide a vector to ```station_id```, the returned tibble will have all the
+available time series from _all_ stations. They can be differentiated using the 
+```station_name``` column.
 
-## Getting Timeseries Information
+```{r}
+# Vector of station_ids
+my_station_ids <- c("144659", "144342")
 
-The dataframe produced with searchStations() or getStationList() contains a column called 'station_id'. These values can be used to generate a list of timeseries available for that station. 
-
-```{r eval = F}
-stn.ts <- getTimeseriesList(hub = 'swmc', station.id = "144659")
-head(stn.ts)
-      ts_name     ts_id
-1   Q.DayMean 949057042
-2       Q.1.O 949048042
-3    Q.DayMax 949056042
-
+available_ts <- ki_timeseries_list(hub = 'swmc', station_id = my_station_ids)
+available_ts
 ```
 
+### Get Time Series Values
 
-## Getting Timeseries Values
+You can now use the ```ts_id``` column in the tibble produced by ```ki_timeseries_list()``` to query values for
+chosen time series. 
 
-Similarly, the dataframe produced by getTimeseriesList() contains a column called 'ts_id' which you'll use to access data for a specific timeseries. By default, data for the past 24 hours is returned (all time stamps are in UTC).
+By default this will return values for the past 24 hours. You can specify the dates you're interested in
+by setting ```start_date``` and ```end_date```. These should be set as date strings with the format 'YYYY-mm-dd'. 
 
-```{r eval = F}
-ts.dat <- getTimeseriesValues(hub = 'swmc', ts.id = "948928042")
-head(ts.dat)
-            Timestamp Value(millimeter)
-1 2017-11-25 00:00:00               0.0
-2 2017-11-25 00:15:00               0.0
+#### One Time Series
+
+```{r}
+# Past 24 hours
+my_values <- ki_timeseries_values(hub = 'swmc', ts_id = '948928042')
+my_values
 ```
 
-You can provide a date range by specifying the 'from' and 'to' variables.
+#### Multiple Time Series
+If you provide a vector to ```ts_id```, a list of tibbles will be returned. Each tibble
+is named according to the station name and the time series' parameter. 
 
-Acceptable date formats are:
-  'yyyy-MM-dd HH:mm:ss',
-  'yyyy-MM-dd',
-  'yyyy-MM',
-  'yyyy'.
-
-```{r eval = F}
-# Query with date range
-ts.dat <- getTimeseriesValues(hub = 'swmc',
-                              ts.id = "948928042", 
-                              from = "2017-01-01", 
-                              to = "2017-02-22")
-head(ts.dat)
-            Timestamp Value(millimeter)
-1 2017-01-01 05:15:00               0.0
-2 2017-01-01 05:30:00               0.0
-3 2017-01-01 05:45:00               0.0
-``` 
-
-
-## Using Lapply to Get Data for Multiple Timeseries
-```{r eval = F}
-# Vector of ts_ids to get values for
-ts.ids <- c("948928042", "948603042")
-
-# Returns a list of dataframes
-ts.dats <- lapply(ts.ids, function(x){
-  getTimeseriesValues(x,
-                      hub = 'swmc',
-                      from = "2017-08-28", 
-                      to = "2017-09-13")
-  })
-
-# First timeseries dataframe
-head(ts.dats[[1]])
-            Timestamp Value(millimeter)
-1 2017-08-28 00:00:00               0.0
-2 2017-08-28 00:15:00               0.0
-
-# Second timeseries dataframe
-head(ts.dats[[2]])
-            Timestamp Value(cubic meter per second)
-1 2017-08-28 05:00:00                         0.251
-2 2017-08-29 05:00:00                         0.243
-3 2017-08-30 05:00:00                         0.243
-
+```{r}
+# Specified date, multiple time series
+my_ts_ids <- c("948928042", "948603042")
+my_values <- ki_timeseries_values(hub = 'swmc', 
+                                  ts_id = my_ts_ids,
+                                  start_date = "2017-08-28",
+                                  end_date = "2017-09-13")
+my_values
 ```
 
-## Error Message Explanations
-"No values available for that selection" : Query returned empty table
+## Using Other Hubs
+You can use this package for a KiWIS hub not included in this list by feeding the location of the API service to the ```hub``` argument.
 
-"The ts_id or date range is invalid" : No record was found for the chosen ts_id/date range
+For instance:
+If your URL looks like 
 
-"The ts_id is invalid": No record was found for the chosen ts_id
+http://kiwis.grandriver.ca/KiWIS/KiWIS?service=kisters&type=queryServices&request=getRequestInfo&datasource=0&format=html
+
+specify the ```hub``` argument with
+
+http://kiwis.grandriver.ca/KiWIS/KiWIS?
+
+If you'd like to have a hub added to the defaults, please [Submit an Issue]("https://github.com/rywhale/kiwisR/issues")
