@@ -2,8 +2,7 @@
 % Please edit documentation in R/ki_station_list.R
 \name{ki_station_list}
 \alias{ki_station_list}
-\title{Get tibble containing station information.
-Returns all available stations by default and allows for search terms.}
+\title{Get tibble containing station information.}
 \usage{
 ki_station_list(hub, search_term, bounding_box = NA)
 }
@@ -19,7 +18,6 @@ with the following format: (min_x, min_y, max_x, max_y).}
 Tibble containing station id, name, latitude and longitude
 }
 \description{
-Get tibble containing station information.
 Returns all available stations by default and allows for search terms.
 }
 \examples{

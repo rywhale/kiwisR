@@ -1,6 +1,6 @@
 #' Get tibble containing station information.
-#' Returns all available stations by default and allows for search terms.
 #'
+#' @description Returns all available stations by default and allows for search terms.
 #' @param hub The KiWIS database you are querying. Default options are 'swmc', 'grand', 'quinte'. See README for more details.
 #' @param search_term (Optional) A station name to search for. Supports the use of * as a wildcard.
 #' @param bounding_box (Optional) A bounding box to search withhin for stations. Should be a vector or comma separated string
