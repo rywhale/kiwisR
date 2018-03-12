@@ -77,9 +77,6 @@ ki_station_list <- function(hub, search_term, bounding_box = NA){
   # Add column names
   colnames(content_dat) <- json_content[1, ]
 
-  # Eliminate unnecessary column
-  content_dat <- content_dat[, -2]
-
   # Remove garbage stations
   content_dat <- content_dat[!grepl(paste(garbage, collapse = "|"), content_dat$station_name), ]
 
