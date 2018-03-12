@@ -1,6 +1,7 @@
 #' Get list of available time series for station or
 #' list of stations.
 #'
+#' @export
 #' @param hub The KiWIS database you are querying. Default options are 'swmc', 'grand', 'quinte'.
 #' See README for more details.
 #' @param station_id Either a single station id or a vector of station id. Can be string or numeric.

@@ -7,7 +7,7 @@
 ki_timeseries_values(hub, ts_id, start_date, end_date, time_zone)
 }
 \arguments{
-\item{hub}{The KiWIS database you are querying. Default options are 'swmc', 'grand', 'quinte'. 
+\item{hub}{The KiWIS database you are querying. Default options are 'swmc', 'grand', 'quinte'.
 See README for more details.}
 
 \item{ts_id}{Either: a single time series id or a vector of time series ids. Time series ids
