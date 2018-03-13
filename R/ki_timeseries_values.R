@@ -74,10 +74,10 @@ ki_timeseries_values <- function(hub, ts_id, start_date, end_date, time_zone){
   json_content <- jsonlite::fromJSON(httr::content(raw, "text"))
 
   if(length(names(json_content)) == 3){
-    return("No data available for selected ts_id.")
+    return(json_content$message)
   }
   if("rows" %in% names(json_content)){
-    num_rows <- json_content$rows
+    num_rows <- sum(as.numeric(json_content$rows))
     if(num_rows == 0){
       return("No data available for selected ts_id.")
     }
@@ -106,7 +106,7 @@ ki_timeseries_values <- function(hub, ts_id, start_date, end_date, time_zone){
   })
 
   # More than one ts id
-  if(length(ts_id) > 1 & tibble::is.tibble(content_dat)){
+  if(sum(sapply(content_dat, tibble::is.tibble)) == length(content_dat)){
     # Name data frames in list
     names(content_dat) <- paste0(json_content$station_name, " (",
                                  json_content$stationparameter_name, ")")
