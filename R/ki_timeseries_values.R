@@ -89,29 +89,32 @@ ki_timeseries_values <- function(hub, ts_id, start_date, end_date, time_zone){
     # Convert to data frame
     current_dat <- tibble::as_tibble(json_content$data[[x]])
 
-    # Add column names
-    names(current_dat) <- c("Timestamp",
-                            paste0(json_content$stationparameter_name[[x]],
-                                   " (",
-                                   json_content$ts_unitname[[x]],
-                                   ")"))
-    # Cast date column
-    current_dat$Timestamp <- lubridate::ymd_hms(current_dat$Timestamp)
+    if(nrow(current_dat) >= 1){
+      # Add column names
+      names(current_dat) <- c("Timestamp",
+                              paste0(json_content$stationparameter_name[[x]],
+                                     " (",
+                                     json_content$ts_unitname[[x]],
+                                     ")"))
+      # Cast date column
+      current_dat$Timestamp <- lubridate::ymd_hms(current_dat$Timestamp)
 
-    # Cast values column
-    current_dat[[2]] <- as.numeric(current_dat[[2]])
-
+      # Cast values column
+      current_dat[[2]] <- as.numeric(current_dat[[2]])
+    }
     return(current_dat)
-
   })
 
-  # More than one ts id
+  # Name data frames in list
   if(sum(sapply(content_dat, tibble::is.tibble)) == length(content_dat)){
-    # Name data frames in list
     names(content_dat) <- paste0(json_content$station_name, " (",
                                  json_content$stationparameter_name, ")")
-  }else{
-    content_dat <- content_dat[[1]]
+  }
+
+  # One time series returned
+  if(length(content_dat) > 1){
+    # Get rid of empty list items
+    content_dat <- content_dat[!is.null(content_dat)]
   }
 
   return(content_dat)
