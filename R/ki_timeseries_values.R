@@ -117,6 +117,11 @@ ki_timeseries_values <- function(hub, ts_id, start_date, end_date, time_zone){
     content_dat <- content_dat[!is.null(content_dat)]
   }
 
+  # One ts_id
+  if(length(ts_id) == 1){
+    content_dat <- content_dat[[1]]
+  }
+
   return(content_dat)
 
 }
