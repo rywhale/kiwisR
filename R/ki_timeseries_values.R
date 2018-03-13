@@ -73,9 +73,8 @@ ki_timeseries_values <- function(hub, ts_id, start_date, end_date, time_zone){
   # Parse to JSON
   json_content <- jsonlite::fromJSON(httr::content(raw, "text"))
 
-  # Check for failed query
-  if(json_content$type == "error"){
-    return(json_content$message)
+  if(json_content$rows == 0){
+    return("No data available for selected ts_id.")
   }
 
   # Grab data for each ts id
