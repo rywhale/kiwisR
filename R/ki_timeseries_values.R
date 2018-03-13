@@ -76,6 +76,12 @@ ki_timeseries_values <- function(hub, ts_id, start_date, end_date, time_zone){
   if(length(names(json_content)) == 3){
     return("No data available for selected ts_id.")
   }
+  if("rows" %in% names(json_content)){
+    num_rows <- json_content$rows
+    if(num_rows == 0){
+      return("No data available for selected ts_id.")
+    }
+  }
 
   # Grab data for each ts id
   content_dat <- lapply(seq(length(ts_id)), function(x){
@@ -100,7 +106,7 @@ ki_timeseries_values <- function(hub, ts_id, start_date, end_date, time_zone){
   })
 
   # More than one ts id
-  if(length(ts_id) > 1){
+  if(length(ts_id) > 1 & tibble::is.tibble(content_dat)){
     # Name data frames in list
     names(content_dat) <- paste0(json_content$station_name, " (",
                                  json_content$stationparameter_name, ")")

@@ -72,7 +72,7 @@ ki_station_list <- function(hub, search_term, bounding_box = NA){
   json_content <- jsonlite::fromJSON(httr::content(raw, "text"))
 
   # Convert to tibble
-  content_dat <- tibble::as_tibble(json_content[-1, ])
+  content_dat <- tibble::as_tibble(json_content)[-1, ]
 
   # Add column names
   colnames(content_dat) <- json_content[1, ]
