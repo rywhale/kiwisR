@@ -49,6 +49,7 @@ ki_timeseries_list <- function(hub, station_id){
                     request = "getTimeseriesList",
                     format = "json",
                     kvp = "true",
+                    returnfields = "coverage,station_name,station_id,ts_id,ts_name",
                     station_id = station_id)
 
   # Call API
@@ -67,9 +68,6 @@ ki_timeseries_list <- function(hub, station_id){
 
   # Add column names
   colnames(content_dat) <- json_content[1, ]
-
-  # Eliminate unnecessary columns
-  content_dat <- content_dat[, -c(2, 6, 7)]
 
   return(content_dat)
 }
