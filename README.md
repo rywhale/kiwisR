@@ -41,36 +41,36 @@ By default, `ki_station_list()` returns a tibble containing information for all 
 ``` r
 # With swmc as the hub
 ki_station_list(hub = 'swmc')
-#> # A tibble: 3,520 x 4
-#>                       station_name station_id station_latitude
-#>                              <chr>      <chr>            <chr>
-#>  1                    ABBOTSFORD A     133535      49.03307961
-#>  2                        ABERDEEN     121939      45.45000031
-#>  3                  ABITIBI CANYON     148200       49.9164159
-#>  4                    ABITIBI LAKE     121135      48.66141167
-#>  5 ABITIBI RIVER AT ABITIBI CANYON     136328       49.8797496
-#>  6 ABITIBI RIVER AT IROQUOIS FALLS     136304      48.76000036
-#>  7   ABITIBI RIVER AT ISLAND FALLS     136324      49.56974984
-#>  8   ABITIBI RIVER AT OTTER RAPIDS     136332      50.17974961
-#>  9     ABITIBI RIVER AT TWIN FALLS     136308      48.74974975
-#> 10             ACTINOLITE (PRICES)     147948      44.54974954
-#> # ... with 3,510 more rows, and 1 more variables: station_longitude <chr>
+#> # A tibble: 3,522 x 5
+#>    station_name    station_no station_id station_latitude station_longitu~
+#>    <chr>           <chr>      <chr>      <chr>            <chr>           
+#>  1 ABBOTSFORD A    CLIM-MSC-~ 133535     49.03307961      -122.3666708    
+#>  2 ABERDEEN        CLIM-MSC-~ 121939     45.45000031      -98.43308042    
+#>  3 ABITIBI CANYON  ZZSNOW-OP~ 148200     49.9164159       -81.56666679    
+#>  4 ABITIBI LAKE    CLIM-MNR-~ 121135     48.66141167      -80.14196139    
+#>  5 ABITIBI RIVER ~ HYDAT-04M~ 136328     49.8797496       -81.56000046    
+#>  6 ABITIBI RIVER ~ HYDAT-04M~ 136304     48.76000036      -80.65974982    
+#>  7 ABITIBI RIVER ~ HYDAT-04M~ 136324     49.56974984      -81.38000055    
+#>  8 ABITIBI RIVER ~ HYDAT-04M~ 136332     50.17974961      -81.6300003     
+#>  9 ABITIBI RIVER ~ HYDAT-04M~ 136308     48.74974975      -80.5800007     
+#> 10 ACTINOLITE (PR~ ZZSNOW-MN~ 147948     44.54974954      -77.33333458    
+#> # ... with 3,512 more rows
 
 # With grand as the hub
 ki_station_list(hub = 'grand')
-#> # A tibble: 89 x 4
-#>              station_name station_id  station_latitude  station_longitude
-#>                     <chr>      <chr>             <chr>              <chr>
-#>  1              Aberfoyle      14575 43.45465555555556         -80.162625
-#>  2        Armstrong Mills      14512          43.63967         -80.269977
-#>  3 Arthur Climate Station      14447      43.830686094      -80.540822376
-#>  4                    Ayr      14856         43.274975 -80.47487777777778
-#>  5  Baden Climate Station      14718      43.395533527      -80.660100299
-#>  6             Beaverdale      14534 43.42189722222223  -80.3326638888889
-#>  7           Below Elmira      15162         43.580107         -80.509161
-#>  8            Below Shand      14440 43.73120277777778 -80.34086944444444
-#>  9 Below Shand WQ Station      15355 43.73120277777778 -80.34086944444444
-#> 10       Blair WQ Station      15177          43.38405 -80.38408055555556
+#> # A tibble: 89 x 5
+#>    station_name    station_no station_id station_latitude station_longitu~
+#>    <chr>           <chr>      <chr>      <chr>            <chr>           
+#>  1 Aberfoyle       144        14575      43.454655555555~ -80.162625      
+#>  2 Armstrong Mills 186        14512      43.63967         -80.269977      
+#>  3 Arthur Climate~ 6          14447      43.830686094     -80.540822376   
+#>  4 Ayr             156        14856      43.274975        -80.47487777777~
+#>  5 Baden Climate ~ 9          14718      43.395533527     -80.660100299   
+#>  6 Beaverdale      168        14534      43.421897222222~ -80.33266388888~
+#>  7 Below Elmira    28         15162      43.580107        -80.509161      
+#>  8 Below Shand     87         14440      43.731202777777~ -80.34086944444~
+#>  9 Below Shand WQ~ 88         15355      43.731202777777~ -80.34086944444~
+#> 10 Blair WQ Stati~ 58         15177      43.38405         -80.38408055555~
 #> # ... with 79 more rows
 ```
 
@@ -86,39 +86,39 @@ You can also specify a bounding box to look within for stations. The bounding bo
 my_bounding_box <- c("-80.126038", "43.458297", "-79.002481", "43.969098")
 my_stations <- ki_station_list(hub = 'swmc', bounding_box = my_bounding_box)
 my_stations
-#> # A tibble: 176 x 4
-#>                              station_name station_id station_latitude
-#>                                     <chr>      <chr>            <chr>
-#>  1                           ALBION HILLS     137457      43.93308257
-#>  2           Acton Sewage Treatment Plant     149765      43.63113873
-#>  3                            BELFOUNTAIN     147848      43.79974939
-#>  4                           BELFOUNTAIN2     147864      43.79974999
-#>  5                                   BOYD     137465      43.81641643
-#>  6             BROUGHAM CREEK AT BROUGHAM     135564      43.91000014
-#>  7                           BRUCE'S MILL     137477      43.94974951
-#>  8                          BUTTONVILLE A     132165      43.86666985
-#>  9                Black Creek below Acton     247406      43.62916667
-#> 10 Black Creek near Weston (Scarlett Rd.)     144081      43.67308155
-#> # ... with 166 more rows, and 1 more variables: station_longitude <chr>
+#> # A tibble: 176 x 5
+#>    station_name    station_no station_id station_latitude station_longitu~
+#>    <chr>           <chr>      <chr>      <chr>            <chr>           
+#>  1 ALBION HILLS    SNOW-MNR-~ 137457     43.93308257      -79.83333343    
+#>  2 Acton Sewage T~ ZZ-WSC-AC~ 149765     43.63113873      -80.01666724    
+#>  3 BELFOUNTAIN     ZZSNOW-MN~ 147848     43.79974939      -80.0166679     
+#>  4 BELFOUNTAIN2    ZZSNOW-MN~ 147864     43.79974999      -80.00000079    
+#>  5 BOYD            SNOW-MNR-~ 137465     43.81641643      -79.58333342    
+#>  6 BROUGHAM CREEK~ HYDAT-02H~ 135564     43.91000014      -79.10000053    
+#>  7 BRUCE'S MILL    SNOW-MNR-~ 137477     43.94974951      -79.35000009    
+#>  8 BUTTONVILLE A   CLIM-MSC-~ 132165     43.86666985      -79.36666949    
+#>  9 Black Creek be~ WSC-02HB0~ 247406     43.62916667      -80.01027778    
+#> 10 Black Creek ne~ WSC-02HC0~ 144081     43.67308155      -79.50583357    
+#> # ... with 166 more rows
 
 # With comma separated string
 my_bounding_box <- "-80.126038,43.458297,-79.002481,43.969098"
 my_stations <- ki_station_list(hub = 'swmc', bounding_box = my_bounding_box)
 my_stations
-#> # A tibble: 176 x 4
-#>                              station_name station_id station_latitude
-#>                                     <chr>      <chr>            <chr>
-#>  1                           ALBION HILLS     137457      43.93308257
-#>  2           Acton Sewage Treatment Plant     149765      43.63113873
-#>  3                            BELFOUNTAIN     147848      43.79974939
-#>  4                           BELFOUNTAIN2     147864      43.79974999
-#>  5                                   BOYD     137465      43.81641643
-#>  6             BROUGHAM CREEK AT BROUGHAM     135564      43.91000014
-#>  7                           BRUCE'S MILL     137477      43.94974951
-#>  8                          BUTTONVILLE A     132165      43.86666985
-#>  9                Black Creek below Acton     247406      43.62916667
-#> 10 Black Creek near Weston (Scarlett Rd.)     144081      43.67308155
-#> # ... with 166 more rows, and 1 more variables: station_longitude <chr>
+#> # A tibble: 176 x 5
+#>    station_name    station_no station_id station_latitude station_longitu~
+#>    <chr>           <chr>      <chr>      <chr>            <chr>           
+#>  1 ALBION HILLS    SNOW-MNR-~ 137457     43.93308257      -79.83333343    
+#>  2 Acton Sewage T~ ZZ-WSC-AC~ 149765     43.63113873      -80.01666724    
+#>  3 BELFOUNTAIN     ZZSNOW-MN~ 147848     43.79974939      -80.0166679     
+#>  4 BELFOUNTAIN2    ZZSNOW-MN~ 147864     43.79974999      -80.00000079    
+#>  5 BOYD            SNOW-MNR-~ 137465     43.81641643      -79.58333342    
+#>  6 BROUGHAM CREEK~ HYDAT-02H~ 135564     43.91000014      -79.10000053    
+#>  7 BRUCE'S MILL    SNOW-MNR-~ 137477     43.94974951      -79.35000009    
+#>  8 BUTTONVILLE A   CLIM-MSC-~ 132165     43.86666985      -79.36666949    
+#>  9 Black Creek be~ WSC-02HB0~ 247406     43.62916667      -80.01027778    
+#> 10 Black Creek ne~ WSC-02HC0~ 144081     43.67308155      -79.50583357    
+#> # ... with 166 more rows
 ```
 
 #### By Search Term
@@ -129,34 +129,36 @@ You can also narrow search results using a search term. This supports the use of
 # All stations starting with 'A'
 my_stations <- ki_station_list(hub = 'swmc', search_term = "A*")
 my_stations
-#> # A tibble: 129 x 4
-#>                       station_name station_id station_latitude
-#>                              <chr>      <chr>            <chr>
-#>  1                    ABBOTSFORD A     133535      49.03307961
-#>  2                        ABERDEEN     121939      45.45000031
-#>  3                  ABITIBI CANYON     148200       49.9164159
-#>  4                    ABITIBI LAKE     121135      48.66141167
-#>  5 ABITIBI RIVER AT ABITIBI CANYON     136328       49.8797496
-#>  6 ABITIBI RIVER AT IROQUOIS FALLS     136304      48.76000036
-#>  7   ABITIBI RIVER AT ISLAND FALLS     136324      49.56974984
-#>  8   ABITIBI RIVER AT OTTER RAPIDS     136332      50.17974961
-#>  9     ABITIBI RIVER AT TWIN FALLS     136308      48.74974975
-#> 10             ACTINOLITE (PRICES)     147948      44.54974954
-#> # ... with 119 more rows, and 1 more variables: station_longitude <chr>
+#> # A tibble: 129 x 5
+#>    station_name    station_no station_id station_latitude station_longitu~
+#>    <chr>           <chr>      <chr>      <chr>            <chr>           
+#>  1 ABBOTSFORD A    CLIM-MSC-~ 133535     49.03307961      -122.3666708    
+#>  2 ABERDEEN        CLIM-MSC-~ 121939     45.45000031      -98.43308042    
+#>  3 ABITIBI CANYON  ZZSNOW-OP~ 148200     49.9164159       -81.56666679    
+#>  4 ABITIBI LAKE    CLIM-MNR-~ 121135     48.66141167      -80.14196139    
+#>  5 ABITIBI RIVER ~ HYDAT-04M~ 136328     49.8797496       -81.56000046    
+#>  6 ABITIBI RIVER ~ HYDAT-04M~ 136304     48.76000036      -80.65974982    
+#>  7 ABITIBI RIVER ~ HYDAT-04M~ 136324     49.56974984      -81.38000055    
+#>  8 ABITIBI RIVER ~ HYDAT-04M~ 136332     50.17974961      -81.6300003     
+#>  9 ABITIBI RIVER ~ HYDAT-04M~ 136308     48.74974975      -80.5800007     
+#> 10 ACTINOLITE (PR~ ZZSNOW-MN~ 147948     44.54974954      -77.33333458    
+#> # ... with 119 more rows
 
 # All stations starting with 'Oshawa'
 my_stations <- ki_station_list(hub = 'swmc', search_term = "Oshawa*")
 my_stations
-#> # A tibble: 2 x 4
-#>             station_name station_id station_latitude station_longitude
-#>                    <chr>      <chr>            <chr>             <chr>
-#> 1 Oshawa Airport - CLOCA     458060        43.923888       -78.8966667
-#> 2 Oshawa Creek at Oshawa     144342      43.92808201      -78.89113781
+#> # A tibble: 2 x 5
+#>   station_name     station_no station_id station_latitude station_longitu~
+#>   <chr>            <chr>      <chr>      <chr>            <chr>           
+#> 1 Oshawa Airport ~ Wiski-0262 458060     43.923888        -78.8966667     
+#> 2 Oshawa Creek at~ WSC-02HD0~ 144342     43.92808201      -78.89113781
 ```
 
 ### Get Time Series Information
 
 You can use the `station_id` column returned using `ki_station_list()` to figure out which time series are available for a given station.
+
+This will also return `to` and `from` columns indicating the period of record for that time series.
 
 #### One Station
 
@@ -164,20 +166,28 @@ You can use the `station_id` column returned using `ki_station_list()` to figure
 # Single station_id
 available_ts <- ki_timeseries_list(hub = 'swmc', station_id = "144659")
 available_ts
-#> # A tibble: 145 x 4
-#>                        station_name station_id      ts_id         ts_name
-#>                               <chr>      <chr>      <chr>           <chr>
-#>  1 Jackson Creek at Jackson Heights     144659  949057042       Q.DayMean
-#>  2 Jackson Creek at Jackson Heights     144659  949048042           Q.1.O
-#>  3 Jackson Creek at Jackson Heights     144659  949056042        Q.DayMax
-#>  4 Jackson Creek at Jackson Heights     144659  949049042            Q.15
-#>  5 Jackson Creek at Jackson Heights     144659  949061042     Q.MonthMean
-#>  6 Jackson Creek at Jackson Heights     144659  949067042       Q.YearMin
-#>  7 Jackson Creek at Jackson Heights     144659  949050042    Q.Baseflow.1
-#>  8 Jackson Creek at Jackson Heights     144659  949058042 Q.DayMean.HYDAT
-#>  9 Jackson Creek at Jackson Heights     144659  949065042 Q.YearMax.HYDAT
-#> 10 Jackson Creek at Jackson Heights     144659 1126053042   Q.DayBaseflow
-#> # ... with 135 more rows
+#> # A tibble: 145 x 6
+#>    station_name          station_id ts_id   ts_name    from               
+#>    <chr>                 <chr>      <chr>   <chr>      <dttm>             
+#>  1 Jackson Creek at Jac~ 144659     949057~ Q.DayMean  2005-12-26 05:00:00
+#>  2 Jackson Creek at Jac~ 144659     949048~ Q.1.O      NA                 
+#>  3 Jackson Creek at Jac~ 144659     949056~ Q.DayMax   2005-12-26 05:00:00
+#>  4 Jackson Creek at Jac~ 144659     949049~ Q.15       2005-12-26 05:00:00
+#>  5 Jackson Creek at Jac~ 144659     949061~ Q.MonthMe~ 2005-12-01 05:00:00
+#>  6 Jackson Creek at Jac~ 144659     949067~ Q.YearMin  2005-01-01 05:00:00
+#>  7 Jackson Creek at Jac~ 144659     949050~ Q.Baseflo~ NA                 
+#>  8 Jackson Creek at Jac~ 144659     949058~ Q.DayMean~ 2006-04-01 05:00:00
+#>  9 Jackson Creek at Jac~ 144659     949065~ Q.YearMax~ 2007-01-01 05:00:00
+#> 10 Jackson Creek at Jac~ 144659     112605~ Q.DayBase~ 2005-12-26 05:00:00
+#> # ... with 135 more rows, and 1 more variable: to <dttm>
+str(available_ts)
+#> Classes 'tbl_df', 'tbl' and 'data.frame':    145 obs. of  6 variables:
+#>  $ station_name: chr  "Jackson Creek at Jackson Heights" "Jackson Creek at Jackson Heights" "Jackson Creek at Jackson Heights" "Jackson Creek at Jackson Heights" ...
+#>  $ station_id  : chr  "144659" "144659" "144659" "144659" ...
+#>  $ ts_id       : chr  "949057042" "949048042" "949056042" "949049042" ...
+#>  $ ts_name     : chr  "Q.DayMean" "Q.1.O" "Q.DayMax" "Q.15" ...
+#>  $ from        : POSIXct, format: "2005-12-26 05:00:00" NA ...
+#>  $ to          : POSIXct, format: "2018-03-20 05:00:00" NA ...
 ```
 
 #### Multiple Stations
@@ -190,20 +200,20 @@ my_station_ids <- c("144659", "144342")
 
 available_ts <- ki_timeseries_list(hub = 'swmc', station_id = my_station_ids)
 available_ts
-#> # A tibble: 275 x 4
-#>              station_name station_id      ts_id        ts_name
-#>                     <chr>      <chr>      <chr>          <chr>
-#>  1 Oshawa Creek at Oshawa     144342 1131022042 TAir.24hrMin.P
-#>  2 Oshawa Creek at Oshawa     144342  945562042  TAir.YearMean
-#>  3 Oshawa Creek at Oshawa     144342 1131019042 TAir.24hrMax.O
-#>  4 Oshawa Creek at Oshawa     144342  945557042    TAir.DayMin
-#>  5 Oshawa Creek at Oshawa     144342  945560042  TAir.MonthMin
-#>  6 Oshawa Creek at Oshawa     144342 1131018042       TAir.1.P
-#>  7 Oshawa Creek at Oshawa     144342  945552042       TAir.1.O
-#>  8 Oshawa Creek at Oshawa     144342 1131023042   TAir.6hr.Max
-#>  9 Oshawa Creek at Oshawa     144342  945558042  TAir.MonthMax
-#> 10 Oshawa Creek at Oshawa     144342  945561042   TAir.YearMax
-#> # ... with 265 more rows
+#> # A tibble: 275 x 6
+#>    station_name        station_id ts_id    ts_name     from               
+#>    <chr>               <chr>      <chr>    <chr>       <dttm>             
+#>  1 Oshawa Creek at Os~ 144342     1131022~ TAir.24hrM~ NA                 
+#>  2 Oshawa Creek at Os~ 144342     9455620~ TAir.YearM~ NA                 
+#>  3 Oshawa Creek at Os~ 144342     1131019~ TAir.24hrM~ NA                 
+#>  4 Oshawa Creek at Os~ 144342     9455570~ TAir.DayMin NA                 
+#>  5 Oshawa Creek at Os~ 144342     9455600~ TAir.Month~ NA                 
+#>  6 Oshawa Creek at Os~ 144342     1131018~ TAir.1.P    NA                 
+#>  7 Oshawa Creek at Os~ 144342     9455520~ TAir.1.O    NA                 
+#>  8 Oshawa Creek at Os~ 144342     1131023~ TAir.6hr.M~ NA                 
+#>  9 Oshawa Creek at Os~ 144342     9455580~ TAir.Month~ NA                 
+#> 10 Oshawa Creek at Os~ 144342     9455610~ TAir.YearM~ NA                 
+#> # ... with 265 more rows, and 1 more variable: to <dttm>
 ```
 
 ### Get Time Series Values
@@ -219,18 +229,18 @@ By default this will return values for the past 24 hours. You can specify the da
 my_values <- ki_timeseries_values(hub = 'swmc', ts_id = '948928042')
 my_values
 #> # A tibble: 85 x 2
-#>              Timestamp `Precip (millimeter)`
-#>                 <dttm>                 <dbl>
-#>  1 2018-03-10 00:00:00                     0
-#>  2 2018-03-10 00:20:00                     0
-#>  3 2018-03-10 00:40:00                     0
-#>  4 2018-03-10 01:00:00                     0
-#>  5 2018-03-10 01:20:00                     0
-#>  6 2018-03-10 01:40:00                     0
-#>  7 2018-03-10 02:00:00                     0
-#>  8 2018-03-10 02:20:00                     0
-#>  9 2018-03-10 02:40:00                     0
-#> 10 2018-03-10 03:00:00                     0
+#>    Timestamp           `Precip (millimeter)`
+#>    <dttm>                              <dbl>
+#>  1 2018-03-19 00:00:00                    0.
+#>  2 2018-03-19 00:20:00                    0.
+#>  3 2018-03-19 00:40:00                    0.
+#>  4 2018-03-19 01:00:00                    0.
+#>  5 2018-03-19 01:20:00                    0.
+#>  6 2018-03-19 01:40:00                    0.
+#>  7 2018-03-19 02:00:00                    0.
+#>  8 2018-03-19 02:20:00                    0.
+#>  9 2018-03-19 02:40:00                    0.
+#> 10 2018-03-19 03:00:00                    0.
 #> # ... with 75 more rows
 ```
 
@@ -248,24 +258,24 @@ my_values <- ki_timeseries_values(hub = 'swmc',
 my_values
 #> $`Jackson Creek at Jackson Heights (Precip)`
 #> # A tibble: 1,632 x 2
-#>              Timestamp `Precip (millimeter)`
-#>                 <dttm>                 <dbl>
-#>  1 2017-08-28 00:00:00                     0
-#>  2 2017-08-28 00:15:00                     0
-#>  3 2017-08-28 00:30:00                     0
-#>  4 2017-08-28 00:45:00                     0
-#>  5 2017-08-28 01:00:00                     0
-#>  6 2017-08-28 01:15:00                     0
-#>  7 2017-08-28 01:30:00                     0
-#>  8 2017-08-28 01:45:00                     0
-#>  9 2017-08-28 02:00:00                     0
-#> 10 2017-08-28 02:15:00                     0
+#>    Timestamp           `Precip (millimeter)`
+#>    <dttm>                              <dbl>
+#>  1 2017-08-28 00:00:00                    0.
+#>  2 2017-08-28 00:15:00                    0.
+#>  3 2017-08-28 00:30:00                    0.
+#>  4 2017-08-28 00:45:00                    0.
+#>  5 2017-08-28 01:00:00                    0.
+#>  6 2017-08-28 01:15:00                    0.
+#>  7 2017-08-28 01:30:00                    0.
+#>  8 2017-08-28 01:45:00                    0.
+#>  9 2017-08-28 02:00:00                    0.
+#> 10 2017-08-28 02:15:00                    0.
 #> # ... with 1,622 more rows
 #> 
 #> $`Jackson Creek at Peterborough (Q)`
 #> # A tibble: 17 x 2
-#>              Timestamp `Q (cubic meter per second)`
-#>                 <dttm>                        <dbl>
+#>    Timestamp           `Q (cubic meter per second)`
+#>    <dttm>                                     <dbl>
 #>  1 2017-08-28 05:00:00                        0.251
 #>  2 2017-08-29 05:00:00                        0.243
 #>  3 2017-08-30 05:00:00                        0.243
@@ -273,7 +283,7 @@ my_values
 #>  5 2017-09-01 05:00:00                        0.233
 #>  6 2017-09-02 05:00:00                        0.270
 #>  7 2017-09-03 05:00:00                        0.908
-#>  8 2017-09-04 05:00:00                        1.299
+#>  8 2017-09-04 05:00:00                        1.30 
 #>  9 2017-09-05 05:00:00                        0.762
 #> 10 2017-09-06 05:00:00                        0.412
 #> 11 2017-09-07 05:00:00                        0.444

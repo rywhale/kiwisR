@@ -69,5 +69,9 @@ ki_timeseries_list <- function(hub, station_id){
   # Add column names
   colnames(content_dat) <- json_content[1, ]
 
+  # Cast date columns
+  content_dat$from <- lubridate::ymd_hms(content_dat$from)
+  content_dat$to <- lubridate::ymd_hms(content_dat$to)
+
   return(content_dat)
 }

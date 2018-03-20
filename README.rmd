@@ -95,12 +95,17 @@ my_stations
 You can use the ```station_id``` column returned using ```ki_station_list()``` to figure out
 which time series are available for a given station. 
 
+This will also return ```to``` and ```from``` columns indicating the period of record
+for that time series. 
+
+
 #### One Station
 
 ```{r}
 # Single station_id
 available_ts <- ki_timeseries_list(hub = 'swmc', station_id = "144659")
 available_ts
+str(available_ts)
 
 ```
 
