@@ -28,7 +28,7 @@ ki_timeseries_list <- function(hub, station_id){
     return("No hub selected! Please select 'swmc', 'grand', 'quinte' or input your own URL.")
   }
   if(hub=="swmc"){
-    api_url<-"http://204.41.16.133/KiWIS/KiWIS?"
+    api_url<-"https://www.swmc.mnr.gov.on.ca/KiWIS/KiWIS?"
   }
   if(hub=="grand"){
     api_url<-"http://kiwis.grandriver.ca/KiWIS/KiWIS?"
