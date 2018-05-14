@@ -7,7 +7,7 @@
 #' can be found using the ki_timeseries_list function
 #' @param start_date A date string formatted "YYYY-MM-DD". Defaults to yesterday. All timestamps are UTC.
 #' @param end_date A date string formatted "YYYY-MM-DD". Defaults to today. All timestamps are UTC.
-#' @return Either: a single data frame or a list of data frames (each named with its time series id)
+#' @return Either: a single tibble or a list of tibbles (each named with its time series id)
 #' @examples
 #' ki_timeseries_values(hub = 'swmc', ts_id = "948928042", from = "2017-01-01", to = "2017-02-22)
 #' ki_timeseries_values(hub = 'swmc', ts_id = c("948928042", "948603042"), from = "2017-01-01", to = "2017-02-22)

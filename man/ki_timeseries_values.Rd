@@ -18,7 +18,7 @@ can be found using the ki_timeseries_list function}
 \item{end_date}{A date string formatted "YYYY-MM-DD". Defaults to today. All timestamps are UTC.}
 }
 \value{
-Either: a single data frame or a list of data frames (each named with its time series id)
+Either: a single tibble or a list of tibbles (each named with its time series id)
 }
 \description{
 Get values for time series id or list of time series ids.

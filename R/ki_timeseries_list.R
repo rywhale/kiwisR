@@ -6,7 +6,7 @@
 #' See README for more details.
 #' @param station_id Either a single station id or a vector of station id. Can be string or numeric.
 #' Station ids can be found using the ki_station_list function.
-#' @return A data frame containing all available time series for selected stations.
+#' @return A tibble containing all available time series for selected stations.
 #' @examples
 #' ki_timeseries_list(hub = 'swmc', station_id = "144659")
 #' ki_timeseries_list(hub = 'swmc', station_id = c("144659", "144342"))

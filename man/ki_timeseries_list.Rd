@@ -15,7 +15,7 @@ See README for more details.}
 Station ids can be found using the ki_station_list function.}
 }
 \value{
-A data frame containing all available time series for selected stations.
+A tibble containing all available time series for selected stations.
 }
 \description{
 Get list of available time series for station or

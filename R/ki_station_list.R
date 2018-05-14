@@ -71,6 +71,11 @@ ki_station_list <- function(hub, search_term, bounding_box = NA){
   # Parse text
   json_content <- jsonlite::fromJSON(httr::content(raw, "text"))
 
+  #Check for empty search results
+  if(class(json_content) == "character"){
+    return("No matches for search term.")
+  }
+
   # Convert to tibble
   content_dat <- tibble::as_tibble(json_content)[-1, ]
 
