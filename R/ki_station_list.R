@@ -3,7 +3,7 @@
 #' @export
 #' @description Returns all available stations by default and allows for search terms.
 #' @param hub The KiWIS database you are querying. Default options are 'swmc', 'grand', 'quinte'. See README for more details.
-#' @param search_term (Optional) A station name to search for. Supports the use of * as a wildcard.
+#' @param search_term (Optional) A station name to search for. Supports the use of * as a wildcard. Case doesn't matter.
 #' @param bounding_box (Optional) A bounding box to search withhin for stations. Should be a vector or comma separated string
 #' with the following format: (min_x, min_y, max_x, max_y).
 #' @return Tibble containing station id, name, latitude and longitude
@@ -51,6 +51,10 @@ ki_station_list <- function(hub, search_term, bounding_box = NA){
 
   # Check for search term
   if(!missing(search_term)){
+    search_term <- paste(search_term,
+                         toupper(search_term),
+                         tolower(search_term),
+                         sep = ",")
     api_query[['station_name']] <- search_term
   }
 

@@ -55,23 +55,6 @@ ki_station_list(hub = 'swmc')
 #>  9 ABITIBI RIVER ~ HYDAT-04M~ 136308     48.74974975      -80.5800007     
 #> 10 ACTINOLITE (PR~ ZZSNOW-MN~ 147948     44.54974954      -77.33333458    
 #> # ... with 3,512 more rows
-
-# With grand as the hub
-ki_station_list(hub = 'grand')
-#> # A tibble: 89 x 5
-#>    station_name    station_no station_id station_latitude station_longitu~
-#>    <chr>           <chr>      <chr>      <chr>            <chr>           
-#>  1 Aberfoyle       144        14575      43.454655555555~ -80.162625      
-#>  2 Armstrong Mills 186        14512      43.63967         -80.269977      
-#>  3 Arthur Climate~ 6          14447      43.830686094     -80.540822376   
-#>  4 Ayr             156        14856      43.274975        -80.47487777777~
-#>  5 Baden Climate ~ 9          14718      43.395533527     -80.660100299   
-#>  6 Beaverdale      168        14534      43.421897222222~ -80.33266388888~
-#>  7 Below Elmira    28         15162      43.580107        -80.509161      
-#>  8 Below Shand     87         14440      43.731202777777~ -80.34086944444~
-#>  9 Below Shand WQ~ 88         15355      43.731202777777~ -80.34086944444~
-#> 10 Blair WQ Stati~ 58         15177      43.38405         -80.38408055555~
-#> # ... with 79 more rows
 ```
 
 #### Within Bounding Box
@@ -129,7 +112,7 @@ You can also narrow search results using a search term. This supports the use of
 # All stations starting with 'A'
 my_stations <- ki_station_list(hub = 'swmc', search_term = "A*")
 my_stations
-#> # A tibble: 129 x 5
+#> # A tibble: 126 x 5
 #>    station_name    station_no station_id station_latitude station_longitu~
 #>    <chr>           <chr>      <chr>      <chr>            <chr>           
 #>  1 ABBOTSFORD A    CLIM-MSC-~ 133535     49.03307961      -122.3666708    
@@ -142,16 +125,17 @@ my_stations
 #>  8 ABITIBI RIVER ~ HYDAT-04M~ 136332     50.17974961      -81.6300003     
 #>  9 ABITIBI RIVER ~ HYDAT-04M~ 136308     48.74974975      -80.5800007     
 #> 10 ACTINOLITE (PR~ ZZSNOW-MN~ 147948     44.54974954      -77.33333458    
-#> # ... with 119 more rows
+#> # ... with 116 more rows
 
 # All stations starting with 'Oshawa'
 my_stations <- ki_station_list(hub = 'swmc', search_term = "Oshawa*")
 my_stations
-#> # A tibble: 2 x 5
+#> # A tibble: 3 x 5
 #>   station_name     station_no station_id station_latitude station_longitu~
 #>   <chr>            <chr>      <chr>      <chr>            <chr>           
-#> 1 Oshawa Airport ~ Wiski-0262 458060     43.923888        -78.8966667     
-#> 2 Oshawa Creek at~ WSC-02HD0~ 144342     43.92808201      -78.89113781
+#> 1 OSHAWA A         CLIM-MSC-~ 132486     43.91666694      -78.90000003    
+#> 2 Oshawa Airport ~ Wiski-0262 458060     43.923888        -78.8966667     
+#> 3 Oshawa Creek at~ WSC-02HD0~ 144342     43.92808201      -78.89113781
 ```
 
 ### Get Time Series Information
@@ -166,28 +150,28 @@ This will also return `to` and `from` columns indicating the period of record fo
 # Single station_id
 available_ts <- ki_timeseries_list(hub = 'swmc', station_id = "144659")
 available_ts
-#> # A tibble: 145 x 6
-#>    station_name          station_id ts_id   ts_name    from               
-#>    <chr>                 <chr>      <chr>   <chr>      <dttm>             
-#>  1 Jackson Creek at Jac~ 144659     949057~ Q.DayMean  2005-12-26 05:00:00
-#>  2 Jackson Creek at Jac~ 144659     949048~ Q.1.O      NA                 
-#>  3 Jackson Creek at Jac~ 144659     949056~ Q.DayMax   2005-12-26 05:00:00
-#>  4 Jackson Creek at Jac~ 144659     949049~ Q.15       2005-12-26 05:00:00
-#>  5 Jackson Creek at Jac~ 144659     949061~ Q.MonthMe~ 2005-12-01 05:00:00
-#>  6 Jackson Creek at Jac~ 144659     949067~ Q.YearMin  2005-01-01 05:00:00
-#>  7 Jackson Creek at Jac~ 144659     949050~ Q.Baseflo~ NA                 
-#>  8 Jackson Creek at Jac~ 144659     949058~ Q.DayMean~ 2006-04-01 05:00:00
-#>  9 Jackson Creek at Jac~ 144659     949065~ Q.YearMax~ 2007-01-01 05:00:00
-#> 10 Jackson Creek at Jac~ 144659     112605~ Q.DayBase~ 2005-12-26 05:00:00
-#> # ... with 135 more rows, and 1 more variable: to <dttm>
+#> # A tibble: 130 x 6
+#>    station_name         station_id ts_id   ts_name     from               
+#>    <chr>                <chr>      <chr>   <chr>       <dttm>             
+#>  1 Jackson Creek at Ja~ 144659     948900~ BAT.1.O     2005-12-26 05:00:00
+#>  2 Jackson Creek at Ja~ 144659     115014~ Battery.1.O NA                 
+#>  3 Jackson Creek at Ja~ 144659     948918~ HRel.Month~ NA                 
+#>  4 Jackson Creek at Ja~ 144659     948919~ HRel.Month~ NA                 
+#>  5 Jackson Creek at Ja~ 144659     948923~ HRel.YearM~ NA                 
+#>  6 Jackson Creek at Ja~ 144659     948913~ JACKSONH.H~ NA                 
+#>  7 Jackson Creek at Ja~ 144659     948917~ HRel.DayMin NA                 
+#>  8 Jackson Creek at Ja~ 144659     948912~ HRel.1.O    NA                 
+#>  9 Jackson Creek at Ja~ 144659     948915~ HRel.DayMax NA                 
+#> 10 Jackson Creek at Ja~ 144659     948920~ HRel.Month~ NA                 
+#> # ... with 120 more rows, and 1 more variable: to <dttm>
 str(available_ts)
-#> Classes 'tbl_df', 'tbl' and 'data.frame':    145 obs. of  6 variables:
+#> Classes 'tbl_df', 'tbl' and 'data.frame':    130 obs. of  6 variables:
 #>  $ station_name: chr  "Jackson Creek at Jackson Heights" "Jackson Creek at Jackson Heights" "Jackson Creek at Jackson Heights" "Jackson Creek at Jackson Heights" ...
 #>  $ station_id  : chr  "144659" "144659" "144659" "144659" ...
-#>  $ ts_id       : chr  "949057042" "949048042" "949056042" "949049042" ...
-#>  $ ts_name     : chr  "Q.DayMean" "Q.1.O" "Q.DayMax" "Q.15" ...
+#>  $ ts_id       : chr  "948900042" "1150147042" "948918042" "948919042" ...
+#>  $ ts_name     : chr  "BAT.1.O" "Battery.1.O" "HRel.MonthMax" "HRel.MonthMean" ...
 #>  $ from        : POSIXct, format: "2005-12-26 05:00:00" NA ...
-#>  $ to          : POSIXct, format: "2018-03-20 05:00:00" NA ...
+#>  $ to          : POSIXct, format: "2018-05-15 09:00:00" NA ...
 ```
 
 #### Multiple Stations
@@ -200,20 +184,20 @@ my_station_ids <- c("144659", "144342")
 
 available_ts <- ki_timeseries_list(hub = 'swmc', station_id = my_station_ids)
 available_ts
-#> # A tibble: 275 x 6
-#>    station_name        station_id ts_id    ts_name     from               
-#>    <chr>               <chr>      <chr>    <chr>       <dttm>             
-#>  1 Oshawa Creek at Os~ 144342     1131022~ TAir.24hrM~ NA                 
-#>  2 Oshawa Creek at Os~ 144342     9455620~ TAir.YearM~ NA                 
-#>  3 Oshawa Creek at Os~ 144342     1131019~ TAir.24hrM~ NA                 
-#>  4 Oshawa Creek at Os~ 144342     9455570~ TAir.DayMin NA                 
-#>  5 Oshawa Creek at Os~ 144342     9455600~ TAir.Month~ NA                 
-#>  6 Oshawa Creek at Os~ 144342     1131018~ TAir.1.P    NA                 
-#>  7 Oshawa Creek at Os~ 144342     9455520~ TAir.1.O    NA                 
-#>  8 Oshawa Creek at Os~ 144342     1131023~ TAir.6hr.M~ NA                 
-#>  9 Oshawa Creek at Os~ 144342     9455580~ TAir.Month~ NA                 
-#> 10 Oshawa Creek at Os~ 144342     9455610~ TAir.YearM~ NA                 
-#> # ... with 265 more rows, and 1 more variable: to <dttm>
+#> # A tibble: 259 x 6
+#>    station_name          station_id ts_id   ts_name    from               
+#>    <chr>                 <chr>      <chr>   <chr>      <dttm>             
+#>  1 Jackson Creek at Jac~ 144659     949057~ Q.DayMean  2005-12-26 05:00:00
+#>  2 Jackson Creek at Jac~ 144659     949048~ Q.1.O      NA                 
+#>  3 Jackson Creek at Jac~ 144659     949056~ Q.DayMax   2005-12-26 05:00:00
+#>  4 Jackson Creek at Jac~ 144659     949049~ Q.15       2005-12-26 05:00:00
+#>  5 Jackson Creek at Jac~ 144659     949061~ Q.MonthMe~ 2005-12-01 05:00:00
+#>  6 Jackson Creek at Jac~ 144659     949067~ Q.YearMin  2005-01-01 05:00:00
+#>  7 Jackson Creek at Jac~ 144659     949058~ Q.DayMean~ 2006-04-01 05:00:00
+#>  8 Jackson Creek at Jac~ 144659     949065~ Q.YearMax~ 2007-01-01 05:00:00
+#>  9 Jackson Creek at Jac~ 144659     112605~ Q.DayBase~ 2005-12-26 05:00:00
+#> 10 Jackson Creek at Jac~ 144659     112605~ Q.DayRuno~ 2005-12-26 05:00:00
+#> # ... with 249 more rows, and 1 more variable: to <dttm>
 ```
 
 ### Get Time Series Values
@@ -228,20 +212,20 @@ By default this will return values for the past 24 hours. You can specify the da
 # Past 24 hours
 my_values <- ki_timeseries_values(hub = 'swmc', ts_id = '948928042')
 my_values
-#> # A tibble: 85 x 2
+#> # A tibble: 100 x 2
 #>    Timestamp           `Precip (millimeter)`
 #>    <dttm>                              <dbl>
-#>  1 2018-03-19 00:00:00                    0.
-#>  2 2018-03-19 00:20:00                    0.
-#>  3 2018-03-19 00:40:00                    0.
-#>  4 2018-03-19 01:00:00                    0.
-#>  5 2018-03-19 01:20:00                    0.
-#>  6 2018-03-19 01:40:00                    0.
-#>  7 2018-03-19 02:00:00                    0.
-#>  8 2018-03-19 02:20:00                    0.
-#>  9 2018-03-19 02:40:00                    0.
-#> 10 2018-03-19 03:00:00                    0.
-#> # ... with 75 more rows
+#>  1 2018-05-14 00:00:00                     0
+#>  2 2018-05-14 00:20:00                     0
+#>  3 2018-05-14 00:40:00                     0
+#>  4 2018-05-14 01:00:00                     0
+#>  5 2018-05-14 01:20:00                     0
+#>  6 2018-05-14 01:40:00                     0
+#>  7 2018-05-14 02:00:00                     0
+#>  8 2018-05-14 02:20:00                     0
+#>  9 2018-05-14 02:40:00                     0
+#> 10 2018-05-14 03:00:00                     0
+#> # ... with 90 more rows
 ```
 
 #### Multiple Time Series
@@ -260,16 +244,16 @@ my_values
 #> # A tibble: 1,632 x 2
 #>    Timestamp           `Precip (millimeter)`
 #>    <dttm>                              <dbl>
-#>  1 2017-08-28 00:00:00                    0.
-#>  2 2017-08-28 00:15:00                    0.
-#>  3 2017-08-28 00:30:00                    0.
-#>  4 2017-08-28 00:45:00                    0.
-#>  5 2017-08-28 01:00:00                    0.
-#>  6 2017-08-28 01:15:00                    0.
-#>  7 2017-08-28 01:30:00                    0.
-#>  8 2017-08-28 01:45:00                    0.
-#>  9 2017-08-28 02:00:00                    0.
-#> 10 2017-08-28 02:15:00                    0.
+#>  1 2017-08-28 00:00:00                     0
+#>  2 2017-08-28 00:15:00                     0
+#>  3 2017-08-28 00:30:00                     0
+#>  4 2017-08-28 00:45:00                     0
+#>  5 2017-08-28 01:00:00                     0
+#>  6 2017-08-28 01:15:00                     0
+#>  7 2017-08-28 01:30:00                     0
+#>  8 2017-08-28 01:45:00                     0
+#>  9 2017-08-28 02:00:00                     0
+#> 10 2017-08-28 02:15:00                     0
 #> # ... with 1,622 more rows
 #> 
 #> $`Jackson Creek at Peterborough (Q)`
@@ -281,7 +265,7 @@ my_values
 #>  3 2017-08-30 05:00:00                        0.243
 #>  4 2017-08-31 05:00:00                        0.268
 #>  5 2017-09-01 05:00:00                        0.233
-#>  6 2017-09-02 05:00:00                        0.270
+#>  6 2017-09-02 05:00:00                        0.27 
 #>  7 2017-09-03 05:00:00                        0.908
 #>  8 2017-09-04 05:00:00                        1.30 
 #>  9 2017-09-05 05:00:00                        0.762

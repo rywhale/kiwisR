@@ -52,8 +52,6 @@ By default, ```ki_station_list()``` returns a tibble containing information for 
 # With swmc as the hub
 ki_station_list(hub = 'swmc')
 
-# With grand as the hub
-ki_station_list(hub = 'grand')
 
 ```
 
