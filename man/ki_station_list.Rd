@@ -7,7 +7,8 @@
 ki_station_list(hub, search_term, bounding_box = NA)
 }
 \arguments{
-\item{hub}{The KiWIS database you are querying. Default options are 'swmc', 'grand', 'quinte'. See README for more details.}
+\item{hub}{The KiWIS database you are querying. Default options are 'swmc', 'grand', 'quinte' and 'creditvalley'.
+See README for more details.}
 
 \item{search_term}{(Optional) A station name to search for. Supports the use of * as a wildcard. Case doesn't matter.}
 

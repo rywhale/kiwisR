@@ -2,7 +2,7 @@
 #' list of stations.
 #'
 #' @export
-#' @param hub The KiWIS database you are querying. Default options are 'swmc', 'grand', 'quinte'.
+#' @param hub The KiWIS database you are querying. Default options are 'swmc', 'grand', 'quinte' and 'creditvalley'.
 #' See README for more details.
 #' @param station_id Either a single station id or a vector of station id. Can be string or numeric.
 #' Station ids can be found using the ki_station_list function.
@@ -23,7 +23,8 @@ ki_timeseries_list <- function(hub, station_id, ts_name){
   # Identify hub
   default_hubs <- c("swmc",
                     "grand",
-                    "quinte")
+                    "quinte",
+                    "creditvalley")
 
   # Hub selection
   if(missing(hub) | !is.character(hub)){
@@ -38,7 +39,11 @@ ki_timeseries_list <- function(hub, station_id, ts_name){
   if(hub=="quinte"){
     api_url<-"http://waterdata.quinteconservation.ca/KiWIS/KiWIS?"
   }
+  if(hub == "creditvalley"){
+    api_url <- "https://waterinfo.creditvalleyca.ca:8443/KiWIS/KiWIS?"
+  }
   if(hub %in% default_hubs == FALSE){
+    message("You are using non-default hub.")
     # Non-default KiWIS URL
     api_url <- hub
   }

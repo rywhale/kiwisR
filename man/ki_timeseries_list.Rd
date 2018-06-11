@@ -8,7 +8,7 @@ list of stations.}
 ki_timeseries_list(hub, station_id, ts_name)
 }
 \arguments{
-\item{hub}{The KiWIS database you are querying. Default options are 'swmc', 'grand', 'quinte'.
+\item{hub}{The KiWIS database you are querying. Default options are 'swmc', 'grand', 'quinte' and 'creditvalley'.
 See README for more details.}
 
 \item{station_id}{Either a single station id or a vector of station id. Can be string or numeric.

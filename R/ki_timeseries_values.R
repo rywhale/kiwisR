@@ -1,7 +1,7 @@
 #' Get values for time series id or list of time series ids.
 #'
 #' @export
-#' @param hub The KiWIS database you are querying. Default options are 'swmc', 'grand', 'quinte'.
+#' @param hub The KiWIS database you are querying. Default options are 'swmc', 'grand', 'quinte' and 'creditvalley'.
 #' See README for more details.
 #' @param ts_id Either: a single time series id or a vector of time series ids. Time series ids
 #' can be found using the ki_timeseries_list function
@@ -23,7 +23,8 @@ ki_timeseries_values <- function(hub, ts_id, start_date, end_date, time_zone){
   # Identify hub
   default_hubs <- c("swmc",
                     "grand",
-                    "quinte")
+                    "quinte",
+                    "creditvalley")
 
   # Hub selection
   if(missing(hub) | !is.character(hub)){
@@ -38,13 +39,21 @@ ki_timeseries_values <- function(hub, ts_id, start_date, end_date, time_zone){
   if(hub=="quinte"){
     api_url<-"http://waterdata.quinteconservation.ca/KiWIS/KiWIS?"
   }
+  if(hub == "creditvalley"){
+    api_url <- "https://waterinfo.creditvalleyca.ca:8443/KiWIS/KiWIS?"
+  }
   if(hub %in% default_hubs == FALSE){
+    message("You are using non-default hub.")
     # Non-default KiWIS URL
     api_url <- hub
   }
 
-  # Account for multiple ts_ids
-  ts_id_string <- paste(ts_id, collapse = ",")
+  if(missing(ts_id)){
+    return("Please enter a valid ts_id.")
+  }else{
+    # Account for multiple ts_ids
+    ts_id_string <- paste(ts_id, collapse = ",")
+  }
 
   # Metadata to return
   ts_meta <- paste(c("ts_unitname", "ts_unitsymbol",

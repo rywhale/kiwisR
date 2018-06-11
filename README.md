@@ -2,19 +2,26 @@ kiwisR
 ================
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-Overview
---------
 
-A wrapper for querying KiWIS APIs to retrieve hydrometric data. Users can toggle between various databases by specifying the 'hub' argument. Currently, there are three default hubs to choose from:
+## Overview
 
--   *swmc* : [Ontario Surface Water Monitoring Centre](https://www.ontario.ca/page/surface-water-monitoring)
--   *grand* : [Grand River Conservation Authority](https://www.grandriver.ca/en/index.aspx)
--   *quinte* : [Quinte Conservation Authority](http://quinteconservation.ca/site/)
+A wrapper for querying KiWIS APIs to retrieve hydrometric data. Users
+can toggle between various databases by specifying the ‘hub’ argument.
+Currently, there are three default hubs to choose from:
 
-All data is returned as tidy [tibbles](https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html).
+  - *swmc* : [Ontario Surface Water Monitoring
+    Centre](https://www.ontario.ca/page/surface-water-monitoring)
+  - *grand* : [Grand River Conservation
+    Authority](https://www.grandriver.ca/en/index.aspx)
+  - *quinte* : [Quinte Conservation
+    Authority](http://quinteconservation.ca/site/)
+  - *creditvalley* : [Credit Valley Conservation
+    Authority](https://cvc.ca/)
 
-Installation
-------------
+All data is returned as tidy
+[tibbles](https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html).
+
+## Installation
 
 To install `kiwisR` you first need to install `remotes`.
 
@@ -29,19 +36,19 @@ Then load the package with
 library(kiwisR)
 ```
 
-Usage
------
+## Usage
 
 ### Get Station Information
 
 #### All Available Stations
 
-By default, `ki_station_list()` returns a tibble containing information for all available stations for the select hub.
+By default, `ki_station_list()` returns a tibble containing information
+for all available stations for the select hub.
 
 ``` r
 # With swmc as the hub
 ki_station_list(hub = 'swmc')
-#> # A tibble: 3,522 x 5
+#> # A tibble: 3,518 x 5
 #>    station_name    station_no station_id station_latitude station_longitu~
 #>    <chr>           <chr>      <chr>      <chr>            <chr>           
 #>  1 ABBOTSFORD A    CLIM-MSC-~ 133535     49.03307961      -122.3666708    
@@ -54,15 +61,18 @@ ki_station_list(hub = 'swmc')
 #>  8 ABITIBI RIVER ~ HYDAT-04M~ 136332     50.17974961      -81.6300003     
 #>  9 ABITIBI RIVER ~ HYDAT-04M~ 136308     48.74974975      -80.5800007     
 #> 10 ACTINOLITE (PR~ ZZSNOW-MN~ 147948     44.54974954      -77.33333458    
-#> # ... with 3,512 more rows
+#> # ... with 3,508 more rows
 ```
 
 #### Within Bounding Box
 
-You can also specify a bounding box to look within for stations. The bounding box should be either
+You can also specify a bounding box to look within for stations. The
+bounding box should be either
 
--   A vector like this `c(min_x, min_y, max_x, max_y)`
--   Or a comma separated string like this `"min_x,min_y,max_x,max_y"`
+  - A vector like this `c(min_x, min_y, max_x, max_y)`
+  - Or a comma separated string like this `"min_x,min_y,max_x,max_y"`
+
+<!-- end list -->
 
 ``` r
 # With vector
@@ -106,7 +116,8 @@ my_stations
 
 #### By Search Term
 
-You can also narrow search results using a search term. This supports the use of `*` as a wildcard.
+You can also narrow search results using a search term. This supports
+the use of `*` as a wildcard.
 
 ``` r
 # All stations starting with 'A'
@@ -140,9 +151,11 @@ my_stations
 
 ### Get Time Series Information
 
-You can use the `station_id` column returned using `ki_station_list()` to figure out which time series are available for a given station.
+You can use the `station_id` column returned using `ki_station_list()`
+to figure out which time series are available for a given station.
 
-This will also return `to` and `from` columns indicating the period of record for that time series.
+This will also return `to` and `from` columns indicating the period of
+record for that time series.
 
 #### One Station
 
@@ -151,32 +164,34 @@ This will also return `to` and `from` columns indicating the period of record fo
 available_ts <- ki_timeseries_list(hub = 'swmc', station_id = "144659")
 available_ts
 #> # A tibble: 130 x 6
-#>    station_name         station_id ts_id   ts_name     from               
-#>    <chr>                <chr>      <chr>   <chr>       <dttm>             
-#>  1 Jackson Creek at Ja~ 144659     948900~ BAT.1.O     2005-12-26 05:00:00
-#>  2 Jackson Creek at Ja~ 144659     115014~ Battery.1.O NA                 
-#>  3 Jackson Creek at Ja~ 144659     948918~ HRel.Month~ NA                 
-#>  4 Jackson Creek at Ja~ 144659     948919~ HRel.Month~ NA                 
-#>  5 Jackson Creek at Ja~ 144659     948923~ HRel.YearM~ NA                 
-#>  6 Jackson Creek at Ja~ 144659     948913~ JACKSONH.H~ NA                 
-#>  7 Jackson Creek at Ja~ 144659     948917~ HRel.DayMin NA                 
-#>  8 Jackson Creek at Ja~ 144659     948912~ HRel.1.O    NA                 
-#>  9 Jackson Creek at Ja~ 144659     948915~ HRel.DayMax NA                 
-#> 10 Jackson Creek at Ja~ 144659     948920~ HRel.Month~ NA                 
+#>    station_name          station_id ts_id   ts_name    from               
+#>    <chr>                 <chr>      <chr>   <chr>      <dttm>             
+#>  1 Jackson Creek at Jac~ 144659     949057~ Q.DayMean  2005-12-26 05:00:00
+#>  2 Jackson Creek at Jac~ 144659     949048~ Q.1.O      NA                 
+#>  3 Jackson Creek at Jac~ 144659     949056~ Q.DayMax   2005-12-26 05:00:00
+#>  4 Jackson Creek at Jac~ 144659     949049~ Q.15       2005-12-26 05:00:00
+#>  5 Jackson Creek at Jac~ 144659     949061~ Q.MonthMe~ 2005-12-01 05:00:00
+#>  6 Jackson Creek at Jac~ 144659     949067~ Q.YearMin  2005-01-01 05:00:00
+#>  7 Jackson Creek at Jac~ 144659     949058~ Q.DayMean~ 2006-04-01 05:00:00
+#>  8 Jackson Creek at Jac~ 144659     949065~ Q.YearMax~ 2007-01-01 05:00:00
+#>  9 Jackson Creek at Jac~ 144659     112605~ Q.DayBase~ 2005-12-26 05:00:00
+#> 10 Jackson Creek at Jac~ 144659     112605~ Q.DayRuno~ 2005-12-26 05:00:00
 #> # ... with 120 more rows, and 1 more variable: to <dttm>
 str(available_ts)
 #> Classes 'tbl_df', 'tbl' and 'data.frame':    130 obs. of  6 variables:
 #>  $ station_name: chr  "Jackson Creek at Jackson Heights" "Jackson Creek at Jackson Heights" "Jackson Creek at Jackson Heights" "Jackson Creek at Jackson Heights" ...
 #>  $ station_id  : chr  "144659" "144659" "144659" "144659" ...
-#>  $ ts_id       : chr  "948900042" "1150147042" "948918042" "948919042" ...
-#>  $ ts_name     : chr  "BAT.1.O" "Battery.1.O" "HRel.MonthMax" "HRel.MonthMean" ...
+#>  $ ts_id       : chr  "949057042" "949048042" "949056042" "949049042" ...
+#>  $ ts_name     : chr  "Q.DayMean" "Q.1.O" "Q.DayMax" "Q.15" ...
 #>  $ from        : POSIXct, format: "2005-12-26 05:00:00" NA ...
-#>  $ to          : POSIXct, format: "2018-05-15 09:00:00" NA ...
+#>  $ to          : POSIXct, format: "2018-06-12 05:00:00" NA ...
 ```
 
 #### Multiple Stations
 
-If you provide a vector to `station_id`, the returned tibble will have all the available time series from *all* stations. They can be differentiated using the `station_name` column.
+If you provide a vector to `station_id`, the returned tibble will have
+all the available time series from *all* stations. They can be
+differentiated using the `station_name` column.
 
 ``` r
 # Vector of station_ids
@@ -202,9 +217,13 @@ available_ts
 
 ### Get Time Series Values
 
-You can now use the `ts_id` column in the tibble produced by `ki_timeseries_list()` to query values for chosen time series.
+You can now use the `ts_id` column in the tibble produced by
+`ki_timeseries_list()` to query values for chosen time series.
 
-By default this will return values for the past 24 hours. You can specify the dates you're interested in by setting `start_date` and `end_date`. These should be set as date strings with the format 'YYYY-mm-dd'.
+By default this will return values for the past 24 hours. You can
+specify the dates you’re interested in by setting `start_date` and
+`end_date`. These should be set as date strings with the format
+‘YYYY-mm-dd’.
 
 #### One Time Series
 
@@ -215,22 +234,24 @@ my_values
 #> # A tibble: 100 x 2
 #>    Timestamp           `Precip (millimeter)`
 #>    <dttm>                              <dbl>
-#>  1 2018-05-14 00:00:00                     0
-#>  2 2018-05-14 00:20:00                     0
-#>  3 2018-05-14 00:40:00                     0
-#>  4 2018-05-14 01:00:00                     0
-#>  5 2018-05-14 01:20:00                     0
-#>  6 2018-05-14 01:40:00                     0
-#>  7 2018-05-14 02:00:00                     0
-#>  8 2018-05-14 02:20:00                     0
-#>  9 2018-05-14 02:40:00                     0
-#> 10 2018-05-14 03:00:00                     0
+#>  1 2018-06-10 00:00:00                     0
+#>  2 2018-06-10 00:20:00                     0
+#>  3 2018-06-10 00:40:00                     0
+#>  4 2018-06-10 01:00:00                     0
+#>  5 2018-06-10 01:20:00                     0
+#>  6 2018-06-10 01:40:00                     0
+#>  7 2018-06-10 02:00:00                     0
+#>  8 2018-06-10 02:20:00                     0
+#>  9 2018-06-10 02:40:00                     0
+#> 10 2018-06-10 03:00:00                     0
 #> # ... with 90 more rows
 ```
 
 #### Multiple Time Series
 
-If you provide a vector to `ts_id`, a list of tibbles will be returned. Each tibble is named according to the station name and the time series' parameter.
+If you provide a vector to `ts_id`, a list of tibbles will be returned.
+Each tibble is named according to the station name and the time series’
+parameter.
 
 ``` r
 # Specified date, multiple time series
@@ -279,12 +300,13 @@ my_values
 #> 17 2017-09-13 05:00:00                        0.332
 ```
 
-Using Other Hubs
-----------------
+## Using Other Hubs
 
-You can use this package for a KiWIS hub not included in this list by feeding the location of the API service to the `hub` argument.
+You can use this package for a KiWIS hub not included in this list by
+feeding the location of the API service to the `hub` argument.
 
-For instance: If your URL looks like
+For instance: If your URL looks
+like
 
 <http://kiwis.grandriver.ca/KiWIS/KiWIS?service=kisters&type=queryServices&request=getRequestInfo&datasource=0&format=html>
 
@@ -292,4 +314,5 @@ specify the `hub` argument with
 
 <http://kiwis.grandriver.ca/KiWIS/KiWIS>?
 
-If you'd like to have a hub added to the defaults, please [Submit an Issue](https://github.com/rywhale/kiwisR/issues)
+If you’d like to have a hub added to the defaults, please [Submit an
+Issue](https://github.com/rywhale/kiwisR/issues)

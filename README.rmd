@@ -23,6 +23,7 @@ A wrapper for querying KiWIS APIs to retrieve hydrometric data. Users can toggle
 * _swmc_ : [Ontario Surface Water Monitoring Centre](https://www.ontario.ca/page/surface-water-monitoring)
 * _grand_ : [Grand River Conservation Authority](https://www.grandriver.ca/en/index.aspx)
 * _quinte_ : [Quinte Conservation Authority](http://quinteconservation.ca/site/)
+* _creditvalley_ : [Credit Valley Conservation Authority](https://cvc.ca/)
 
 All data is returned as tidy [tibbles](https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html). 
 
