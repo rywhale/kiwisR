@@ -5,7 +5,7 @@ kiwisR
 Overview
 --------
 
-A wrapper for querying KiWIS APIs to retrieve hydrometric data. Users can toggle between various databases by specifying the 'hub' argument. Currently, there are three default hubs to choose from:
+A wrapper for querying KiWIS APIs to retrieve hydrometric data. Users can toggle between various databases by specifying the 'hub' argument. Currently, the default hubs are:
 
 -   *swmc* : [Ontario Surface Water Monitoring Centre](https://www.ontario.ca/page/surface-water-monitoring)
 -   *grand* : [Grand River Conservation Authority](https://www.grandriver.ca/en/index.aspx)
@@ -186,18 +186,18 @@ my_station_ids <- c("144659", "144342")
 available_ts <- ki_timeseries_list(hub = 'swmc', station_id = my_station_ids)
 available_ts
 #> # A tibble: 259 x 6
-#>    station_name        station_id ts_id    ts_name     from               
-#>    <chr>               <chr>      <chr>    <chr>       <dttm>             
-#>  1 Oshawa Creek at Os~ 144342     1131022~ TAir.24hrM~ NA                 
-#>  2 Oshawa Creek at Os~ 144342     9455620~ TAir.YearM~ NA                 
-#>  3 Oshawa Creek at Os~ 144342     1131019~ TAir.24hrM~ NA                 
-#>  4 Oshawa Creek at Os~ 144342     9455570~ TAir.DayMin NA                 
-#>  5 Oshawa Creek at Os~ 144342     9455600~ TAir.Month~ NA                 
-#>  6 Oshawa Creek at Os~ 144342     1131018~ TAir.1.P    NA                 
-#>  7 Oshawa Creek at Os~ 144342     9455520~ TAir.1.O    NA                 
-#>  8 Oshawa Creek at Os~ 144342     1131023~ TAir.6hr.M~ NA                 
-#>  9 Oshawa Creek at Os~ 144342     9455580~ TAir.Month~ NA                 
-#> 10 Oshawa Creek at Os~ 144342     9455610~ TAir.YearM~ NA                 
+#>    station_name          station_id ts_id   ts_name    from               
+#>    <chr>                 <chr>      <chr>   <chr>      <dttm>             
+#>  1 Jackson Creek at Jac~ 144659     949057~ Q.DayMean  2005-12-26 05:00:00
+#>  2 Jackson Creek at Jac~ 144659     949048~ Q.1.O      NA                 
+#>  3 Jackson Creek at Jac~ 144659     949056~ Q.DayMax   2005-12-26 05:00:00
+#>  4 Jackson Creek at Jac~ 144659     949049~ Q.15       2005-12-26 05:00:00
+#>  5 Jackson Creek at Jac~ 144659     949061~ Q.MonthMe~ 2005-12-01 05:00:00
+#>  6 Jackson Creek at Jac~ 144659     949067~ Q.YearMin  2005-01-01 05:00:00
+#>  7 Jackson Creek at Jac~ 144659     949058~ Q.DayMean~ 2006-04-01 05:00:00
+#>  8 Jackson Creek at Jac~ 144659     949065~ Q.YearMax~ 2007-01-01 05:00:00
+#>  9 Jackson Creek at Jac~ 144659     112605~ Q.DayBase~ 2005-12-26 05:00:00
+#> 10 Jackson Creek at Jac~ 144659     112605~ Q.DayRuno~ 2005-12-26 05:00:00
 #> # ... with 249 more rows, and 1 more variable: to <dttm>
 ```
 
