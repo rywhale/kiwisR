@@ -15,6 +15,7 @@ knitr::opts_chunk$set(
 source('R/ki_timeseries_list.R')
 source('R/ki_station_list.R')
 source('R/ki_timeseries_values.R')
+source('R/utils.R')
 ```
 
 ## Overview
@@ -52,7 +53,6 @@ By default, ```ki_station_list()``` returns a tibble containing information for 
 ```{r}
 # With swmc as the hub
 ki_station_list(hub = 'swmc')
-
 
 ```
 

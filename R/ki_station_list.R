@@ -21,32 +21,7 @@ ki_station_list <- function(hub, search_term, bounding_box = NA){
                "\\sTEMP$", "\\stest\\s")
 
   # Identify hub
-  default_hubs <- c("swmc",
-                    "grand",
-                    "quinte",
-                    "creditvalley")
-
-  # Hub selection
-  if(missing(hub) | !is.character(hub)){
-    return("No hub selected! Please select 'swmc', 'grand', 'quinte' or input your own URL.")
-  }
-  if(hub=="swmc"){
-    api_url<-"https://www.swmc.mnr.gov.on.ca/KiWIS/KiWIS?"
-  }
-  if(hub=="grand"){
-    api_url<-"http://kiwis.grandriver.ca/KiWIS/KiWIS?"
-  }
-  if(hub=="quinte"){
-    api_url<-"http://waterdata.quinteconservation.ca/KiWIS/KiWIS?"
-  }
-  if(hub == "creditvalley"){
-    api_url <- "https://waterinfo.creditvalleyca.ca:8443/KiWIS/KiWIS?"
-  }
-  if(hub %in% default_hubs == FALSE){
-    message("You are using non-default hub.")
-    # Non-default KiWIS URL
-    api_url <- hub
-  }
+  api_url <- check_hub(hub)
 
   # Base query
   api_query <- list(service = "kisters",
@@ -71,7 +46,8 @@ ki_station_list <- function(hub, search_term, bounding_box = NA){
   }
 
   # Send request
-  raw <- httr::GET(url = api_url, query = api_query)
+  raw <- httr::GET(url = api_url,
+                   query = api_query)
 
   # Check for 404
   if(raw$status_code == 404){
@@ -93,7 +69,11 @@ ki_station_list <- function(hub, search_term, bounding_box = NA){
   colnames(content_dat) <- json_content[1, ]
 
   # Remove garbage stations
-  content_dat <- content_dat[!grepl(paste(garbage, collapse = "|"), content_dat$station_name), ]
+  content_dat <- content_dat[!grepl(paste(garbage, collapse = "|"),
+                                    content_dat$station_name), ]
+
+  # Cast lat/lon columns
+  content_dat[c(4,5)] <- sapply(content_dat[c(4,5)], as.double)
 
   return(content_dat)
 }

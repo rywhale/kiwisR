@@ -7,18 +7,23 @@
 ki_timeseries_values(hub, ts_id, start_date, end_date, time_zone)
 }
 \arguments{
-\item{hub}{The KiWIS database you are querying. Default options are 'swmc', 'grand', 'quinte' and 'creditvalley'.
+\item{hub}{The KiWIS database you are querying.
+Default options are 'swmc', 'grand', 'quinte' and 'creditvalley'.
 See README for more details.}
 
-\item{ts_id}{Either: a single time series id or a vector of time series ids. Time series ids
+\item{ts_id}{Either: a single time series id or a vector of time series ids.
+Time series ids
 can be found using the ki_timeseries_list function}
 
-\item{start_date}{A date string formatted "YYYY-MM-DD". Defaults to yesterday. All timestamps are UTC.}
+\item{start_date}{A date string formatted "YYYY-MM-DD".
+Defaults to yesterday. All timestamps are UTC.}
 
-\item{end_date}{A date string formatted "YYYY-MM-DD". Defaults to today. All timestamps are UTC.}
+\item{end_date}{A date string formatted "YYYY-MM-DD".
+Defaults to today. All timestamps are UTC.}
 }
 \value{
-Either: a single tibble or a list of tibbles (each named with its time series id)
+Either: a single tibble or a list of tibbles
+(each named according to station and timeseries)
 }
 \description{
 Get values for time series id or list of time series ids.

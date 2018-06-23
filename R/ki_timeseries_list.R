@@ -17,43 +17,22 @@
 ki_timeseries_list <- function(hub, station_id, ts_name){
   # Check for no input
   if(missing(station_id) & missing(ts_name)){
-    return("No station_id or ts_name search term provided.")
+    stop("No station_id or ts_name search term provided.")
   }
 
   # Identify hub
-  default_hubs <- c("swmc",
-                    "grand",
-                    "quinte",
-                    "creditvalley")
-
-  # Hub selection
-  if(missing(hub) | !is.character(hub)){
-    return("No hub selected! Please select 'swmc', 'grand', 'quinte' or input your own URL.")
-  }
-  if(hub=="swmc"){
-    api_url<-"https://www.swmc.mnr.gov.on.ca/KiWIS/KiWIS?"
-  }
-  if(hub=="grand"){
-    api_url<-"http://kiwis.grandriver.ca/KiWIS/KiWIS?"
-  }
-  if(hub=="quinte"){
-    api_url<-"http://waterdata.quinteconservation.ca/KiWIS/KiWIS?"
-  }
-  if(hub == "creditvalley"){
-    api_url <- "https://waterinfo.creditvalleyca.ca:8443/KiWIS/KiWIS?"
-  }
-  if(hub %in% default_hubs == FALSE){
-    message("You are using non-default hub.")
-    # Non-default KiWIS URL
-    api_url <- hub
-  }
+  api_url <- check_hub(hub)
 
   api_query <- list(service = "kisters",
                     type = "queryServices",
                     request = "getTimeseriesList",
                     format = "json",
                     kvp = "true",
-                    returnfields = "coverage,station_name,station_id,ts_id,ts_name")
+                    returnfields = paste0("coverage,",
+                                          "station_name,",
+                                          "station_id,",
+                                          "ts_id,",
+                                          "ts_name"))
 
   if(!missing(station_id)){
     # Account for multiple station_ids
@@ -67,7 +46,8 @@ ki_timeseries_list <- function(hub, station_id, ts_name){
   }
 
   # Call API
-  raw <- httr::GET(url = api_url, query = api_query)
+  raw <- httr::GET(url = api_url,
+                   query = api_query)
 
   # Check for 404
   if(raw$status_code == 404){
