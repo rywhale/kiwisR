@@ -19,7 +19,7 @@ source('R/utils.R')
 ```
 
 ## Overview
-A wrapper for querying KiWIS APIs to retrieve hydrometric data. Users can toggle between various databases by specifying the 'hub' argument. Currently, there are three default hubs to choose from:
+A wrapper for querying KiWIS APIs to retrieve hydrometric data. Users can toggle between various databases by specifying the 'hub' argument. Currently, the default hubs are:
 
 * _swmc_ : [Ontario Surface Water Monitoring Centre](https://www.ontario.ca/page/surface-water-monitoring)
 * _grand_ : [Grand River Conservation Authority](https://www.grandriver.ca/en/index.aspx)
