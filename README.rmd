@@ -90,7 +90,7 @@ my_stations <- ki_station_list(hub = 'swmc', search_term = "Oshawa*")
 my_stations
 ```
 
-### By Group
+#### By Group
 You can retrieve a list of available station and time series groups using ```ki_group_list```
 
 ```{r}
