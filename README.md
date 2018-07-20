@@ -149,7 +149,7 @@ my_stations
 #> 3 Oshawa Creek at~ WSC-02HD0~ 144342                 43.9            -78.9
 ```
 
-### By Group
+#### By Group
 
 You can retrieve a list of available station and time series groups
 using `ki_group_list`
@@ -248,16 +248,16 @@ available_ts
 #> # A tibble: 259 x 6
 #>    station_name station_id ts_id ts_name from               
 #>    <chr>        <chr>      <chr> <chr>   <dttm>             
-#>  1 Oshawa Cree~ 144342     1131~ TAir.2~ NA                 
-#>  2 Oshawa Cree~ 144342     9455~ TAir.Y~ NA                 
-#>  3 Oshawa Cree~ 144342     1131~ TAir.2~ NA                 
-#>  4 Oshawa Cree~ 144342     9455~ TAir.D~ NA                 
-#>  5 Oshawa Cree~ 144342     9455~ TAir.M~ NA                 
-#>  6 Oshawa Cree~ 144342     1131~ TAir.1~ NA                 
-#>  7 Oshawa Cree~ 144342     9455~ TAir.1~ NA                 
-#>  8 Oshawa Cree~ 144342     1131~ TAir.6~ NA                 
-#>  9 Oshawa Cree~ 144342     9455~ TAir.M~ NA                 
-#> 10 Oshawa Cree~ 144342     9455~ TAir.Y~ NA                 
+#>  1 Jackson Cre~ 144659     9490~ Q.DayM~ 2005-12-26 05:00:00
+#>  2 Jackson Cre~ 144659     9490~ Q.1.O   NA                 
+#>  3 Jackson Cre~ 144659     9490~ Q.DayM~ 2005-12-26 05:00:00
+#>  4 Jackson Cre~ 144659     9490~ Q.15    2005-12-26 05:00:00
+#>  5 Jackson Cre~ 144659     9490~ Q.Mont~ 2005-12-01 05:00:00
+#>  6 Jackson Cre~ 144659     9490~ Q.Year~ 2005-01-01 05:00:00
+#>  7 Jackson Cre~ 144659     9490~ Q.DayM~ 2006-04-01 05:00:00
+#>  8 Jackson Cre~ 144659     9490~ Q.Year~ 2007-01-01 05:00:00
+#>  9 Jackson Cre~ 144659     1126~ Q.DayB~ 2005-12-26 05:00:00
+#> 10 Jackson Cre~ 144659     1126~ Q.DayR~ 2005-12-26 05:00:00
 #> # ... with 249 more rows, and 1 more variable: to <dttm>
 ```
 
