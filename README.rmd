@@ -15,6 +15,7 @@ knitr::opts_chunk$set(
 source('R/ki_timeseries_list.R')
 source('R/ki_station_list.R')
 source('R/ki_timeseries_values.R')
+source('R/ki_group_list.R')
 source('R/utils.R')
 ```
 
@@ -87,6 +88,22 @@ my_stations
 # All stations starting with 'Oshawa'
 my_stations <- ki_station_list(hub = 'swmc', search_term = "Oshawa*")
 my_stations
+```
+
+### By Group
+You can retrieve a list of available station and time series groups using ```ki_group_list```
+
+```{r}
+all_groups <- ki_group_list(hub = 'swmc')
+all_groups
+```
+
+You can then pass values from the ```group_id``` column to ```ki_station_list``` to filter for only stations
+included in the group
+
+```{r}
+group_stations <- ki_station_list(hub = 'swmc', group_id = '169270')
+group_stations
 ```
 
 ### Get Time Series Information

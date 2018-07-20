@@ -14,43 +14,49 @@
 #' ki_timeseries_list(hub = 'swmc', station_id = c("144659", "144342"))
 #'
 
-ki_timeseries_list <- function(hub, station_id, ts_name){
+ki_timeseries_list <- function(hub, station_id, ts_name) {
   # Check for no input
-  if(missing(station_id) & missing(ts_name)){
+  if (missing(station_id) & missing(ts_name)) {
     stop("No station_id or ts_name search term provided.")
   }
 
   # Identify hub
   api_url <- check_hub(hub)
 
-  api_query <- list(service = "kisters",
-                    type = "queryServices",
-                    request = "getTimeseriesList",
-                    format = "json",
-                    kvp = "true",
-                    returnfields = paste0("coverage,",
-                                          "station_name,",
-                                          "station_id,",
-                                          "ts_id,",
-                                          "ts_name"))
+  api_query <- list(
+    service = "kisters",
+    type = "queryServices",
+    request = "getTimeseriesList",
+    format = "json",
+    kvp = "true",
+    returnfields = paste0(
+      "coverage,",
+      "station_name,",
+      "station_id,",
+      "ts_id,",
+      "ts_name"
+    )
+  )
 
-  if(!missing(station_id)){
+  if (!missing(station_id)) {
     # Account for multiple station_ids
     station_id <- paste(station_id, collapse = ",")
-    api_query[['station_id']] <- station_id
+    api_query[["station_id"]] <- station_id
   }
 
   # Check for ts_name search
-  if(!missing(ts_name)){
-    api_query[['ts_name']] <- ts_name
+  if (!missing(ts_name)) {
+    api_query[["ts_name"]] <- ts_name
   }
 
   # Call API
-  raw <- httr::GET(url = api_url,
-                   query = api_query)
+  raw <- httr::GET(
+    url = api_url,
+    query = api_query
+  )
 
   # Check for 404
-  if(raw$status_code == 404){
+  if (raw$status_code == 404) {
     return("Selected hub unavailable!")
   }
 

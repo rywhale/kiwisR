@@ -4,7 +4,7 @@
 \alias{ki_station_list}
 \title{Get tibble containing station information.}
 \usage{
-ki_station_list(hub, search_term, bounding_box = NA)
+ki_station_list(hub, search_term, bounding_box, group_id)
 }
 \arguments{
 \item{hub}{The KiWIS database you are querying. Default options are 'swmc', 'grand', 'quinte' and 'creditvalley'.
@@ -12,7 +12,9 @@ See README for more details.}
 
 \item{search_term}{(Optional) A station name to search for. Supports the use of * as a wildcard. Case doesn't matter.}
 
-\item{bounding_box}{(Optional) A bounding box to search withhin for stations. Should be a vector or comma separated string
+\item{bounding_box}{(Optional) A bounding box to search withhin for stations. Should be a vector or comma separated string}
+
+\item{group_id}{(Optional) A station group id (see ki_group_list).
 with the following format: (min_x, min_y, max_x, max_y).}
 }
 \value{
@@ -25,5 +27,5 @@ Returns all available stations by default and allows for search terms.
 ki_station_list(hub = 'swmc')
 ki_station_list(hub = 'swmc', search_term = "A*")
 ki_station_list(hub = 'swmc', search_term = "Lake Ontario at Toronto")
-
+ki_station_list(hub = 'swmc', group_id = '169270')
 }
