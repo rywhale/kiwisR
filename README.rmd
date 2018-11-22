@@ -111,8 +111,9 @@ group_stations
 You can use the ```station_id``` column returned using ```ki_station_list()``` to figure out
 which time series are available for a given station. 
 
-This will also return ```to``` and ```from``` columns indicating the period of record
-for that time series. 
+By default, this will also return ```to``` and ```from``` columns 
+indicating the period of record for that time series. You can speed
+up queries by setting the ```coverage``` argument to `FALSE`. 
 
 
 #### One Station

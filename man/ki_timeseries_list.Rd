@@ -5,7 +5,7 @@
 \title{Get list of available time series for station or
 list of stations.}
 \usage{
-ki_timeseries_list(hub, station_id, ts_name)
+ki_timeseries_list(hub, station_id, ts_name, coverage = TRUE)
 }
 \arguments{
 \item{hub}{The KiWIS database you are querying. Default options are 'swmc', 'grand', 'quinte' and 'creditvalley'.
@@ -16,6 +16,9 @@ Station ids can be found using the ki_station_list function.}
 
 \item{ts_name}{(Optional) A specific time series short name to search for. E.g. 'TAir.1.O'
 Supports the use of "*" as a wildcard.}
+
+\item{coverage}{(Optional) Whether or not to return period of record columns.
+Defaults to TRUE, change to FALSE for faster queries.}
 }
 \value{
 A tibble containing all available time series for selected stations.

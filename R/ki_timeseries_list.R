@@ -8,13 +8,15 @@
 #' Station ids can be found using the ki_station_list function.
 #' @param ts_name (Optional) A specific time series short name to search for. E.g. 'TAir.1.O'
 #' Supports the use of "*" as a wildcard.
+#' @param coverage (Optional) Whether or not to return period of record columns.
+#' Defaults to TRUE, change to FALSE for faster queries.
 #' @return A tibble containing all available time series for selected stations.
 #' @examples
 #' ki_timeseries_list(hub = 'swmc', station_id = "144659")
 #' ki_timeseries_list(hub = 'swmc', station_id = c("144659", "144342"))
 #'
 
-ki_timeseries_list <- function(hub, station_id, ts_name) {
+ki_timeseries_list <- function(hub, station_id, ts_name, coverage = TRUE) {
   # Check for no input
   if (missing(station_id) & missing(ts_name)) {
     stop("No station_id or ts_name search term provided.")
@@ -30,7 +32,6 @@ ki_timeseries_list <- function(hub, station_id, ts_name) {
     format = "json",
     kvp = "true",
     returnfields = paste0(
-      "coverage,",
       "station_name,",
       "station_id,",
       "ts_id,",
@@ -43,6 +44,15 @@ ki_timeseries_list <- function(hub, station_id, ts_name) {
     station_id <- paste(station_id, collapse = ",")
     api_query[["station_id"]] <- station_id
   }
+
+  if(coverage == TRUE){
+    # Turn coverage columns on
+    api_query[['returnfields']] <- paste0(
+      api_query[['returnfields']],
+      ",coverage"
+    )
+  }
+
 
   # Check for ts_name search
   if (!missing(ts_name)) {
@@ -70,8 +80,10 @@ ki_timeseries_list <- function(hub, station_id, ts_name) {
   colnames(content_dat) <- json_content[1, ]
 
   # Cast date columns
-  content_dat$from <- lubridate::ymd_hms(content_dat$from)
-  content_dat$to <- lubridate::ymd_hms(content_dat$to)
+  if(coverage == TRUE){
+    content_dat$from <- lubridate::ymd_hms(content_dat$from)
+    content_dat$to <- lubridate::ymd_hms(content_dat$to)
+  }
 
   return(content_dat)
 }
