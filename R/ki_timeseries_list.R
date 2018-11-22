@@ -53,7 +53,6 @@ ki_timeseries_list <- function(hub, station_id, ts_name, coverage = TRUE) {
     )
   }
 
-
   # Check for ts_name search
   if (!missing(ts_name)) {
     api_query[["ts_name"]] <- ts_name
@@ -73,8 +72,13 @@ ki_timeseries_list <- function(hub, station_id, ts_name, coverage = TRUE) {
   # Parse text
   json_content <- jsonlite::fromJSON(httr::content(raw, "text"))
 
-  # Convert to  tibble
-  content_dat <- tibble::as_tibble(json_content[-1, ])
+  # Check for special case single ts return
+  if(nrow(json_content) == 2){
+    content_dat <- tibble::as_tibble(json_content)[-1, ]
+  }else{
+    # Convert to  tibble
+    content_dat <- tibble::as_tibble(json_content[-1, ])
+  }
 
   # Add column names
   colnames(content_dat) <- json_content[1, ]
@@ -85,5 +89,5 @@ ki_timeseries_list <- function(hub, station_id, ts_name, coverage = TRUE) {
     content_dat$to <- lubridate::ymd_hms(content_dat$to)
   }
 
-  return(content_dat)
+ return(content_dat)
 }
