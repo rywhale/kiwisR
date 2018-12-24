@@ -10,16 +10,17 @@
 #' Supports the use of "*" as a wildcard.
 #' @param coverage (Optional) Whether or not to return period of record columns.
 #' Defaults to TRUE, change to FALSE for faster queries.
+#' @param group_id (Optional) A time series group id (see ki_group_list)
 #' @return A tibble containing all available time series for selected stations.
 #' @examples
 #' ki_timeseries_list(hub = 'swmc', station_id = "144659")
 #' ki_timeseries_list(hub = 'swmc', station_id = c("144659", "144342"))
 #'
 
-ki_timeseries_list <- function(hub, station_id, ts_name, coverage = TRUE) {
+ki_timeseries_list <- function(hub, station_id, ts_name, coverage = TRUE, group_id) {
   # Check for no input
-  if (missing(station_id) & missing(ts_name)) {
-    stop("No station_id or ts_name search term provided.")
+  if (missing(station_id) & missing(ts_name) & missing(group_id)) {
+    stop("No station_id, ts_name or group_id search term provided.")
   }
 
   # Identify hub
@@ -56,6 +57,12 @@ ki_timeseries_list <- function(hub, station_id, ts_name, coverage = TRUE) {
   # Check for ts_name search
   if (!missing(ts_name)) {
     api_query[["ts_name"]] <- ts_name
+  }
+
+  # Check for group_id
+  if(!missing(group_id)){
+    api_query[["timeseriesgroup_id"]] <- group_id
+
   }
 
   # Call API
