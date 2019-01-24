@@ -11,16 +11,38 @@
 #' @param coverage (Optional) Whether or not to return period of record columns.
 #' Defaults to TRUE, change to FALSE for faster queries.
 #' @param group_id (Optional) A time series group id (see ki_group_list)
+#' @param return_fields (Optional) Specific fields to return. Consult your KiWIS hub services documentation for available options.
+#' Should be a comma separate string or a vector.
 #' @return A tibble containing all available time series for selected stations.
 #' @examples
 #' ki_timeseries_list(hub = 'swmc', station_id = "144659")
 #' ki_timeseries_list(hub = 'swmc', station_id = c("144659", "144342"))
 #'
 
-ki_timeseries_list <- function(hub, station_id, ts_name, coverage = TRUE, group_id) {
+ki_timeseries_list <- function(hub, station_id, ts_name, coverage = TRUE, group_id, return_fields) {
   # Check for no input
   if (missing(station_id) & missing(ts_name) & missing(group_id)) {
-    stop("No station_id, ts_name or group_id search term provided.")
+    stop("No station_id, ts_name or group_id provided.")
+  }
+
+  # Account for user-provided return fields
+  if(missing(return_fields)){
+    return_fields <- "station_name,station_id,ts_id,ts_name"
+  }else{
+    if(!is.vector(return_fields) & !is.character(return_fields)){
+      stop(
+        "User supplied return_fields must be comma separate string or vector of fields."
+      )
+    }
+
+    # Account for user listing coverage in return_fields
+    if(length(grepl("coverage", return_fields))){
+      return_fields <- gsub(
+        ",coverage|coverage,",
+        "",
+        return_fields
+      )
+    }
   }
 
   # Identify hub
@@ -32,13 +54,11 @@ ki_timeseries_list <- function(hub, station_id, ts_name, coverage = TRUE, group_
     request = "getTimeseriesList",
     format = "json",
     kvp = "true",
-    returnfields = paste0(
-      "station_name,",
-      "station_id,",
-      "ts_id,",
-      "ts_name"
+    returnfields = paste(
+      return_fields,
+      collapse = ","
+      )
     )
-  )
 
   if (!missing(station_id)) {
     # Account for multiple station_ids
@@ -65,15 +85,25 @@ ki_timeseries_list <- function(hub, station_id, ts_name, coverage = TRUE, group_
 
   }
 
-  # Call API
-  raw <- httr::GET(
-    url = api_url,
-    query = api_query
-  )
+  # Send request
+  raw <- tryCatch({
+    httr::GET(
+      url = api_url,
+      query = api_query
+    )}, error = function(e){
+      return(e)
+    })
+
+  if(sum(grepl("error", class(raw)))){
+    stop("Query returned error: ", raw$message)
+  }
 
   # Check for 404
   if (raw$status_code == 404) {
-    return("Selected hub unavailable!")
+    stop(
+      "404 returned by selected hub.",
+      "Check that you are able to access it via a web browser."
+    )
   }
 
   # Parse text

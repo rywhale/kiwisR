@@ -4,7 +4,7 @@
 \alias{ki_station_list}
 \title{Get tibble containing station information.}
 \usage{
-ki_station_list(hub, search_term, bounding_box, group_id)
+ki_station_list(hub, search_term, bounding_box, group_id, return_fields)
 }
 \arguments{
 \item{hub}{The KiWIS database you are querying. Default options are 'swmc', 'grand', 'quinte' and 'creditvalley'.
@@ -16,6 +16,9 @@ See README for more details.}
 
 \item{group_id}{(Optional) A station group id (see ki_group_list).
 with the following format: (min_x, min_y, max_x, max_y).}
+
+\item{return_fields}{(Optional) Specific fields to return. Consult your KiWIS hub services documentation for available options.
+Should be a comma separate string or a vector.}
 }
 \value{
 Tibble containing station id, name, latitude and longitude

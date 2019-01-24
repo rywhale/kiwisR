@@ -8,6 +8,8 @@
 #' @param bounding_box (Optional) A bounding box to search withhin for stations. Should be a vector or comma separated string
 #' @param group_id (Optional) A station group id (see ki_group_list).
 #' with the following format: (min_x, min_y, max_x, max_y).
+#' @param return_fields (Optional) Specific fields to return. Consult your KiWIS hub services documentation for available options.
+#' Should be a comma separate string or a vector.
 #' @return Tibble containing station id, name, latitude and longitude
 #' @examples
 #' ki_station_list(hub = 'swmc')
@@ -15,13 +17,24 @@
 #' ki_station_list(hub = 'swmc', search_term = "Lake Ontario at Toronto")
 #' ki_station_list(hub = 'swmc', group_id = '169270')
 
-ki_station_list <- function(hub, search_term, bounding_box, group_id) {
+ki_station_list <- function(hub, search_term, bounding_box, group_id, return_fields) {
   # Common strings for culling bogus stations
   garbage <- c(
     "^#", "^--", "testing",
     "^Template\\s", "\\sTEST$",
     "\\sTEMP$", "\\stest\\s"
   )
+
+  # Account for user-provided return fields
+  if(missing(return_fields)){
+    return_fields <- "station_name,station_no,station_id,station_latitude,station_longitude"
+  }else{
+    if(!is.vector(return_fields) & !is.character(return_fields)){
+      stop(
+        "User supplied return_fields must be comma separate string or vector of fields."
+        )
+    }
+  }
 
   # Identify hub
   api_url <- check_hub(hub)
@@ -32,7 +45,11 @@ ki_station_list <- function(hub, search_term, bounding_box, group_id) {
     type = "queryServices",
     request = "getStationList",
     format = "json",
-    kvp = "true"
+    kvp = "true",
+    returnfields = paste(
+      return_fields,
+      collapse = ","
+    )
   )
 
   # Check for search term
@@ -57,14 +74,24 @@ ki_station_list <- function(hub, search_term, bounding_box, group_id) {
   }
 
   # Send request
-  raw <- httr::GET(
-    url = api_url,
-    query = api_query
-  )
+  raw <- tryCatch({
+    httr::GET(
+      url = api_url,
+      query = api_query
+    )}, error = function(e){
+    return(e)
+  })
+
+  if(sum(grepl("error", raw))){
+    stop("Query returned error.")
+  }
 
   # Check for 404
   if (raw$status_code == 404) {
-    return("Selected hub unavailable!")
+    stop(
+      "404 returned by selected hub.",
+      "Check that you are able to access it via a web browser."
+      )
   }
 
   # Parse text
@@ -88,7 +115,9 @@ ki_station_list <- function(hub, search_term, bounding_box, group_id) {
   ), ]
 
   # Cast lat/lon columns
-  content_dat[c(4, 5)] <- sapply(content_dat[c(4, 5)], as.double)
+  content_dat[which(grepl("lat|lon", names(content_dat)))] <- sapply(
+    content_dat[which(grepl("lat|lon", names(content_dat)))],
+    as.double)
 
-  return(content_dat)
+  return(raw)
 }
