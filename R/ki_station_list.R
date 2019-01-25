@@ -119,5 +119,5 @@ ki_station_list <- function(hub, search_term, bounding_box, group_id, return_fie
     content_dat[which(grepl("lat|lon", names(content_dat)))],
     as.double)
 
-  return(raw)
+  return(content_dat)
 }
