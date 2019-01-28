@@ -27,8 +27,10 @@ Tibble containing station id, name, latitude and longitude
 Returns all available stations by default and allows for search terms.
 }
 \examples{
+\dontrun{
 ki_station_list(hub = 'swmc')
 ki_station_list(hub = 'swmc', search_term = "A*")
 ki_station_list(hub = 'swmc', search_term = "Lake Ontario at Toronto")
 ki_station_list(hub = 'swmc', group_id = '169270')
+}
 }

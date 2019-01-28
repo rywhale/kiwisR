@@ -19,5 +19,7 @@ Returns a tibble containing available groups. Allows users to query
 ki_station_list for grouped stations.
 }
 \examples{
+\dontrun{
 ki_group_list(hub = 'swmc')
+}
 }

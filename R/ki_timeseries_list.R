@@ -15,9 +15,10 @@
 #' Should be a comma separate string or a vector.
 #' @return A tibble containing all available time series for selected stations.
 #' @examples
+#' \dontrun{
 #' ki_timeseries_list(hub = 'swmc', station_id = "144659")
 #' ki_timeseries_list(hub = 'swmc', station_id = c("144659", "144342"))
-#'
+#'}
 
 ki_timeseries_list <- function(hub, station_id, ts_name, coverage = TRUE, group_id, return_fields) {
   # Check for no input

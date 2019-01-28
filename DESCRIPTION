@@ -7,7 +7,7 @@ Maintainer: Ryan Whaley <rdgwhaley@gmail.com>
 Description: Allows users to query KiWIS databases for 
     hydrometric information. Currently supports three 
     default hubs and also allows for non-default hubs to be used.
-License: MIT | file LICENSE
+License: MIT + file LICENSE
 URL: https://github.com/rywhale/kiwisR
 BugReports: https://github.com/rywhale/kiwisR/issues
 Imports: 

@@ -1,7 +1,7 @@
 ## Deal with hub selection
 #' @noRd
+#' @description Function to handle default hubs. Not intended for external use.
 #' @keywords internal
-#' @export
 
 check_hub <- function(hub) {
   # Identify default hubs

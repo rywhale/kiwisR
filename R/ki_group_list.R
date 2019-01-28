@@ -8,7 +8,9 @@
 #' See README for more details.
 #' @return A tibble with three columns: group_id, group_name and group_type
 #' @examples
+#' \dontrun{
 #' ki_group_list(hub = 'swmc')
+#' }
 
 ki_group_list <- function(hub) {
 
