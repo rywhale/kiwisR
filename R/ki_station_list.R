@@ -117,9 +117,12 @@ ki_station_list <- function(hub, search_term, bounding_box, group_id, return_fie
   ), ]
 
   # Cast lat/lon columns
-  content_dat[which(grepl("lat|lon", names(content_dat)))] <- sapply(
-    content_dat[which(grepl("lat|lon", names(content_dat)))],
-    as.double)
+  if(sum(grepl("lat|lon", names(content_dat))) >= 1){
+    content_dat[which(grepl("lat|lon", names(content_dat)))] <- sapply(
+      content_dat[which(grepl("lat|lon", names(content_dat)))],
+      as.double
+      )
+  }
 
   return(content_dat)
 }

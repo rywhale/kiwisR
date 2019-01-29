@@ -121,6 +121,14 @@ ki_timeseries_list <- function(hub, station_id, ts_name, coverage = TRUE, group_
   # Add column names
   colnames(content_dat) <- json_content[1, ]
 
+  # Cast lat/lon columns
+  if(sum(grepl("lat|lon", names(content_dat))) >= 1){
+    content_dat[which(grepl("lat|lon", names(content_dat)))] <- sapply(
+      content_dat[which(grepl("lat|lon", names(content_dat)))],
+      as.double
+    )
+  }
+
   # Cast date columns
   if(coverage == TRUE){
     content_dat$from <- lubridate::ymd_hms(content_dat$from)
