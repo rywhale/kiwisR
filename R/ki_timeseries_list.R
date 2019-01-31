@@ -28,6 +28,7 @@ ki_timeseries_list <- function(hub, station_id, ts_name, coverage = TRUE, group_
 
   # Account for user-provided return fields
   if(missing(return_fields)){
+    # Default
     return_fields <- "station_name,station_id,ts_id,ts_name"
   }else{
     if(!is.vector(return_fields) & !is.character(return_fields)){
@@ -119,10 +120,10 @@ ki_timeseries_list <- function(hub, station_id, ts_name, coverage = TRUE, group_
   }
 
   # Add column names
-  colnames(content_dat) <- json_content[1, ]
+  names(content_dat) <- json_content[1, ]
 
   # Cast lat/lon columns
-  if(sum(grepl("lat|lon", names(content_dat))) >= 1){
+  if(sum(grepl("lat|lon", names(content_dat))) >= 2){
     content_dat[which(grepl("lat|lon", names(content_dat)))] <- sapply(
       content_dat[which(grepl("lat|lon", names(content_dat)))],
       as.double
