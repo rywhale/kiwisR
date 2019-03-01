@@ -12,20 +12,15 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
-source('R/ki_timeseries_list.R')
-source('R/ki_station_list.R')
-source('R/ki_timeseries_values.R')
-source('R/ki_group_list.R')
-source('R/utils.R')
+
 ```
 
 ## Overview
 A wrapper for querying KiWIS APIs to retrieve hydrometric data. Users can toggle between various databases by specifying the 'hub' argument. Currently, the default hubs are:
 
+* _kisters_ : [KISTERS KiWIS Example Server](http://kiwis.kisters.de/KiWIS2/index.html)
 * _swmc_ : [Ontario Surface Water Monitoring Centre](https://www.ontario.ca/page/surface-water-monitoring)
-* _grand_ : [Grand River Conservation Authority](https://www.grandriver.ca/en/index.aspx)
 * _quinte_ : [Quinte Conservation Authority](http://quinteconservation.ca/site/)
-* _creditvalley_ : [Credit Valley Conservation Authority](https://cvc.ca/)
 
 All data is returned as tidy [tibbles](https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html). 
 
@@ -39,7 +34,7 @@ remotes::install_github('rywhale/kiwisR')
 
 Then load the package with
 
-```{r eval = FALSE}
+```{r eval = TRUE,message=FALSE,warning=FALSE}
 library(kiwisR)
 ```
 
@@ -67,7 +62,11 @@ You can also specify a bounding box to look within for stations. The bounding bo
 ```{r}
 # With vector
 my_bounding_box <- c("-80.126038", "43.458297", "-79.002481", "43.969098")
-my_stations <- ki_station_list(hub = 'swmc', bounding_box = my_bounding_box)
+my_stations <- ki_station_list(
+  hub = 'swmc', 
+  bounding_box = my_bounding_box
+  )
+
 my_stations
 
 # With comma separated string
@@ -82,11 +81,19 @@ You can also narrow search results using a search term. This supports the use of
 
 ```{r}
 # All stations starting with 'A'
-my_stations <- ki_station_list(hub = 'swmc', search_term = "A*")
+my_stations <- ki_station_list(
+  hub = 'swmc', 
+  search_term = "A*"
+  )
+
 my_stations
 
 # All stations starting with 'Oshawa'
-my_stations <- ki_station_list(hub = 'swmc', search_term = "Oshawa*")
+my_stations <- ki_station_list(
+  hub = 'swmc', 
+  search_term = "Oshawa*"
+  )
+
 my_stations
 ```
 
@@ -102,7 +109,11 @@ You can then pass values from the ```group_id``` column to ```ki_station_list```
 included in the group
 
 ```{r}
-group_stations <- ki_station_list(hub = 'swmc', group_id = '169270')
+group_stations <- ki_station_list(
+  hub = 'swmc', 
+  group_id = '169270'
+  )
+
 group_stations
 ```
 
@@ -120,8 +131,13 @@ up queries by setting the ```coverage``` argument to `FALSE`.
 
 ```{r}
 # Single station_id
-available_ts <- ki_timeseries_list(hub = 'swmc', station_id = "144659")
+available_ts <- ki_timeseries_list(
+  hub = 'swmc', 
+  station_id = "144659"
+  )
+
 available_ts
+
 str(available_ts)
 
 ```
@@ -135,7 +151,11 @@ available time series from _all_ stations. They can be differentiated using the
 # Vector of station_ids
 my_station_ids <- c("144659", "144342")
 
-available_ts <- ki_timeseries_list(hub = 'swmc', station_id = my_station_ids)
+available_ts <- ki_timeseries_list(
+  hub = 'swmc', 
+  station_id = my_station_ids
+  )
+
 available_ts
 ```
 
@@ -151,7 +171,11 @@ by setting ```start_date``` and ```end_date```. These should be set as date stri
 
 ```{r}
 # Past 24 hours
-my_values <- ki_timeseries_values(hub = 'swmc', ts_id = '948928042')
+my_values <- ki_timeseries_values(
+  hub = 'swmc', 
+  ts_id = '948928042'
+  )
+
 my_values
 ```
 
@@ -162,10 +186,13 @@ is named according to the station name and the time series' parameter.
 ```{r}
 # Specified date, multiple time series
 my_ts_ids <- c("948928042", "948603042")
-my_values <- ki_timeseries_values(hub = 'swmc', 
-                                  ts_id = my_ts_ids,
-                                  start_date = "2017-08-28",
-                                  end_date = "2017-09-13")
+my_values <- ki_timeseries_values(
+  hub = 'swmc',
+  ts_id = my_ts_ids,
+  start_date = "2017-08-28",
+  end_date = "2017-09-13"
+  )
+
 my_values
 ```
 
@@ -175,10 +202,10 @@ You can use this package for a KiWIS hub not included in this list by feeding th
 For instance:
 If your URL looks like 
 
-http://kiwis.grandriver.ca/KiWIS/KiWIS?service=kisters&type=queryServices&request=getRequestInfo&datasource=0&format=html
+https://waterdata.grandriver.ca/KiWIS/KiWIS?service=kisters&type=queryServices&request=getRequestInfo&datasource=0&format=html
 
 specify the ```hub``` argument with
 
-http://kiwis.grandriver.ca/KiWIS/KiWIS?
+https://waterdata.grandriver.ca/KiWIS/KiWIS?
 
 If you'd like to have a hub added to the defaults, please [Submit an Issue](https://github.com/rywhale/kiwisR/issues)
