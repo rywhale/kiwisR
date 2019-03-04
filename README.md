@@ -3,6 +3,9 @@ kiwisR
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+![Travis build
+status](https://travis-ci.org/rywhale/kiwisR.svg?branch=CRAN_DEV)\](<https://travis-ci.org/rywhale/kiwisR>)
+
 ## Overview
 
 A wrapper for querying KISTERS WISKI Databases via the [KiWIS
@@ -273,16 +276,16 @@ available_ts
 #> # A tibble: 218 x 6
 #>    station_name station_id ts_id ts_name from               
 #>    <chr>        <chr>      <chr> <chr>   <dttm>             
-#>  1 Jackson Cre~ 144659     9489~ Precip~ 2007-06-01 05:00:00
-#>  2 Jackson Cre~ 144659     1139~ Precip~ 2007-06-19 00:00:00
-#>  3 Jackson Cre~ 144659     9489~ Precip~ 2007-06-18 20:15:00
-#>  4 Jackson Cre~ 144659     9489~ Precip~ 2007-06-18 05:00:00
-#>  5 Jackson Cre~ 144659     1139~ Precip~ 2007-06-19 00:00:00
-#>  6 Jackson Cre~ 144659     1143~ Precip~ 2007-07-01 05:00:00
-#>  7 Jackson Cre~ 144659     1143~ Precip~ 2007-07-01 05:00:00
-#>  8 Jackson Cre~ 144659     1143~ Precip~ 2007-06-18 05:00:00
-#>  9 Jackson Cre~ 144659     9489~ Precip~ 2007-06-18 20:15:00
-#> 10 Jackson Cre~ 144659     1143~ Precip~ 2000-02-01 05:00:00
+#>  1 Jackson Cre~ 144659     9490~ Q.DayM~ 2005-12-26 05:00:00
+#>  2 Jackson Cre~ 144659     9490~ Q.1.O   NA                 
+#>  3 Jackson Cre~ 144659     9490~ Q.DayM~ 2005-12-26 05:00:00
+#>  4 Jackson Cre~ 144659     9490~ Q.15    2005-12-26 05:00:00
+#>  5 Jackson Cre~ 144659     9490~ Q.Mont~ 2005-12-01 05:00:00
+#>  6 Jackson Cre~ 144659     9490~ Q.Year~ 2005-01-01 05:00:00
+#>  7 Jackson Cre~ 144659     9490~ Q.DayM~ 2006-04-01 05:00:00
+#>  8 Jackson Cre~ 144659     9490~ Q.Year~ 2007-01-01 05:00:00
+#>  9 Jackson Cre~ 144659     1126~ Q.DayB~ 2005-12-26 05:00:00
+#> 10 Jackson Cre~ 144659     9490~ Q.Mont~ 2006-04-01 05:00:00
 #> # ... with 208 more rows, and 1 more variable: to <dttm>
 ```
 

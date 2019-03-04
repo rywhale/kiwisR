@@ -15,6 +15,8 @@ knitr::opts_chunk$set(
 
 ```
 
+![Travis build status](https://travis-ci.org/rywhale/kiwisR.svg?branch=CRAN_DEV)]
+
 ## Overview
 A wrapper for querying KISTERS WISKI Databases via the [KiWIS API](https://water.kisters.de/en/technology-trends/kisters-and-open-data/). Users can toggle between various databases by specifying the 'hub' argument. Currently, the default hubs are:
 
