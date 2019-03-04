@@ -13,15 +13,13 @@ See \href{https://github.com/rywhale/kiwisR}{README}.}
 \item{ts_id}{Either: a single time series id or a vector of time series ids.
 Time series ids can be found using the ki_timeseries_list function}
 
-\item{start_date}{A date string formatted "YYYY-MM-DD".
-Defaults to yesterday. All timestamps are UTC.}
+\item{start_date}{A date string formatted "YYYY-MM-DD". Defaults to yesterday.}
 
-\item{end_date}{A date string formatted "YYYY-MM-DD".
-Defaults to today. All timestamps are UTC.}
+\item{end_date}{A date string formatted "YYYY-MM-DD". Defaults to today.}
 }
 \value{
-Either: a single tibble or a list of tibbles
-(each named according to station and timeseries)
+Either: a single tibble or a list of tibbles (each named according to station and parameter).
+ Tibbles returned contain columns for Timestamp, Value and Unit. All timestamps are returned in UTC.
 }
 \description{
 Returns time series values for given time series id and date range.

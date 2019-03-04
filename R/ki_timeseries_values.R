@@ -6,12 +6,10 @@
 #'  See \href{https://github.com/rywhale/kiwisR}{README}.
 #' @param ts_id Either: a single time series id or a vector of time series ids.
 #'  Time series ids can be found using the ki_timeseries_list function
-#' @param start_date A date string formatted "YYYY-MM-DD".
-#' Defaults to yesterday. All timestamps are UTC.
-#' @param end_date A date string formatted "YYYY-MM-DD".
-#' Defaults to today. All timestamps are UTC.
-#' @return Either: a single tibble or a list of tibbles
-#' (each named according to station and timeseries)
+#' @param start_date A date string formatted "YYYY-MM-DD". Defaults to yesterday.
+#' @param end_date A date string formatted "YYYY-MM-DD". Defaults to today.
+#' @return Either: a single tibble or a list of tibbles (each named according to station and parameter).
+#'  Tibbles returned contain columns for Timestamp, Value and Unit. All timestamps are returned in UTC.
 #' @examples
 #' \dontrun{
 #' ki_timeseries_values(

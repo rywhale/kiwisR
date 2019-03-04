@@ -24,6 +24,8 @@ test_that("ki_timeseries_values returns error if no data for specified dates", {
 })
 
 test_that("ki_timeseries_values returns table with data", {
+  skip_if_net_down()
+
   test_ts <- "231042"
   ts_vals <- ki_timeseries_values(hub = "kisters",
                                   ts_id = test_ts,
@@ -33,6 +35,8 @@ test_that("ki_timeseries_values returns table with data", {
 })
 
 test_that("ki_timeseries_values can take a vector of ts_ids and return list of tables", {
+  skip_if_net_down()
+
   test_ts <- c("231042","244042")
   ts_vals <- ki_timeseries_values(hub = "kisters",
                                   ts_id = test_ts,
@@ -44,6 +48,8 @@ test_that("ki_timeseries_values can take a vector of ts_ids and return list of t
 })
 
 test_that("ki_timeseries_values returns three columns (two static) by default", {
+  skip_if_net_down()
+
   test_ts <- "231042"
   ts_vals <- ki_timeseries_values(hub = "kisters",
                                   ts_id = test_ts,

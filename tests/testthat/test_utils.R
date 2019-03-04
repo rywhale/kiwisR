@@ -1,6 +1,8 @@
 context("Testing functions in utils.R")
 
 test_that("check_hub accepts certain character strings for default hubs", {
+  skip_if_net_down()
+
   expect_is(check_hub("kisters"), "character")
   expect_is(check_hub("swmc"), "character")
   expect_is(check_hub("quinte"), "character")

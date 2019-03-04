@@ -3,6 +3,12 @@
 #' @description Checks input against defaults and checks to make sure the server can be reached
 #' @keywords internal
 check_hub <- function(hub) {
+
+  # Check for internet access
+  if(!has_internet()){
+    stop("No access to internet", call. = FALSE)
+  }
+
   # Identify default hubs
   default_hubs <- list(
     "kisters" = "http://kiwis.kisters.de/KiWIS/KiWIS?",
@@ -64,4 +70,15 @@ check_date <- function(start_date, end_date){
     stop("start_date is greater than end_date")
   }
 
+}
+
+#' Checking if internet connection available
+#' @noRd
+#' @description Checks if connection to internet can be made. Useful to check before running API-related tests
+#' @author Sam Albers
+#' @keywords internal
+has_internet <- function(){
+  z <- try(suppressWarnings(readLines('https://www.google.ca', n = 1)),
+           silent = TRUE)
+  !inherits(z, "try-error")
 }

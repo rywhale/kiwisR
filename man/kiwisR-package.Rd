@@ -16,7 +16,19 @@ A suggested workflow for using this package:
  \item Get time series data using \code{ki_timeseries_values()}
 }
 }
+\seealso{
+Useful links:
+\itemize{
+  \item Report bugs at \url{https://github.com/rywhale/kiwisR/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Ryan Whaley \email{rdgwhaley@gmail.com}
+
+Other contributors:
+\itemize{
+  \item Sam Albers \email{sam.albers@gov.bc.ca} [contributor]
+}
 
 }

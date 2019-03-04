@@ -15,7 +15,9 @@ knitr::opts_chunk$set(
 
 ```
 
-![Travis build status](https://travis-ci.org/rywhale/kiwisR.svg?branch=CRAN_DEV)]
+![Travis-CI Build Status](https://travis-ci.org/rywhale/kiwisR.svg?branch=CRAN_DEV)
+[![LICENSE](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/kiwisR)](https://cran.r-project.org/package=kiwisR) [![CRAN Download](https://cranlogs.r-pkg.org/badges/kiwisR?color=brightgreen)](https://CRAN.R-project.org/package=kiwisR)
 
 ## Overview
 A wrapper for querying KISTERS WISKI Databases via the [KiWIS API](https://water.kisters.de/en/technology-trends/kisters-and-open-data/). Users can toggle between various databases by specifying the 'hub' argument. Currently, the default hubs are:
@@ -24,14 +26,14 @@ A wrapper for querying KISTERS WISKI Databases via the [KiWIS API](https://water
 * _swmc_ : [Ontario Surface Water Monitoring Centre](https://www.ontario.ca/page/surface-water-monitoring)
 * _quinte_ : [Quinte Conservation Authority](http://quinteconservation.ca/site/)
 
-All data is returned as tidy [tibbles](https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html). 
+All data is returned as tidy [tibbles](https://CRAN.R-project.org/package=tibble). 
 
 ## Installation
-To install ```kiwisR``` you first need to install ```remotes```. 
+To install the development version of ```kiwisR``` you first need to install ```devtools```. 
 
 ```{r eval = FALSE}
-install.packages("remotes")
-remotes::install_github('rywhale/kiwisR')
+if(!requireNamespace("devtools")) install.packages("devtools")
+devtools::install_github('rywhale/kiwisR')
 ```
 
 Then load the package with
@@ -204,10 +206,10 @@ You can use this package for a KiWIS hub not included in this list by feeding th
 For instance:
 If your URL looks like 
 
-http://kiwis.kisters.de/KiWIS/KiWIS?datasource=0&service=kisters&type=queryServices&request=getrequestinfo
+`http://kiwis.kisters.de/KiWIS/KiWIS?datasource=0&service=kisters&type=queryServices&request=getrequestinfo`
 
 specify the ```hub``` argument with
 
-http://kiwis.kisters.de/KiWIS/KiWIS?
+`http://kiwis.kisters.de/KiWIS/KiWIS?`
 
 If you'd like to have a hub added to the defaults, please [Submit an Issue](https://github.com/rywhale/kiwisR/issues)

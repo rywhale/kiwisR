@@ -3,8 +3,12 @@ kiwisR
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-![Travis build
-status](https://travis-ci.org/rywhale/kiwisR.svg?branch=CRAN_DEV)\](<https://travis-ci.org/rywhale/kiwisR>)
+![Travis-CI Build
+Status](https://travis-ci.org/rywhale/kiwisR.svg?branch=CRAN_DEV)
+[![LICENSE](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/kiwisR)](https://cran.r-project.org/package=kiwisR)
+[![CRAN
+Download](https://cranlogs.r-pkg.org/badges/kiwisR?color=brightgreen)](https://CRAN.R-project.org/package=kiwisR)
 
 ## Overview
 
@@ -21,15 +25,16 @@ argument. Currently, the default hubs are:
     Authority](http://quinteconservation.ca/site/)
 
 All data is returned as tidy
-[tibbles](https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html).
+[tibbles](https://CRAN.R-project.org/package=tibble).
 
 ## Installation
 
-To install `kiwisR` you first need to install `remotes`.
+To install the development version of `kiwisR` you first need to install
+`devtools`.
 
 ``` r
-install.packages("remotes")
-remotes::install_github('rywhale/kiwisR')
+if(!requireNamespace("devtools")) install.packages("devtools")
+devtools::install_github('rywhale/kiwisR')
 ```
 
 Then load the package with
@@ -276,16 +281,16 @@ available_ts
 #> # A tibble: 218 x 6
 #>    station_name station_id ts_id ts_name from               
 #>    <chr>        <chr>      <chr> <chr>   <dttm>             
-#>  1 Jackson Cre~ 144659     9490~ Q.DayM~ 2005-12-26 05:00:00
-#>  2 Jackson Cre~ 144659     9490~ Q.1.O   NA                 
-#>  3 Jackson Cre~ 144659     9490~ Q.DayM~ 2005-12-26 05:00:00
-#>  4 Jackson Cre~ 144659     9490~ Q.15    2005-12-26 05:00:00
-#>  5 Jackson Cre~ 144659     9490~ Q.Mont~ 2005-12-01 05:00:00
-#>  6 Jackson Cre~ 144659     9490~ Q.Year~ 2005-01-01 05:00:00
-#>  7 Jackson Cre~ 144659     9490~ Q.DayM~ 2006-04-01 05:00:00
-#>  8 Jackson Cre~ 144659     9490~ Q.Year~ 2007-01-01 05:00:00
-#>  9 Jackson Cre~ 144659     1126~ Q.DayB~ 2005-12-26 05:00:00
-#> 10 Jackson Cre~ 144659     9490~ Q.Mont~ 2006-04-01 05:00:00
+#>  1 Jackson Cre~ 144659     9489~ Precip~ 2007-06-01 05:00:00
+#>  2 Jackson Cre~ 144659     1139~ Precip~ 2007-06-19 00:00:00
+#>  3 Jackson Cre~ 144659     9489~ Precip~ 2007-06-18 20:15:00
+#>  4 Jackson Cre~ 144659     9489~ Precip~ 2007-06-18 05:00:00
+#>  5 Jackson Cre~ 144659     1139~ Precip~ 2007-06-19 00:00:00
+#>  6 Jackson Cre~ 144659     1143~ Precip~ 2007-07-01 05:00:00
+#>  7 Jackson Cre~ 144659     1143~ Precip~ 2007-07-01 05:00:00
+#>  8 Jackson Cre~ 144659     1143~ Precip~ 2007-06-18 05:00:00
+#>  9 Jackson Cre~ 144659     9489~ Precip~ 2007-06-18 20:15:00
+#> 10 Jackson Cre~ 144659     1143~ Precip~ 2000-02-01 05:00:00
 #> # ... with 208 more rows, and 1 more variable: to <dttm>
 ```
 
@@ -309,7 +314,7 @@ my_values <- ki_timeseries_values(
   )
 
 my_values
-#> # A tibble: 141 x 3
+#> # A tibble: 174 x 3
 #>    Timestamp           Precip Units
 #>    <dttm>               <dbl> <chr>
 #>  1 2019-03-03 00:00:00      0 mm   
@@ -322,7 +327,7 @@ my_values
 #>  8 2019-03-03 01:45:00      0 mm   
 #>  9 2019-03-03 02:00:00      0 mm   
 #> 10 2019-03-03 02:15:00      0 mm   
-#> # ... with 131 more rows
+#> # ... with 164 more rows
 ```
 
 #### Multiple Time Series
@@ -389,11 +394,11 @@ feeding the location of the API service to the `hub` argument.
 For instance: If your URL looks
 like
 
-<http://kiwis.kisters.de/KiWIS/KiWIS?datasource=0&service=kisters&type=queryServices&request=getrequestinfo>
+`http://kiwis.kisters.de/KiWIS/KiWIS?datasource=0&service=kisters&type=queryServices&request=getrequestinfo`
 
 specify the `hub` argument with
 
-<http://kiwis.kisters.de/KiWIS/KiWIS>?
+`http://kiwis.kisters.de/KiWIS/KiWIS?`
 
 If you’d like to have a hub added to the defaults, please [Submit an
 Issue](https://github.com/rywhale/kiwisR/issues)
