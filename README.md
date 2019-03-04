@@ -1,7 +1,7 @@
-kiwisR
-================
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+# kiwisR <img src="tools/readme/kiwisR_small.png" align="right" />
 
 ![Travis-CI Build
 Status](https://travis-ci.org/rywhale/kiwisR.svg?branch=CRAN_DEV)
