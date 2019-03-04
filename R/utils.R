@@ -1,31 +1,29 @@
-## Deal with hub selection
+#' Hub selection handling
 #' @noRd
-#' @description Function to handle default hubs. Not intended for external use.
+#' @description Checks input against defaults and checks to make sure the server can be reached
 #' @keywords internal
-
 check_hub <- function(hub) {
   # Identify default hubs
-  default_hubs <- c(
-    "kisters",
-    "swmc",
-    "quinte"
+  default_hubs <- list(
+    "kisters" = "http://kiwis.kisters.de/KiWIS/KiWIS?",
+    "swmc" = "https://www.swmc.mnr.gov.on.ca/KiWIS/KiWIS?",
+    "quinte" = "http://waterdata.quinteconservation.ca/KiWIS/KiWIS?"
   )
+
   # Hub selection
   if (!is.character(hub)) {
-    stop("Hub should be a URL.")
+    stop(
+      "`hub` argument must be a character- either a URL or one of the following defaults: ",
+      paste(c("", names(default_hubs)), collapse = "\n"),
+      "See https://github.com/rywhale/kiwisR for more information."
+      )
   }
-  if(hub == "kisters"){
-    api_url <- "http://kiwis.kisters.de/KiWIS/KiWIS?"
-  }
-  if (hub == "swmc") {
-    api_url <- "https://www.swmc.mnr.gov.on.ca/KiWIS/KiWIS?"
-  }
-  if (hub == "quinte") {
-    api_url <- "http://waterdata.quinteconservation.ca/KiWIS/KiWIS?"
-  }
-  if (!hub %in% default_hubs) {
+
+  if (!hub %in% names(default_hubs)) {
     # Non-default KiWIS URL
     api_url <- hub
+  }else{
+    api_url <- default_hubs[[which(names(default_hubs) == hub)]]
   }
 
   # Check if server returns error
@@ -38,8 +36,32 @@ check_hub <- function(hub) {
   )
 
   if(server_status$category != "Success"){
-    stop("Hub server returned error: ", server_status$message)
+    stop("hub server returned error: ", server_status$message)
   }else{
     return(api_url)
   }
+}
+
+#' User provided date string checking
+#' @noRd
+#' @description Checks user provided date strings to ensure they can be cast to yyyy-mm-dd
+#' @keywords internal
+check_date <- function(start_date, end_date){
+
+  start_status <- tryCatch({
+    lubridate::ymd(start_date)
+  }, warning = function(w){
+    stop("start_date must be in yyyy-mm-dd format", call. = FALSE)
+  })
+
+  end_status <- tryCatch({
+    lubridate::ymd(end_date)
+  }, warning = function(w){
+    stop("end_date must be in yyyy-mm-dd format", call. = FALSE)
+  })
+
+  if(lubridate::ymd(start_date) > lubridate::ymd(end_date)){
+    stop("start_date is greater than end_date")
+  }
+
 }

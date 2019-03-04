@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 ```
 
 ## Overview
-A wrapper for querying KiWIS APIs to retrieve hydrometric data. Users can toggle between various databases by specifying the 'hub' argument. Currently, the default hubs are:
+A wrapper for querying KISTERS WISKI Databases via the [KiWIS API](https://water.kisters.de/en/technology-trends/kisters-and-open-data/). Users can toggle between various databases by specifying the 'hub' argument. Currently, the default hubs are:
 
 * _kisters_ : [KISTERS KiWIS Example Server](http://kiwis.kisters.de/KiWIS2/index.html)
 * _swmc_ : [Ontario Surface Water Monitoring Centre](https://www.ontario.ca/page/surface-water-monitoring)
@@ -202,10 +202,10 @@ You can use this package for a KiWIS hub not included in this list by feeding th
 For instance:
 If your URL looks like 
 
-https://waterdata.grandriver.ca/KiWIS/KiWIS?service=kisters&type=queryServices&request=getRequestInfo&datasource=0&format=html
+http://kiwis.kisters.de/KiWIS/KiWIS?datasource=0&service=kisters&type=queryServices&request=getrequestinfo
 
 specify the ```hub``` argument with
 
-https://waterdata.grandriver.ca/KiWIS/KiWIS?
+http://kiwis.kisters.de/KiWIS/KiWIS?
 
 If you'd like to have a hub added to the defaults, please [Submit an Issue](https://github.com/rywhale/kiwisR/issues)

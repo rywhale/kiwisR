@@ -2,12 +2,10 @@
 #'
 #' @export
 #' @description Returns time series values for given time series id and date range.
-#' @param hub The KiWIS database you are querying.
-#' Default options are 'swmc', 'grand', 'quinte' and 'creditvalley'.
-#' See README for more details.
+#' @param hub The KiWIS database you are querying. Either one of the defaults or a URL.
+#'  See \href{https://github.com/rywhale/kiwisR}{README}.
 #' @param ts_id Either: a single time series id or a vector of time series ids.
-#' Time series ids
-#' can be found using the ki_timeseries_list function
+#'  Time series ids can be found using the ki_timeseries_list function
 #' @param start_date A date string formatted "YYYY-MM-DD".
 #' Defaults to yesterday. All timestamps are UTC.
 #' @param end_date A date string formatted "YYYY-MM-DD".
@@ -31,16 +29,19 @@
 ki_timeseries_values <- function(hub, ts_id, start_date, end_date) {
 
   # Default to past 24 hours
-  if (missing(start_date) & missing(end_date)) {
+  if (missing(start_date) || missing(end_date)) {
+    message("No start or end date provided, trying to return data for past 24 hours")
     start_date <- Sys.Date() - 1
     end_date <- Sys.Date()
+  }else{
+    check_date(start_date, end_date)
   }
 
   # Identify hub
   api_url <- check_hub(hub)
 
   if (missing(ts_id)) {
-    return("Please enter a valid ts_id.")
+    stop("Please enter a valid ts_id.")
   } else {
     # Account for multiple ts_ids
     ts_id_string <- paste(ts_id, collapse = ",")
@@ -94,7 +95,7 @@ ki_timeseries_values <- function(hub, ts_id, start_date, end_date) {
   json_content <- jsonlite::fromJSON(httr::content(raw, "text"))
 
   if (length(names(json_content)) == 3) {
-    return(json_content$message)
+    stop(json_content$message)
   }
   if ("rows" %in% names(json_content)) {
     num_rows <- sum(as.numeric(json_content$rows))
@@ -128,7 +129,7 @@ ki_timeseries_values <- function(hub, ts_id, start_date, end_date) {
       # Cast values column
       current_dat[[2]] <- as.numeric(current_dat[[2]])
     }
-    return(current_dat)
+    current_dat
   })
 
   # Name data frames in list
