@@ -1,33 +1,40 @@
-kiwisR
-================
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+# kiwisR <img src="tools/readme/kiwisR_small.png" align="right" />
+
+![Travis-CI Build
+Status](https://travis-ci.org/rywhale/kiwisR.svg?branch=CRAN_DEV)
+[![LICENSE](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/kiwisR)](https://cran.r-project.org/package=kiwisR)
+[![CRAN
+Download](https://cranlogs.r-pkg.org/badges/kiwisR?color=brightgreen)](https://CRAN.R-project.org/package=kiwisR)
+
 ## Overview
 
-A wrapper for querying KiWIS APIs to retrieve hydrometric data. Users
-can toggle between various databases by specifying the ‘hub’ argument.
-Currently, the default hubs are:
+A wrapper for querying KISTERS WISKI Databases via the [KiWIS
+API](https://water.kisters.de/en/technology-trends/kisters-and-open-data/).
+Users can toggle between various databases by specifying the ‘hub’
+argument. Currently, the default hubs are:
 
+  - *kisters* : [KISTERS KiWIS Example
+    Server](http://kiwis.kisters.de/KiWIS2/index.html)
   - *swmc* : [Ontario Surface Water Monitoring
     Centre](https://www.ontario.ca/page/surface-water-monitoring)
-  - *grand* : [Grand River Conservation
-    Authority](https://www.grandriver.ca/en/index.aspx)
   - *quinte* : [Quinte Conservation
     Authority](http://quinteconservation.ca/site/)
-  - *creditvalley* : [Credit Valley Conservation
-    Authority](https://cvc.ca/)
 
 All data is returned as tidy
-[tibbles](https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html).
+[tibbles](https://CRAN.R-project.org/package=tibble).
 
 ## Installation
 
-To install `kiwisR` you first need to install `remotes`.
+To install the development version of `kiwisR` you first need to install
+`devtools`.
 
 ``` r
-install.packages("remotes")
-remotes::install_github('rywhale/kiwisR')
+if(!requireNamespace("devtools")) install.packages("devtools")
+devtools::install_github('rywhale/kiwisR')
 ```
 
 Then load the package with
@@ -43,25 +50,25 @@ library(kiwisR)
 #### All Available Stations
 
 By default, `ki_station_list()` returns a tibble containing information
-for all available stations for the select hub.
+for all available stations for the selected hub.
 
 ``` r
 # With swmc as the hub
 ki_station_list(hub = 'swmc')
-#> # A tibble: 3,535 x 5
-#>    station_name    station_no station_id station_latitude station_longitu~
-#>    <chr>           <chr>      <chr>                 <dbl>            <dbl>
-#>  1 ABBOTSFORD A    CLIM-MSC-~ 133535                 49.0           -122. 
-#>  2 ABERDEEN        CLIM-MSC-~ 121939                 45.5            -98.4
-#>  3 ABITIBI CANYON  ZZSNOW-OP~ 148200                 49.9            -81.6
-#>  4 ABITIBI LAKE    CLIM-MNR-~ 121135                 48.7            -80.1
-#>  5 ABITIBI RIVER ~ HYDAT-04M~ 136328                 49.9            -81.6
-#>  6 ABITIBI RIVER ~ HYDAT-04M~ 136304                 48.8            -80.7
-#>  7 ABITIBI RIVER ~ HYDAT-04M~ 136324                 49.6            -81.4
-#>  8 ABITIBI RIVER ~ HYDAT-04M~ 136332                 50.2            -81.6
-#>  9 ABITIBI RIVER ~ HYDAT-04M~ 136308                 48.7            -80.6
-#> 10 ACTINOLITE (PR~ ZZSNOW-MN~ 147948                 44.5            -77.3
-#> # ... with 3,525 more rows
+#> # A tibble: 3,577 x 5
+#>    station_name     station_no station_id station_latitude station_longitu~
+#>    <chr>            <chr>      <chr>                 <dbl>            <dbl>
+#>  1 ABBOTSFORD A     CLIM-MSC-~ 133535                 49.0           -122. 
+#>  2 ABERDEEN         CLIM-MSC-~ 121939                 45.5            -98.4
+#>  3 ABITIBI CANYON   ZZSNOW-OP~ 148200                 49.9            -81.6
+#>  4 ABITIBI LAKE     CLIM-MNR-~ 121135                 48.7            -80.1
+#>  5 ABITIBI RIVER A~ HYDAT-04M~ 136328                 49.9            -81.6
+#>  6 ABITIBI RIVER A~ HYDAT-04M~ 136304                 48.8            -80.7
+#>  7 ABITIBI RIVER A~ HYDAT-04M~ 136324                 49.6            -81.4
+#>  8 ABITIBI RIVER A~ HYDAT-04M~ 136332                 50.2            -81.6
+#>  9 ABITIBI RIVER A~ HYDAT-04M~ 136308                 48.7            -80.6
+#> 10 ACTINOLITE (PRI~ ZZSNOW-MN~ 147948                 44.5            -77.3
+#> # ... with 3,567 more rows
 ```
 
 #### Within Bounding Box
@@ -77,41 +84,45 @@ bounding box should be either
 ``` r
 # With vector
 my_bounding_box <- c("-80.126038", "43.458297", "-79.002481", "43.969098")
-my_stations <- ki_station_list(hub = 'swmc', bounding_box = my_bounding_box)
+my_stations <- ki_station_list(
+  hub = 'swmc', 
+  bounding_box = my_bounding_box
+  )
+
 my_stations
-#> # A tibble: 177 x 5
-#>    station_name    station_no station_id station_latitude station_longitu~
-#>    <chr>           <chr>      <chr>                 <dbl>            <dbl>
-#>  1 ALBION HILLS    SNOW-MNR-~ 137457                 43.9            -79.8
-#>  2 Acton Sewage T~ ZZ-WSC-AC~ 149765                 43.6            -80.0
-#>  3 BELFOUNTAIN     ZZSNOW-MN~ 147848                 43.8            -80.0
-#>  4 BELFOUNTAIN2    ZZSNOW-MN~ 147864                 43.8            -80.0
-#>  5 BOYD            SNOW-MNR-~ 137465                 43.8            -79.6
-#>  6 BROUGHAM CREEK~ HYDAT-02H~ 135564                 43.9            -79.1
-#>  7 BRUCE'S MILL    SNOW-MNR-~ 137477                 43.9            -79.4
-#>  8 BUTTONVILLE A   CLIM-MSC-~ 132165                 43.9            -79.4
-#>  9 Black Creek be~ WSC-02HB0~ 247406                 43.6            -80.0
-#> 10 Black Creek ne~ WSC-02HC0~ 144081                 43.7            -79.5
-#> # ... with 167 more rows
+#> # A tibble: 173 x 5
+#>    station_name     station_no station_id station_latitude station_longitu~
+#>    <chr>            <chr>      <chr>                 <dbl>            <dbl>
+#>  1 ALBION HILLS     SNOW-MNR-~ 137457                 43.9            -79.8
+#>  2 Acton Sewage Tr~ ZZ-WSC-AC~ 149765                 43.6            -80.0
+#>  3 BELFOUNTAIN      ZZSNOW-MN~ 147848                 43.8            -80.0
+#>  4 BELFOUNTAIN2     ZZSNOW-MN~ 147864                 43.8            -80.0
+#>  5 BOYD             SNOW-MNR-~ 137465                 43.8            -79.6
+#>  6 BROUGHAM CREEK ~ HYDAT-02H~ 135564                 43.9            -79.1
+#>  7 BRUCE'S MILL     SNOW-MNR-~ 137477                 43.9            -79.4
+#>  8 BUTTONVILLE A    CLIM-MSC-~ 132165                 43.9            -79.4
+#>  9 Black Creek bel~ WSC-02HB0~ 247406                 43.6            -80.0
+#> 10 Black Creek nea~ WSC-02HC0~ 144081                 43.7            -79.5
+#> # ... with 163 more rows
 
 # With comma separated string
 my_bounding_box <- "-80.126038,43.458297,-79.002481,43.969098"
 my_stations <- ki_station_list(hub = 'swmc', bounding_box = my_bounding_box)
 my_stations
-#> # A tibble: 177 x 5
-#>    station_name    station_no station_id station_latitude station_longitu~
-#>    <chr>           <chr>      <chr>                 <dbl>            <dbl>
-#>  1 ALBION HILLS    SNOW-MNR-~ 137457                 43.9            -79.8
-#>  2 Acton Sewage T~ ZZ-WSC-AC~ 149765                 43.6            -80.0
-#>  3 BELFOUNTAIN     ZZSNOW-MN~ 147848                 43.8            -80.0
-#>  4 BELFOUNTAIN2    ZZSNOW-MN~ 147864                 43.8            -80.0
-#>  5 BOYD            SNOW-MNR-~ 137465                 43.8            -79.6
-#>  6 BROUGHAM CREEK~ HYDAT-02H~ 135564                 43.9            -79.1
-#>  7 BRUCE'S MILL    SNOW-MNR-~ 137477                 43.9            -79.4
-#>  8 BUTTONVILLE A   CLIM-MSC-~ 132165                 43.9            -79.4
-#>  9 Black Creek be~ WSC-02HB0~ 247406                 43.6            -80.0
-#> 10 Black Creek ne~ WSC-02HC0~ 144081                 43.7            -79.5
-#> # ... with 167 more rows
+#> # A tibble: 173 x 5
+#>    station_name     station_no station_id station_latitude station_longitu~
+#>    <chr>            <chr>      <chr>                 <dbl>            <dbl>
+#>  1 ALBION HILLS     SNOW-MNR-~ 137457                 43.9            -79.8
+#>  2 Acton Sewage Tr~ ZZ-WSC-AC~ 149765                 43.6            -80.0
+#>  3 BELFOUNTAIN      ZZSNOW-MN~ 147848                 43.8            -80.0
+#>  4 BELFOUNTAIN2     ZZSNOW-MN~ 147864                 43.8            -80.0
+#>  5 BOYD             SNOW-MNR-~ 137465                 43.8            -79.6
+#>  6 BROUGHAM CREEK ~ HYDAT-02H~ 135564                 43.9            -79.1
+#>  7 BRUCE'S MILL     SNOW-MNR-~ 137477                 43.9            -79.4
+#>  8 BUTTONVILLE A    CLIM-MSC-~ 132165                 43.9            -79.4
+#>  9 Black Creek bel~ WSC-02HB0~ 247406                 43.6            -80.0
+#> 10 Black Creek nea~ WSC-02HC0~ 144081                 43.7            -79.5
+#> # ... with 163 more rows
 ```
 
 #### By Search Term
@@ -121,32 +132,40 @@ the use of `*` as a wildcard.
 
 ``` r
 # All stations starting with 'A'
-my_stations <- ki_station_list(hub = 'swmc', search_term = "A*")
+my_stations <- ki_station_list(
+  hub = 'swmc', 
+  search_term = "A*"
+  )
+
 my_stations
-#> # A tibble: 127 x 5
-#>    station_name    station_no station_id station_latitude station_longitu~
-#>    <chr>           <chr>      <chr>                 <dbl>            <dbl>
-#>  1 ABBOTSFORD A    CLIM-MSC-~ 133535                 49.0           -122. 
-#>  2 ABERDEEN        CLIM-MSC-~ 121939                 45.5            -98.4
-#>  3 ABITIBI CANYON  ZZSNOW-OP~ 148200                 49.9            -81.6
-#>  4 ABITIBI LAKE    CLIM-MNR-~ 121135                 48.7            -80.1
-#>  5 ABITIBI RIVER ~ HYDAT-04M~ 136328                 49.9            -81.6
-#>  6 ABITIBI RIVER ~ HYDAT-04M~ 136304                 48.8            -80.7
-#>  7 ABITIBI RIVER ~ HYDAT-04M~ 136324                 49.6            -81.4
-#>  8 ABITIBI RIVER ~ HYDAT-04M~ 136332                 50.2            -81.6
-#>  9 ABITIBI RIVER ~ HYDAT-04M~ 136308                 48.7            -80.6
-#> 10 ACTINOLITE (PR~ ZZSNOW-MN~ 147948                 44.5            -77.3
-#> # ... with 117 more rows
+#> # A tibble: 126 x 5
+#>    station_name     station_no station_id station_latitude station_longitu~
+#>    <chr>            <chr>      <chr>                 <dbl>            <dbl>
+#>  1 ABBOTSFORD A     CLIM-MSC-~ 133535                 49.0           -122. 
+#>  2 ABERDEEN         CLIM-MSC-~ 121939                 45.5            -98.4
+#>  3 ABITIBI CANYON   ZZSNOW-OP~ 148200                 49.9            -81.6
+#>  4 ABITIBI LAKE     CLIM-MNR-~ 121135                 48.7            -80.1
+#>  5 ABITIBI RIVER A~ HYDAT-04M~ 136328                 49.9            -81.6
+#>  6 ABITIBI RIVER A~ HYDAT-04M~ 136304                 48.8            -80.7
+#>  7 ABITIBI RIVER A~ HYDAT-04M~ 136324                 49.6            -81.4
+#>  8 ABITIBI RIVER A~ HYDAT-04M~ 136332                 50.2            -81.6
+#>  9 ABITIBI RIVER A~ HYDAT-04M~ 136308                 48.7            -80.6
+#> 10 ACTINOLITE (PRI~ ZZSNOW-MN~ 147948                 44.5            -77.3
+#> # ... with 116 more rows
 
 # All stations starting with 'Oshawa'
-my_stations <- ki_station_list(hub = 'swmc', search_term = "Oshawa*")
+my_stations <- ki_station_list(
+  hub = 'swmc', 
+  search_term = "Oshawa*"
+  )
+
 my_stations
 #> # A tibble: 3 x 5
-#>   station_name     station_no station_id station_latitude station_longitu~
-#>   <chr>            <chr>      <chr>                 <dbl>            <dbl>
-#> 1 OSHAWA A         CLIM-MSC-~ 132486                 43.9            -78.9
-#> 2 Oshawa Airport ~ Wiski-0262 458060                 43.9            -78.9
-#> 3 Oshawa Creek at~ WSC-02HD0~ 144342                 43.9            -78.9
+#>   station_name     station_no  station_id station_latitude station_longitu~
+#>   <chr>            <chr>       <chr>                 <dbl>            <dbl>
+#> 1 OSHAWA A         CLIM-MSC-Y~ 132486                 43.9            -78.9
+#> 2 Oshawa Airport ~ Wiski-0262  458060                 43.9            -78.9
+#> 3 Oshawa Creek at~ WSC-02HD008 144342                 43.9            -78.9
 ```
 
 #### By Group
@@ -157,41 +176,45 @@ using `ki_group_list`
 ``` r
 all_groups <- ki_group_list(hub = 'swmc')
 all_groups
-#> # A tibble: 166 x 3
-#>    group_id group_name                         group_type
-#>    <chr>    <chr>                              <chr>     
-#>  1 169270   Ausable Bayfield CA                station   
-#>  2 181216   WISKI_Precip_OWLR                  station   
-#>  3 181729   WWW_Extranet                       station   
-#>  4 189271   WiskiFlowGauges_OLWR               station   
-#>  5 198801   All CLIM-MNR Stations              station   
-#>  6 199135   All Active Stream Gauges           station   
-#>  7 199818   All MOE COA-RAC CA                 station   
-#>  8 199828   All Trent Severn Waterway          station   
-#>  9 199829   Archived Streamgauging Stations CA station   
-#> 10 199830   Aurora MNR                         station   
-#> # ... with 156 more rows
+#> # A tibble: 160 x 3
+#>    group_name                         group_id group_type
+#>    <chr>                              <chr>    <chr>     
+#>  1 Ausable Bayfield CA                169270   station   
+#>  2 WWW_Extranet                       181729   station   
+#>  3 All Active Stream Gauges           199135   station   
+#>  4 All MOE COA-RAC CA                 199818   station   
+#>  5 All Trent Severn Waterway          199828   station   
+#>  6 Archived Streamgauging Stations CA 199829   station   
+#>  7 Aurora MNR                         199830   station   
+#>  8 Bancroft MNR                       199831   station   
+#>  9 Bracebridge MNR                    199832   station   
+#> 10 Cataraqui CA                       199833   station   
+#> # ... with 150 more rows
 ```
 
 You can then pass values from the `group_id` column to `ki_station_list`
 to filter for only stations included in the group
 
 ``` r
-group_stations <- ki_station_list(hub = 'swmc', group_id = '169270')
+group_stations <- ki_station_list(
+  hub = 'swmc', 
+  group_id = '169270'
+  )
+
 group_stations
 #> # A tibble: 25 x 5
-#>    station_name    station_no station_id station_latitude station_longitu~
-#>    <chr>           <chr>      <chr>                 <dbl>            <dbl>
-#>  1 Ausable River ~ WSC-02FF0~ 142338                 43.2            -81.8
-#>  2 Ausable River ~ Wiski-0015 138406                 43.2            -81.9
-#>  3 Ausable River ~ WSC-02FF0~ 142324                 43.4            -81.5
-#>  4 Ausable River ~ WSC-02FF0~ 142269                 43.1            -81.7
-#>  5 BRUCEFIELD (CA~ SNOW-MNR-~ 137228                 43.5            -81.5
-#>  6 Bayfield River~ WSC-02FF0~ 142296                 43.6            -81.6
-#>  7 Black Creek ne~ WSC-02FF0~ 142392                 43.4            -81.5
-#>  8 Garvey Glenn a~ Wiski-0202 139749                 44.0            -81.7
-#>  9 Gully Creek at~ Wiski-0200 139731                 43.6            -81.7
-#> 10 KHIVA (OROURKE) SNOW-MNR-~ 137232                 43.3            -81.6
+#>    station_name     station_no station_id station_latitude station_longitu~
+#>    <chr>            <chr>      <chr>                 <dbl>            <dbl>
+#>  1 Ausable River N~ WSC-02FF0~ 142338                 43.2            -81.8
+#>  2 Ausable River a~ Wiski-0015 138406                 43.2            -81.9
+#>  3 Ausable River n~ WSC-02FF0~ 142324                 43.4            -81.5
+#>  4 Ausable River n~ WSC-02FF0~ 142269                 43.1            -81.7
+#>  5 BRUCEFIELD (CAM~ SNOW-MNR-~ 137228                 43.5            -81.5
+#>  6 Bayfield River ~ WSC-02FF0~ 142296                 43.6            -81.6
+#>  7 Black Creek nea~ WSC-02FF0~ 142392                 43.4            -81.5
+#>  8 Garvey Glenn at~ Wiski-0202 139749                 44.0            -81.7
+#>  9 Gully Creek at ~ Wiski-0200 139731                 43.6            -81.7
+#> 10 KHIVA (OROURKE)  SNOW-MNR-~ 137232                 43.3            -81.6
 #> # ... with 15 more rows
 ```
 
@@ -200,16 +223,21 @@ group_stations
 You can use the `station_id` column returned using `ki_station_list()`
 to figure out which time series are available for a given station.
 
-This will also return `to` and `from` columns indicating the period of
-record for that time series.
+By default, this will also return `to` and `from` columns indicating the
+period of record for that time series. You can speed up queries by
+setting the `coverage` argument to `FALSE`.
 
 #### One Station
 
 ``` r
 # Single station_id
-available_ts <- ki_timeseries_list(hub = 'swmc', station_id = "144659")
+available_ts <- ki_timeseries_list(
+  hub = 'swmc', 
+  station_id = "144659"
+  )
+
 available_ts
-#> # A tibble: 130 x 6
+#> # A tibble: 143 x 6
 #>    station_name station_id ts_id ts_name from               
 #>    <chr>        <chr>      <chr> <chr>   <dttm>             
 #>  1 Jackson Cre~ 144659     9490~ Q.DayM~ 2005-12-26 05:00:00
@@ -221,16 +249,17 @@ available_ts
 #>  7 Jackson Cre~ 144659     9490~ Q.DayM~ 2006-04-01 05:00:00
 #>  8 Jackson Cre~ 144659     9490~ Q.Year~ 2007-01-01 05:00:00
 #>  9 Jackson Cre~ 144659     1126~ Q.DayB~ 2005-12-26 05:00:00
-#> 10 Jackson Cre~ 144659     1126~ Q.DayR~ 2005-12-26 05:00:00
-#> # ... with 120 more rows, and 1 more variable: to <dttm>
+#> 10 Jackson Cre~ 144659     9490~ Q.Mont~ 2006-04-01 05:00:00
+#> # ... with 133 more rows, and 1 more variable: to <dttm>
+
 str(available_ts)
-#> Classes 'tbl_df', 'tbl' and 'data.frame':    130 obs. of  6 variables:
+#> Classes 'tbl_df', 'tbl' and 'data.frame':    143 obs. of  6 variables:
 #>  $ station_name: chr  "Jackson Creek at Jackson Heights" "Jackson Creek at Jackson Heights" "Jackson Creek at Jackson Heights" "Jackson Creek at Jackson Heights" ...
 #>  $ station_id  : chr  "144659" "144659" "144659" "144659" ...
 #>  $ ts_id       : chr  "949057042" "949048042" "949056042" "949049042" ...
 #>  $ ts_name     : chr  "Q.DayMean" "Q.1.O" "Q.DayMax" "Q.15" ...
 #>  $ from        : POSIXct, format: "2005-12-26 05:00:00" NA ...
-#>  $ to          : POSIXct, format: "2018-07-21 05:00:00" NA ...
+#>  $ to          : POSIXct, format: "2019-03-06 05:00:00" NA ...
 ```
 
 #### Multiple Stations
@@ -243,22 +272,26 @@ differentiated using the `station_name` column.
 # Vector of station_ids
 my_station_ids <- c("144659", "144342")
 
-available_ts <- ki_timeseries_list(hub = 'swmc', station_id = my_station_ids)
+available_ts <- ki_timeseries_list(
+  hub = 'swmc', 
+  station_id = my_station_ids
+  )
+
 available_ts
-#> # A tibble: 259 x 6
+#> # A tibble: 218 x 6
 #>    station_name station_id ts_id ts_name from               
 #>    <chr>        <chr>      <chr> <chr>   <dttm>             
-#>  1 Jackson Cre~ 144659     9490~ Q.DayM~ 2005-12-26 05:00:00
-#>  2 Jackson Cre~ 144659     9490~ Q.1.O   NA                 
-#>  3 Jackson Cre~ 144659     9490~ Q.DayM~ 2005-12-26 05:00:00
-#>  4 Jackson Cre~ 144659     9490~ Q.15    2005-12-26 05:00:00
-#>  5 Jackson Cre~ 144659     9490~ Q.Mont~ 2005-12-01 05:00:00
-#>  6 Jackson Cre~ 144659     9490~ Q.Year~ 2005-01-01 05:00:00
-#>  7 Jackson Cre~ 144659     9490~ Q.DayM~ 2006-04-01 05:00:00
-#>  8 Jackson Cre~ 144659     9490~ Q.Year~ 2007-01-01 05:00:00
-#>  9 Jackson Cre~ 144659     1126~ Q.DayB~ 2005-12-26 05:00:00
-#> 10 Jackson Cre~ 144659     1126~ Q.DayR~ 2005-12-26 05:00:00
-#> # ... with 249 more rows, and 1 more variable: to <dttm>
+#>  1 Jackson Cre~ 144659     9489~ Precip~ 2007-06-01 05:00:00
+#>  2 Jackson Cre~ 144659     1139~ Precip~ 2007-06-19 00:00:00
+#>  3 Jackson Cre~ 144659     9489~ Precip~ 2007-06-18 20:15:00
+#>  4 Jackson Cre~ 144659     9489~ Precip~ 2007-06-18 05:00:00
+#>  5 Jackson Cre~ 144659     1139~ Precip~ 2007-06-19 00:00:00
+#>  6 Jackson Cre~ 144659     1143~ Precip~ 2007-07-01 05:00:00
+#>  7 Jackson Cre~ 144659     1143~ Precip~ 2007-07-01 05:00:00
+#>  8 Jackson Cre~ 144659     1143~ Precip~ 2007-06-18 05:00:00
+#>  9 Jackson Cre~ 144659     9489~ Precip~ 2007-06-18 20:15:00
+#> 10 Jackson Cre~ 144659     1143~ Precip~ 2000-02-01 05:00:00
+#> # ... with 208 more rows, and 1 more variable: to <dttm>
 ```
 
 ### Get Time Series Values
@@ -275,22 +308,26 @@ specify the dates you’re interested in by setting `start_date` and
 
 ``` r
 # Past 24 hours
-my_values <- ki_timeseries_values(hub = 'swmc', ts_id = '948928042')
+my_values <- ki_timeseries_values(
+  hub = 'swmc', 
+  ts_id = '948928042'
+  )
+
 my_values
-#> # A tibble: 103 x 3
+#> # A tibble: 141 x 3
 #>    Timestamp           Precip Units
 #>    <dttm>               <dbl> <chr>
-#>  1 2018-07-19 00:00:00      0 mm   
-#>  2 2018-07-19 00:20:00      0 mm   
-#>  3 2018-07-19 00:40:00      0 mm   
-#>  4 2018-07-19 01:00:00      0 mm   
-#>  5 2018-07-19 01:20:00      0 mm   
-#>  6 2018-07-19 01:40:00      0 mm   
-#>  7 2018-07-19 02:00:00      0 mm   
-#>  8 2018-07-19 02:20:00      0 mm   
-#>  9 2018-07-19 02:40:00      0 mm   
-#> 10 2018-07-19 03:00:00      0 mm   
-#> # ... with 93 more rows
+#>  1 2019-03-04 00:00:00      0 mm   
+#>  2 2019-03-04 00:15:00      0 mm   
+#>  3 2019-03-04 00:30:00      0 mm   
+#>  4 2019-03-04 00:45:00      0 mm   
+#>  5 2019-03-04 01:00:00      0 mm   
+#>  6 2019-03-04 01:15:00      0 mm   
+#>  7 2019-03-04 01:30:00      0 mm   
+#>  8 2019-03-04 01:45:00      0 mm   
+#>  9 2019-03-04 02:00:00      0 mm   
+#> 10 2019-03-04 02:15:00      0 mm   
+#> # ... with 131 more rows
 ```
 
 #### Multiple Time Series
@@ -302,10 +339,13 @@ parameter.
 ``` r
 # Specified date, multiple time series
 my_ts_ids <- c("948928042", "948603042")
-my_values <- ki_timeseries_values(hub = 'swmc', 
-                                  ts_id = my_ts_ids,
-                                  start_date = "2017-08-28",
-                                  end_date = "2017-09-13")
+my_values <- ki_timeseries_values(
+  hub = 'swmc',
+  ts_id = my_ts_ids,
+  start_date = "2017-08-28",
+  end_date = "2017-09-13"
+  )
+
 my_values
 #> $`Jackson Creek at Jackson Heights (Precip)`
 #> # A tibble: 1,632 x 3
@@ -354,11 +394,11 @@ feeding the location of the API service to the `hub` argument.
 For instance: If your URL looks
 like
 
-<http://kiwis.grandriver.ca/KiWIS/KiWIS?service=kisters&type=queryServices&request=getRequestInfo&datasource=0&format=html>
+`http://kiwis.kisters.de/KiWIS/KiWIS?datasource=0&service=kisters&type=queryServices&request=getrequestinfo`
 
 specify the `hub` argument with
 
-<http://kiwis.grandriver.ca/KiWIS/KiWIS>?
+`http://kiwis.kisters.de/KiWIS/KiWIS?`
 
 If you’d like to have a hub added to the defaults, please [Submit an
 Issue](https://github.com/rywhale/kiwisR/issues)

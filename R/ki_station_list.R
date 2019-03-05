@@ -1,9 +1,9 @@
 #' Get tibble containing station information.
 #'
 #' @export
-#' @description Returns all available stations by default and allows for search terms.
-#' @param hub The KiWIS database you are querying. Default options are 'swmc', 'grand', 'quinte' and 'creditvalley'.
-#' See README for more details.
+#' @description Returns all available stations by default and allows for search terms and other filters.
+#' @param hub The KiWIS database you are querying. Either one of the defaults or a URL.
+#'  See \href{https://github.com/rywhale/kiwisR}{README}.
 #' @param search_term (Optional) A station name to search for. Supports the use of * as a wildcard. Case doesn't matter.
 #' @param bounding_box (Optional) A bounding box to search withhin for stations. Should be a vector or comma separated string
 #' @param group_id (Optional) A station group id (see ki_group_list).

@@ -3,9 +3,8 @@
 #' @export
 #' @description Returns a tibble containing available groups. Allows users to query
 #' ki_station_list for grouped stations.
-#' @param hub The KiWIS database you are querying.
-#' Default options are 'swmc', 'grand', 'quinte' and 'creditvalley'.
-#' See README for more details.
+#' @param hub The KiWIS database you are querying. Either one of the defaults or a URL.
+#'  See \href{https://github.com/rywhale/kiwisR}{README}.
 #' @return A tibble with three columns: group_id, group_name and group_type
 #' @examples
 #' \dontrun{

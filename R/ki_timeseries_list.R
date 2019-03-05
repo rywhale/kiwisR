@@ -2,8 +2,8 @@
 #' list of stations.
 #'
 #' @export
-#' @param hub The KiWIS database you are querying. Default options are 'swmc', 'grand', 'quinte' and 'creditvalley'.
-#' See README for more details.
+#' @param hub The KiWIS database you are querying. Either one of the defaults or a URL.
+#'  See \href{https://github.com/rywhale/kiwisR}{README}.
 #' @param station_id Either a single station id or a vector of station id. Can be string or numeric.
 #' Station ids can be found using the ki_station_list function.
 #' @param ts_name (Optional) A specific time series short name to search for. E.g. 'TAir.1.O'

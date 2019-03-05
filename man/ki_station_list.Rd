@@ -7,8 +7,8 @@
 ki_station_list(hub, search_term, bounding_box, group_id, return_fields)
 }
 \arguments{
-\item{hub}{The KiWIS database you are querying. Default options are 'swmc', 'grand', 'quinte' and 'creditvalley'.
-See README for more details.}
+\item{hub}{The KiWIS database you are querying. Either one of the defaults or a URL.
+See \href{https://github.com/rywhale/kiwisR}{README}.}
 
 \item{search_term}{(Optional) A station name to search for. Supports the use of * as a wildcard. Case doesn't matter.}
 
@@ -24,7 +24,7 @@ Should be a comma separate string or a vector.}
 Tibble containing station id, name, latitude and longitude
 }
 \description{
-Returns all available stations by default and allows for search terms.
+Returns all available stations by default and allows for search terms and other filters.
 }
 \examples{
 \dontrun{

@@ -1,6 +1,7 @@
 ---
-title: kiwisR
-output: github_document
+output: 
+  github_document:
+    html_preview: true
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -9,37 +10,38 @@ output: github_document
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "man/figures/README-",
+  fig.path = "tools/readme/README-",
   out.width = "100%"
 )
-source('R/ki_timeseries_list.R')
-source('R/ki_station_list.R')
-source('R/ki_timeseries_values.R')
-source('R/ki_group_list.R')
-source('R/utils.R')
+
 ```
 
+# kiwisR <img src="tools/readme/kiwisR_small.png" align="right" />
+
+![Travis-CI Build Status](https://travis-ci.org/rywhale/kiwisR.svg?branch=CRAN_DEV)
+[![LICENSE](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/kiwisR)](https://cran.r-project.org/package=kiwisR) [![CRAN Download](https://cranlogs.r-pkg.org/badges/kiwisR?color=brightgreen)](https://CRAN.R-project.org/package=kiwisR)
+
 ## Overview
-A wrapper for querying KiWIS APIs to retrieve hydrometric data. Users can toggle between various databases by specifying the 'hub' argument. Currently, the default hubs are:
+A wrapper for querying KISTERS WISKI Databases via the [KiWIS API](https://water.kisters.de/en/technology-trends/kisters-and-open-data/). Users can toggle between various databases by specifying the 'hub' argument. Currently, the default hubs are:
 
+* _kisters_ : [KISTERS KiWIS Example Server](http://kiwis.kisters.de/KiWIS2/index.html)
 * _swmc_ : [Ontario Surface Water Monitoring Centre](https://www.ontario.ca/page/surface-water-monitoring)
-* _grand_ : [Grand River Conservation Authority](https://www.grandriver.ca/en/index.aspx)
 * _quinte_ : [Quinte Conservation Authority](http://quinteconservation.ca/site/)
-* _creditvalley_ : [Credit Valley Conservation Authority](https://cvc.ca/)
 
-All data is returned as tidy [tibbles](https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html). 
+All data is returned as tidy [tibbles](https://CRAN.R-project.org/package=tibble). 
 
 ## Installation
-To install ```kiwisR``` you first need to install ```remotes```. 
+To install the development version of ```kiwisR``` you first need to install ```devtools```. 
 
 ```{r eval = FALSE}
-install.packages("remotes")
-remotes::install_github('rywhale/kiwisR')
+if(!requireNamespace("devtools")) install.packages("devtools")
+devtools::install_github('rywhale/kiwisR')
 ```
 
 Then load the package with
 
-```{r eval = FALSE}
+```{r eval = TRUE,message=FALSE,warning=FALSE}
 library(kiwisR)
 ```
 
@@ -49,7 +51,7 @@ library(kiwisR)
 
 #### All Available Stations
 
-By default, ```ki_station_list()``` returns a tibble containing information for all available stations for the select hub. 
+By default, ```ki_station_list()``` returns a tibble containing information for all available stations for the selected hub. 
 
 ```{r}
 # With swmc as the hub
@@ -67,7 +69,11 @@ You can also specify a bounding box to look within for stations. The bounding bo
 ```{r}
 # With vector
 my_bounding_box <- c("-80.126038", "43.458297", "-79.002481", "43.969098")
-my_stations <- ki_station_list(hub = 'swmc', bounding_box = my_bounding_box)
+my_stations <- ki_station_list(
+  hub = 'swmc', 
+  bounding_box = my_bounding_box
+  )
+
 my_stations
 
 # With comma separated string
@@ -82,11 +88,19 @@ You can also narrow search results using a search term. This supports the use of
 
 ```{r}
 # All stations starting with 'A'
-my_stations <- ki_station_list(hub = 'swmc', search_term = "A*")
+my_stations <- ki_station_list(
+  hub = 'swmc', 
+  search_term = "A*"
+  )
+
 my_stations
 
 # All stations starting with 'Oshawa'
-my_stations <- ki_station_list(hub = 'swmc', search_term = "Oshawa*")
+my_stations <- ki_station_list(
+  hub = 'swmc', 
+  search_term = "Oshawa*"
+  )
+
 my_stations
 ```
 
@@ -102,7 +116,11 @@ You can then pass values from the ```group_id``` column to ```ki_station_list```
 included in the group
 
 ```{r}
-group_stations <- ki_station_list(hub = 'swmc', group_id = '169270')
+group_stations <- ki_station_list(
+  hub = 'swmc', 
+  group_id = '169270'
+  )
+
 group_stations
 ```
 
@@ -120,8 +138,13 @@ up queries by setting the ```coverage``` argument to `FALSE`.
 
 ```{r}
 # Single station_id
-available_ts <- ki_timeseries_list(hub = 'swmc', station_id = "144659")
+available_ts <- ki_timeseries_list(
+  hub = 'swmc', 
+  station_id = "144659"
+  )
+
 available_ts
+
 str(available_ts)
 
 ```
@@ -135,7 +158,11 @@ available time series from _all_ stations. They can be differentiated using the
 # Vector of station_ids
 my_station_ids <- c("144659", "144342")
 
-available_ts <- ki_timeseries_list(hub = 'swmc', station_id = my_station_ids)
+available_ts <- ki_timeseries_list(
+  hub = 'swmc', 
+  station_id = my_station_ids
+  )
+
 available_ts
 ```
 
@@ -151,7 +178,11 @@ by setting ```start_date``` and ```end_date```. These should be set as date stri
 
 ```{r}
 # Past 24 hours
-my_values <- ki_timeseries_values(hub = 'swmc', ts_id = '948928042')
+my_values <- ki_timeseries_values(
+  hub = 'swmc', 
+  ts_id = '948928042'
+  )
+
 my_values
 ```
 
@@ -162,10 +193,13 @@ is named according to the station name and the time series' parameter.
 ```{r}
 # Specified date, multiple time series
 my_ts_ids <- c("948928042", "948603042")
-my_values <- ki_timeseries_values(hub = 'swmc', 
-                                  ts_id = my_ts_ids,
-                                  start_date = "2017-08-28",
-                                  end_date = "2017-09-13")
+my_values <- ki_timeseries_values(
+  hub = 'swmc',
+  ts_id = my_ts_ids,
+  start_date = "2017-08-28",
+  end_date = "2017-09-13"
+  )
+
 my_values
 ```
 
@@ -175,10 +209,10 @@ You can use this package for a KiWIS hub not included in this list by feeding th
 For instance:
 If your URL looks like 
 
-http://kiwis.grandriver.ca/KiWIS/KiWIS?service=kisters&type=queryServices&request=getRequestInfo&datasource=0&format=html
+`http://kiwis.kisters.de/KiWIS/KiWIS?datasource=0&service=kisters&type=queryServices&request=getrequestinfo`
 
 specify the ```hub``` argument with
 
-http://kiwis.grandriver.ca/KiWIS/KiWIS?
+`http://kiwis.kisters.de/KiWIS/KiWIS?`
 
 If you'd like to have a hub added to the defaults, please [Submit an Issue](https://github.com/rywhale/kiwisR/issues)
