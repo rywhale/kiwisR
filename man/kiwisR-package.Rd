@@ -19,6 +19,7 @@ A suggested workflow for using this package:
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://github.com/rywhale/kiwisR}
   \item Report bugs at \url{https://github.com/rywhale/kiwisR/issues}
 }
 
