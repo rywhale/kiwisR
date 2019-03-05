@@ -51,7 +51,7 @@ library(kiwisR)
 
 #### All Available Stations
 
-By default, ```ki_station_list()``` returns a tibble containing information for all available stations for the select hub. 
+By default, ```ki_station_list()``` returns a tibble containing information for all available stations for the selected hub. 
 
 ```{r}
 # With swmc as the hub

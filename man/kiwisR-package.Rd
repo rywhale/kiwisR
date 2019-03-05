@@ -6,7 +6,7 @@
 \alias{kiwisR-package}
 \title{kiwisR: A wrapper for querying KISTERS WISKI Databases via the KiWIS API}
 \description{
-kiwisR provides a simplified method for retrieving tidy data from KiWIS API sources.
+kiwisR provides a simplified method for retrieving tidy data from KISTERS WISKI databases via KiWIS API.
 }
 \details{
 A suggested workflow for using this package:

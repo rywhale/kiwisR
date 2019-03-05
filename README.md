@@ -50,7 +50,7 @@ library(kiwisR)
 #### All Available Stations
 
 By default, `ki_station_list()` returns a tibble containing information
-for all available stations for the select hub.
+for all available stations for the selected hub.
 
 ``` r
 # With swmc as the hub
@@ -259,7 +259,7 @@ str(available_ts)
 #>  $ ts_id       : chr  "949057042" "949048042" "949056042" "949049042" ...
 #>  $ ts_name     : chr  "Q.DayMean" "Q.1.O" "Q.DayMax" "Q.15" ...
 #>  $ from        : POSIXct, format: "2005-12-26 05:00:00" NA ...
-#>  $ to          : POSIXct, format: "2019-03-05 05:00:00" NA ...
+#>  $ to          : POSIXct, format: "2019-03-06 05:00:00" NA ...
 ```
 
 #### Multiple Stations
@@ -314,20 +314,20 @@ my_values <- ki_timeseries_values(
   )
 
 my_values
-#> # A tibble: 174 x 3
+#> # A tibble: 141 x 3
 #>    Timestamp           Precip Units
 #>    <dttm>               <dbl> <chr>
-#>  1 2019-03-03 00:00:00      0 mm   
-#>  2 2019-03-03 00:15:00      0 mm   
-#>  3 2019-03-03 00:30:00      0 mm   
-#>  4 2019-03-03 00:45:00      0 mm   
-#>  5 2019-03-03 01:00:00      0 mm   
-#>  6 2019-03-03 01:15:00      0 mm   
-#>  7 2019-03-03 01:30:00      0 mm   
-#>  8 2019-03-03 01:45:00      0 mm   
-#>  9 2019-03-03 02:00:00      0 mm   
-#> 10 2019-03-03 02:15:00      0 mm   
-#> # ... with 164 more rows
+#>  1 2019-03-04 00:00:00      0 mm   
+#>  2 2019-03-04 00:15:00      0 mm   
+#>  3 2019-03-04 00:30:00      0 mm   
+#>  4 2019-03-04 00:45:00      0 mm   
+#>  5 2019-03-04 01:00:00      0 mm   
+#>  6 2019-03-04 01:15:00      0 mm   
+#>  7 2019-03-04 01:30:00      0 mm   
+#>  8 2019-03-04 01:45:00      0 mm   
+#>  9 2019-03-04 02:00:00      0 mm   
+#> 10 2019-03-04 02:15:00      0 mm   
+#> # ... with 131 more rows
 ```
 
 #### Multiple Time Series
