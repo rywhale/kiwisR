@@ -4,7 +4,7 @@
 # kiwisR <img src="tools/readme/kiwisR_small.png" align="right" />
 
 ![Travis-CI Build
-Status](https://travis-ci.org/rywhale/kiwisR.svg?branch=CRAN_DEV)
+Status](https://travis-ci.org/rywhale/kiwisR.svg?branch=master)
 [![LICENSE](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/kiwisR)](https://cran.r-project.org/package=kiwisR)
 [![CRAN
@@ -14,7 +14,7 @@ Download](https://cranlogs.r-pkg.org/badges/kiwisR?color=brightgreen)](https://C
 
 A wrapper for querying KISTERS WISKI Databases via the [KiWIS
 API](https://water.kisters.de/en/technology-trends/kisters-and-open-data/).
-Users can toggle between various databases by specifying the ‘hub’
+Users can toggle between various databases by specifying the `hub`
 argument. Currently, the default hubs are:
 
   - *kisters* : [KISTERS KiWIS Example
