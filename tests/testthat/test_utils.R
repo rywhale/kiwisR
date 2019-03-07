@@ -1,11 +1,15 @@
 context("Testing functions in utils.R")
 
-test_that("check_hub accepts certain character strings for default hubs", {
+test_that("check_hub accepts defaults and returns URL", {
   skip_if_net_down()
 
-  expect_is(check_hub("kisters"), "character")
-  expect_is(check_hub("swmc"), "character")
-  expect_is(check_hub("quinte"), "character")
+  swmc_stat <- check_hub("swmc")
+  kist_stat <- check_hub("kisters")
+  quint_stat<- check_hub("quinte")
+
+  expect_true(is.character(swmc_stat))
+  expect_true(is.character(kist_stat))
+  expect_true(is.character(quint_stat))
 })
 
 test_that("check_hub returns error if server/url is unreachable", {
