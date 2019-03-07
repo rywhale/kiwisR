@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/kiwisR)](https://cran.r-project.org/package=kiwisR) [![CRAN Download](https://cranlogs.r-pkg.org/badges/kiwisR?color=brightgreen)](https://CRAN.R-project.org/package=kiwisR)
 
 ## Overview
-A wrapper for querying KISTERS WISKI Databases via the [KiWIS API](https://water.kisters.de/en/technology-trends/kisters-and-open-data/). Users can toggle between various databases by specifying the `hub` argument. Currently, the default hubs are:
+A wrapper for querying [KISTERS WISKI databases](https://www.kisters.net/NA/products/wiski/) via the [KiWIS API](https://water.kisters.de/en/technology-trends/kisters-and-open-data/). Users can toggle between various databases by specifying the `hub` argument. Currently, the default hubs are:
 
 * _kisters_ : [KISTERS KiWIS Example Server](http://kiwis.kisters.de/KiWIS2/index.html)
 * _swmc_ : [Ontario Surface Water Monitoring Centre](https://www.ontario.ca/page/surface-water-monitoring)

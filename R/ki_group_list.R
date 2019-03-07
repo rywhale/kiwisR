@@ -1,15 +1,14 @@
 #' Get list of available groups
 #'
 #' @export
-#' @description Returns a tibble containing available groups. Allows users to query
-#' ki_station_list for grouped stations.
+#' @description Returns a tibble containing metadata available groups. This can be used to
+#' further filter down other queries like `ki_station_list`
 #' @param hub The KiWIS database you are querying. Either one of the defaults or a URL.
 #'  See \href{https://github.com/rywhale/kiwisR}{README}.
 #' @return A tibble with three columns: group_id, group_name and group_type
 #' @examples
-#' \dontrun{
-#' ki_group_list(hub = 'swmc')
-#' }
+#' ki_group_list(hub = 'kisters')
+#'
 
 ki_group_list <- function(hub) {
 

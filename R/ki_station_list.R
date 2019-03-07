@@ -10,14 +10,13 @@
 #' with the following format: (min_x, min_y, max_x, max_y).
 #' @param return_fields (Optional) Specific fields to return. Consult your KiWIS hub services documentation for available options.
 #' Should be a comma separate string or a vector.
-#' @return Tibble containing station id, name, latitude and longitude
+#' @return Tibble containing station metdata.
 #' @examples
-#' \dontrun{
-#' ki_station_list(hub = 'swmc')
-#' ki_station_list(hub = 'swmc', search_term = "A*")
-#' ki_station_list(hub = 'swmc', search_term = "Lake Ontario at Toronto")
-#' ki_station_list(hub = 'swmc', group_id = '169270')
-#' }
+#' ki_station_list(hub = "kisters")
+#' ki_station_list(hub = "kisters", search_term = "A*")
+#' ki_station_list(hub = "kisters", bounding_box = "-131.7,-5.4,135.8,75.8")
+#' ki_station_list(hub = "kisters", group_id = "21219")
+#'
 
 ki_station_list <- function(hub, search_term, bounding_box, group_id, return_fields) {
   # Common strings for culling bogus stations

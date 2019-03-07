@@ -11,18 +11,13 @@
 #' @return Either: a single tibble or a list of tibbles (each named according to station and parameter).
 #'  Tibbles returned contain columns for Timestamp, Value and Unit. All timestamps are returned in UTC.
 #' @examples
-#' \dontrun{
 #' ki_timeseries_values(
-#'   hub = 'swmc',
-#'   ts_id = "948928042",
-#'   start_date = "2017-01-01",
-#'   end_date = "2017-02-22")
-#' ki_timeseries_values(
-#'   hub = 'swmc',
-#'   ts_id = c("948928042", "948603042"),
-#'   start_date = "2017-01-01",
-#'   end_date = "2017-02-22")
-#'   }
+#'   hub = "kisters",
+#'   ts_id = "231042",
+#'   start_date = "2015-12-01",
+#'   end_date = "2018-01-01"
+#'   )
+#'
 
 ki_timeseries_values <- function(hub, ts_id, start_date, end_date) {
 

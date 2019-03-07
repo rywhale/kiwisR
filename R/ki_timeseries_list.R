@@ -6,8 +6,7 @@
 #'  See \href{https://github.com/rywhale/kiwisR}{README}.
 #' @param station_id Either a single station id or a vector of station id. Can be string or numeric.
 #' Station ids can be found using the ki_station_list function.
-#' @param ts_name (Optional) A specific time series short name to search for. E.g. 'TAir.1.O'
-#' Supports the use of "*" as a wildcard.
+#' @param ts_name (Optional) A specific time series short name to search for. Supports the use of "*" as a wildcard.
 #' @param coverage (Optional) Whether or not to return period of record columns.
 #' Defaults to TRUE, change to FALSE for faster queries.
 #' @param group_id (Optional) A time series group id (see ki_group_list)
@@ -15,10 +14,10 @@
 #' Should be a comma separate string or a vector.
 #' @return A tibble containing all available time series for selected stations.
 #' @examples
-#' \dontrun{
-#' ki_timeseries_list(hub = 'swmc', station_id = "144659")
-#' ki_timeseries_list(hub = 'swmc', station_id = c("144659", "144342"))
-#'}
+#' ki_timeseries_list(hub = "kisters", station_id = "23445")
+#' ki_timeseries_list(hub = "kisters", group_id = "11919")
+#' ki_timeseries_list(hub = "kisters", ts_name = "A*")
+#'
 
 ki_timeseries_list <- function(hub, station_id, ts_name, coverage = TRUE, group_id, return_fields) {
   # Check for no input

@@ -14,11 +14,10 @@ See \href{https://github.com/rywhale/kiwisR}{README}.}
 A tibble with three columns: group_id, group_name and group_type
 }
 \description{
-Returns a tibble containing available groups. Allows users to query
-ki_station_list for grouped stations.
+Returns a tibble containing metadata available groups. This can be used to
+further filter down other queries like `ki_station_list`
 }
 \examples{
-\dontrun{
-ki_group_list(hub = 'swmc')
-}
+ki_group_list(hub = 'kisters')
+
 }

@@ -15,8 +15,7 @@ See \href{https://github.com/rywhale/kiwisR}{README}.}
 \item{station_id}{Either a single station id or a vector of station id. Can be string or numeric.
 Station ids can be found using the ki_station_list function.}
 
-\item{ts_name}{(Optional) A specific time series short name to search for. E.g. 'TAir.1.O'
-Supports the use of "*" as a wildcard.}
+\item{ts_name}{(Optional) A specific time series short name to search for. Supports the use of "*" as a wildcard.}
 
 \item{coverage}{(Optional) Whether or not to return period of record columns.
 Defaults to TRUE, change to FALSE for faster queries.}
@@ -34,8 +33,8 @@ Get list of available time series for station or
 list of stations.
 }
 \examples{
-\dontrun{
-ki_timeseries_list(hub = 'swmc', station_id = "144659")
-ki_timeseries_list(hub = 'swmc', station_id = c("144659", "144342"))
-}
+ki_timeseries_list(hub = "kisters", station_id = "23445")
+ki_timeseries_list(hub = "kisters", group_id = "11919")
+ki_timeseries_list(hub = "kisters", ts_name = "A*")
+
 }

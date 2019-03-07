@@ -12,7 +12,8 @@ Download](https://cranlogs.r-pkg.org/badges/kiwisR?color=brightgreen)](https://C
 
 ## Overview
 
-A wrapper for querying KISTERS WISKI Databases via the [KiWIS
+A wrapper for querying [KISTERS WISKI
+databases](https://www.kisters.net/NA/products/wiski/) via the [KiWIS
 API](https://water.kisters.de/en/technology-trends/kisters-and-open-data/).
 Users can toggle between various databases by specifying the `hub`
 argument. Currently, the default hubs are:
@@ -55,7 +56,7 @@ for all available stations for the selected hub.
 ``` r
 # With swmc as the hub
 ki_station_list(hub = 'swmc')
-#> # A tibble: 3,577 x 5
+#> # A tibble: 3,576 x 5
 #>    station_name     station_no station_id station_latitude station_longitu~
 #>    <chr>            <chr>      <chr>                 <dbl>            <dbl>
 #>  1 ABBOTSFORD A     CLIM-MSC-~ 133535                 49.0           -122. 
@@ -68,7 +69,7 @@ ki_station_list(hub = 'swmc')
 #>  8 ABITIBI RIVER A~ HYDAT-04M~ 136332                 50.2            -81.6
 #>  9 ABITIBI RIVER A~ HYDAT-04M~ 136308                 48.7            -80.6
 #> 10 ACTINOLITE (PRI~ ZZSNOW-MN~ 147948                 44.5            -77.3
-#> # ... with 3,567 more rows
+#> # ... with 3,566 more rows
 ```
 
 #### Within Bounding Box
@@ -259,7 +260,7 @@ str(available_ts)
 #>  $ ts_id       : chr  "949057042" "949048042" "949056042" "949049042" ...
 #>  $ ts_name     : chr  "Q.DayMean" "Q.1.O" "Q.DayMax" "Q.15" ...
 #>  $ from        : POSIXct, format: "2005-12-26 05:00:00" NA ...
-#>  $ to          : POSIXct, format: "2019-03-06 05:00:00" NA ...
+#>  $ to          : POSIXct, format: "2019-03-08 05:00:00" NA ...
 ```
 
 #### Multiple Stations
@@ -281,16 +282,16 @@ available_ts
 #> # A tibble: 218 x 6
 #>    station_name station_id ts_id ts_name from               
 #>    <chr>        <chr>      <chr> <chr>   <dttm>             
-#>  1 Jackson Cre~ 144659     9489~ Precip~ 2007-06-01 05:00:00
-#>  2 Jackson Cre~ 144659     1139~ Precip~ 2007-06-19 00:00:00
-#>  3 Jackson Cre~ 144659     9489~ Precip~ 2007-06-18 20:15:00
-#>  4 Jackson Cre~ 144659     9489~ Precip~ 2007-06-18 05:00:00
-#>  5 Jackson Cre~ 144659     1139~ Precip~ 2007-06-19 00:00:00
-#>  6 Jackson Cre~ 144659     1143~ Precip~ 2007-07-01 05:00:00
-#>  7 Jackson Cre~ 144659     1143~ Precip~ 2007-07-01 05:00:00
-#>  8 Jackson Cre~ 144659     1143~ Precip~ 2007-06-18 05:00:00
-#>  9 Jackson Cre~ 144659     9489~ Precip~ 2007-06-18 20:15:00
-#> 10 Jackson Cre~ 144659     1143~ Precip~ 2000-02-01 05:00:00
+#>  1 Jackson Cre~ 144659     9490~ Q.DayM~ 2005-12-26 05:00:00
+#>  2 Jackson Cre~ 144659     9490~ Q.1.O   NA                 
+#>  3 Jackson Cre~ 144659     9490~ Q.DayM~ 2005-12-26 05:00:00
+#>  4 Jackson Cre~ 144659     9490~ Q.15    2005-12-26 05:00:00
+#>  5 Jackson Cre~ 144659     9490~ Q.Mont~ 2005-12-01 05:00:00
+#>  6 Jackson Cre~ 144659     9490~ Q.Year~ 2005-01-01 05:00:00
+#>  7 Jackson Cre~ 144659     9490~ Q.DayM~ 2006-04-01 05:00:00
+#>  8 Jackson Cre~ 144659     9490~ Q.Year~ 2007-01-01 05:00:00
+#>  9 Jackson Cre~ 144659     1126~ Q.DayB~ 2005-12-26 05:00:00
+#> 10 Jackson Cre~ 144659     9490~ Q.Mont~ 2006-04-01 05:00:00
 #> # ... with 208 more rows, and 1 more variable: to <dttm>
 ```
 
@@ -317,16 +318,16 @@ my_values
 #> # A tibble: 141 x 3
 #>    Timestamp           Precip Units
 #>    <dttm>               <dbl> <chr>
-#>  1 2019-03-04 00:00:00      0 mm   
-#>  2 2019-03-04 00:15:00      0 mm   
-#>  3 2019-03-04 00:30:00      0 mm   
-#>  4 2019-03-04 00:45:00      0 mm   
-#>  5 2019-03-04 01:00:00      0 mm   
-#>  6 2019-03-04 01:15:00      0 mm   
-#>  7 2019-03-04 01:30:00      0 mm   
-#>  8 2019-03-04 01:45:00      0 mm   
-#>  9 2019-03-04 02:00:00      0 mm   
-#> 10 2019-03-04 02:15:00      0 mm   
+#>  1 2019-03-06 00:00:00      0 mm   
+#>  2 2019-03-06 00:15:00      0 mm   
+#>  3 2019-03-06 00:30:00      0 mm   
+#>  4 2019-03-06 00:45:00      0 mm   
+#>  5 2019-03-06 01:00:00      0 mm   
+#>  6 2019-03-06 01:15:00      0 mm   
+#>  7 2019-03-06 01:30:00      0 mm   
+#>  8 2019-03-06 01:45:00      0 mm   
+#>  9 2019-03-06 02:00:00      0 mm   
+#> 10 2019-03-06 02:15:00      0 mm   
 #> # ... with 131 more rows
 ```
 
