@@ -1,3 +1,15 @@
+kiwisR 0.1.3
+=========================
+* Changes in response to CRAN reviewer comments
+
+### IMPROVEMENTS
+* Unit tests for `ki_group_list`
+* Removed \dontrun from all examples and replaced with examples that use `kisters` hub
+
+### MINOR CHANGES
+* Added information about WISKI/KISTERS/KiWIS to DESCRIPTION
+
+
 kiwisR 0.1.2
 =========================
 * Changes in preparation for first CRAN submission
