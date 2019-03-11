@@ -32,6 +32,12 @@ A wrapper for querying [KISTERS WISKI databases](https://www.kisters.net/NA/prod
 All data is returned as tidy [tibbles](https://CRAN.R-project.org/package=tibble). 
 
 ## Installation
+You can install ```kiwisR``` from CRAN:
+
+```{r eval = FALSE}
+install.packages('kiwisR')
+```
+
 To install the development version of ```kiwisR``` you first need to install ```devtools```. 
 
 ```{r eval = FALSE}

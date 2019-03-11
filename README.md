@@ -30,6 +30,12 @@ All data is returned as tidy
 
 ## Installation
 
+You can install `kiwisR` from CRAN:
+
+``` r
+install.packages('kiwisR')
+```
+
 To install the development version of `kiwisR` you first need to install
 `devtools`.
 
@@ -250,7 +256,7 @@ available_ts
 #>  7 Jackson Cre~ 144659     9490~ Q.DayM~ 2006-04-01 05:00:00
 #>  8 Jackson Cre~ 144659     9490~ Q.Year~ 2007-01-01 05:00:00
 #>  9 Jackson Cre~ 144659     1126~ Q.DayB~ 2005-12-26 05:00:00
-#> 10 Jackson Cre~ 144659     9490~ Q.Mont~ 2006-04-01 05:00:00
+#> 10 Jackson Cre~ 144659     1126~ Q.DayR~ 2005-12-26 05:00:00
 #> # ... with 133 more rows, and 1 more variable: to <dttm>
 
 str(available_ts)
@@ -260,7 +266,7 @@ str(available_ts)
 #>  $ ts_id       : chr  "949057042" "949048042" "949056042" "949049042" ...
 #>  $ ts_name     : chr  "Q.DayMean" "Q.1.O" "Q.DayMax" "Q.15" ...
 #>  $ from        : POSIXct, format: "2005-12-26 05:00:00" NA ...
-#>  $ to          : POSIXct, format: "2019-03-08 05:00:00" NA ...
+#>  $ to          : POSIXct, format: "2019-03-12 05:00:00" NA ...
 ```
 
 #### Multiple Stations
@@ -282,16 +288,16 @@ available_ts
 #> # A tibble: 218 x 6
 #>    station_name station_id ts_id ts_name from               
 #>    <chr>        <chr>      <chr> <chr>   <dttm>             
-#>  1 Jackson Cre~ 144659     9490~ Q.DayM~ 2005-12-26 05:00:00
-#>  2 Jackson Cre~ 144659     9490~ Q.1.O   NA                 
-#>  3 Jackson Cre~ 144659     9490~ Q.DayM~ 2005-12-26 05:00:00
-#>  4 Jackson Cre~ 144659     9490~ Q.15    2005-12-26 05:00:00
-#>  5 Jackson Cre~ 144659     9490~ Q.Mont~ 2005-12-01 05:00:00
-#>  6 Jackson Cre~ 144659     9490~ Q.Year~ 2005-01-01 05:00:00
-#>  7 Jackson Cre~ 144659     9490~ Q.DayM~ 2006-04-01 05:00:00
-#>  8 Jackson Cre~ 144659     9490~ Q.Year~ 2007-01-01 05:00:00
-#>  9 Jackson Cre~ 144659     1126~ Q.DayB~ 2005-12-26 05:00:00
-#> 10 Jackson Cre~ 144659     9490~ Q.Mont~ 2006-04-01 05:00:00
+#>  1 Jackson Cre~ 144659     9489~ Precip~ 2007-06-01 05:00:00
+#>  2 Jackson Cre~ 144659     1139~ Precip~ 2007-06-19 00:00:00
+#>  3 Jackson Cre~ 144659     1143~ Precip~ 2007-07-01 05:00:00
+#>  4 Jackson Cre~ 144659     1139~ Precip~ 2007-06-19 00:00:00
+#>  5 Jackson Cre~ 144659     9489~ Precip~ 2007-06-18 20:15:00
+#>  6 Jackson Cre~ 144659     9489~ Precip~ 2007-06-18 05:00:00
+#>  7 Jackson Cre~ 144659     1143~ Precip~ 2007-07-01 05:00:00
+#>  8 Jackson Cre~ 144659     1143~ Precip~ 2007-06-18 05:00:00
+#>  9 Jackson Cre~ 144659     9489~ Precip~ 2007-06-18 20:15:00
+#> 10 Jackson Cre~ 144659     1143~ Precip~ 2000-02-01 05:00:00
 #> # ... with 208 more rows, and 1 more variable: to <dttm>
 ```
 
@@ -315,20 +321,20 @@ my_values <- ki_timeseries_values(
   )
 
 my_values
-#> # A tibble: 141 x 3
+#> # A tibble: 89 x 3
 #>    Timestamp           Precip Units
 #>    <dttm>               <dbl> <chr>
-#>  1 2019-03-06 00:00:00      0 mm   
-#>  2 2019-03-06 00:15:00      0 mm   
-#>  3 2019-03-06 00:30:00      0 mm   
-#>  4 2019-03-06 00:45:00      0 mm   
-#>  5 2019-03-06 01:00:00      0 mm   
-#>  6 2019-03-06 01:15:00      0 mm   
-#>  7 2019-03-06 01:30:00      0 mm   
-#>  8 2019-03-06 01:45:00      0 mm   
-#>  9 2019-03-06 02:00:00      0 mm   
-#> 10 2019-03-06 02:15:00      0 mm   
-#> # ... with 131 more rows
+#>  1 2019-03-10 12:00:00    0   mm   
+#>  2 2019-03-10 12:15:00    0   mm   
+#>  3 2019-03-10 12:30:00    0   mm   
+#>  4 2019-03-10 12:45:00    0   mm   
+#>  5 2019-03-10 13:00:00    0   mm   
+#>  6 2019-03-10 13:15:00    0.4 mm   
+#>  7 2019-03-10 13:30:00    0.4 mm   
+#>  8 2019-03-10 13:45:00    0.4 mm   
+#>  9 2019-03-10 14:00:00    0.2 mm   
+#> 10 2019-03-10 14:15:00    0.4 mm   
+#> # ... with 79 more rows
 ```
 
 #### Multiple Time Series

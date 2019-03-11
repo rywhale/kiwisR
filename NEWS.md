@@ -1,3 +1,8 @@
+kiwisR 0.1.4
+=========================
+* Minor formatting changes to DESCRIPTION ('' around software names, etc)
+* CRAN submission accepted :)
+
 kiwisR 0.1.3
 =========================
 * Changes in response to CRAN reviewer comments
