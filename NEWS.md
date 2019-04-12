@@ -1,3 +1,8 @@
+kiwisR 0.1.4.5
+=========================
+* Testing changes to `check_hub` to address query speed degredation 
+
+
 kiwisR 0.1.4
 =========================
 * Minor formatting changes to DESCRIPTION ('' around software names, etc)

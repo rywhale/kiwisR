@@ -4,10 +4,10 @@
 #' @keywords internal
 check_hub <- function(hub) {
 
-  # Check for internet access
-  if(!has_internet()){
-    stop("No access to internet", call. = FALSE)
-  }
+  # # Check for internet access
+  # if(!has_internet()){
+  #   stop("No access to internet", call. = FALSE)
+  # }
 
   # Identify default hubs
   default_hubs <- list(
@@ -32,20 +32,22 @@ check_hub <- function(hub) {
     api_url <- default_hubs[[which(names(default_hubs) == hub)]]
   }
 
-  # Check if server returns error
-  server_status <- httr::http_status(
-    httr::GET(
-      paste0(
-        api_url, "datasource=0&service=kisters&type=queryServices&request=getrequestinfo"
-        )
-      )
-  )
+  return(api_url)
 
-  if(server_status$category != "Success"){
-    stop("hub server returned error: ", server_status$message)
-  }else{
-    return(api_url)
-  }
+  # # Check if server returns error
+  # server_status <- httr::http_status(
+  #   httr::GET(
+  #     paste0(
+  #       api_url, "datasource=0&service=kisters&type=queryServices&request=getrequestinfo"
+  #       )
+  #     )
+  # )
+
+  # if(server_status$category != "Success"){
+  #   stop("hub server returned error: ", server_status$message)
+  # }else{
+  #   return(api_url)
+  # }
 }
 
 #' User provided date string checking
