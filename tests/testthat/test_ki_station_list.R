@@ -4,6 +4,10 @@ test_that("ki_station_list throws error when no hub specified", {
   expect_error(ki_station_list(hub = ""))
 })
 
+test_that("ki_station_list throws error if provided hub in not reachable", {
+  expect_error(ki_station_list(hub = "https://xxxxx"))
+})
+
 test_that("ki_station_list should return a tibble", {
   skip_if_net_down()
 

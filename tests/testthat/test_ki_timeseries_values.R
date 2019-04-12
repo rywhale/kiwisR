@@ -4,6 +4,10 @@ test_that("ki_timeseries_values throws error when no hub specified", {
   expect_error(ki_timeseries_values(hub = "", ts_id = "1234"))
 })
 
+test_that("ki_timeseries_values throws error if provided hub in not reachable", {
+  expect_error(ki_timeseries_values(hub = "https://xxxx", ts_id = "1234"))
+})
+
 test_that("ki_timeseries_values throws error when no ts_id specified", {
   expect_error(ki_timeseries_values(hub = "kisters"))
 })

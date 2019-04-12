@@ -3,12 +3,6 @@
 #' @description Checks input against defaults and checks to make sure the server can be reached
 #' @keywords internal
 check_hub <- function(hub) {
-
-  # # Check for internet access
-  # if(!has_internet()){
-  #   stop("No access to internet", call. = FALSE)
-  # }
-
   # Identify default hubs
   default_hubs <- list(
     "kisters" = "http://kiwis.kisters.de/KiWIS/KiWIS?",
@@ -33,21 +27,6 @@ check_hub <- function(hub) {
   }
 
   return(api_url)
-
-  # # Check if server returns error
-  # server_status <- httr::http_status(
-  #   httr::GET(
-  #     paste0(
-  #       api_url, "datasource=0&service=kisters&type=queryServices&request=getrequestinfo"
-  #       )
-  #     )
-  # )
-
-  # if(server_status$category != "Success"){
-  #   stop("hub server returned error: ", server_status$message)
-  # }else{
-  #   return(api_url)
-  # }
 }
 
 #' User provided date string checking

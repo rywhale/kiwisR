@@ -12,10 +12,6 @@ test_that("check_hub accepts defaults and returns URL", {
   expect_true(is.character(quint_stat))
 })
 
-test_that("check_hub returns error if server/url is unreachable", {
-  expect_error(check_hub("http://xxxxx"))
-})
-
 test_that("check_hub returns error if hub is not a character", {
   expect_error(check_hub(1234))
 })

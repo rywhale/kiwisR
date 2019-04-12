@@ -1,6 +1,13 @@
-kiwisR 0.1.4.5
+kiwisR 0.1.5
 =========================
-* Testing changes to `check_hub` to address query speed degredation 
+### IMPROVEMENTS
+* Changes to `check_hub` to address query speed degredation
+  * Was previously checking the server for every query which wrecked query times for looped/repeated queries
+* Added tests for faulty URLs passed to ki_* functions (to replace the degredated server checking aspects of `check_hub`)
+
+### MINOR CHANGES
+* Fixed small bug fix in `ki_station_list` that caused errors when passing optional returnfields
+containing string 'lon' 
 
 
 kiwisR 0.1.4
