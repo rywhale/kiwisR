@@ -34,7 +34,7 @@ test_that("ki_timeseries_list accepts ts_name for retrieving metadata", {
   skip_if_net_down()
   skip_if_exp_down()
 
-  ts_meta <- ki_timeseries_list(hub = example_hub, ts_name = "A*")
+  ts_meta <- ki_timeseries_list(hub = example_hub, ts_name = "Vel*")
 
   expect_is(ts_meta, c("tbl_df", "tbl", "data.frame"))
 })

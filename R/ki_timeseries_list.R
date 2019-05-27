@@ -15,8 +15,7 @@
 #' @return A tibble containing all available time series for selected stations.
 #' @examples
 #' ki_timeseries_list(hub = "swmc", station_id = "146775")
-#' ki_timeseries_list(hub = "swmc", group_id = "499612")
-#' ki_timeseries_list(hub = "swmc", ts_name = "V*")
+#' ki_timeseries_list(hub = "swmc", ts_name = "Vel*")
 #'
 
 ki_timeseries_list <- function(hub, station_id, ts_name, coverage = TRUE, group_id, return_fields) {
