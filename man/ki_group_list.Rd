@@ -18,6 +18,6 @@ Returns a tibble containing metadata available groups. This can be used to
 further filter down other queries like `ki_station_list`
 }
 \examples{
-ki_group_list(hub = 'kisters')
+ki_group_list(hub = 'swmc')
 
 }

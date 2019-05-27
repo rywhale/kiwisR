@@ -1,6 +1,6 @@
 Package: kiwisR
 Title: A Wrapper for Querying KISTERS 'WISKI' Databases via the 'KiWIS' API
-Version: 0.1.5
+Version: 0.1.6
 Authors@R: c(person("Ryan", "Whaley", role = c("aut", "cre"), email = "rdgwhaley@gmail.com"),
   person("Sam", "Albers", role = "ctb", email = "sam.albers@gov.bc.ca")
   )
@@ -21,7 +21,8 @@ Imports:
   tibble,
   jsonlite,
   lubridate,
-  httr
+  httr,
+  dplyr
 Suggests:
   ggplot2,
   knitr,

@@ -47,8 +47,12 @@ devtools::install_github('rywhale/kiwisR')
 
 Then load the package with
 
-```{r eval = TRUE,message=FALSE,warning=FALSE}
+```{r eval = FALSE,message=FALSE,warning=FALSE}
 library(kiwisR)
+```
+
+```{r eval=TRUE,message=FALSE,warning=FALSE}
+devtools::load_all()
 ```
 
 ## Usage
@@ -170,6 +174,8 @@ available_ts <- ki_timeseries_list(
   )
 
 available_ts
+
+unique(available_ts$ts_name)
 ```
 
 ### Get Time Series Values
@@ -180,33 +186,35 @@ chosen time series.
 By default this will return values for the past 24 hours. You can specify the dates you're interested in
 by setting ```start_date``` and ```end_date```. These should be set as date strings with the format 'YYYY-mm-dd'. 
 
+You can pass either a single or multiple ```ts_id```(s). 
+
 #### One Time Series
 
 ```{r}
 # Past 24 hours
 my_values <- ki_timeseries_values(
   hub = 'swmc', 
-  ts_id = '948928042'
+  ts_id = '966435042'
   )
 
 my_values
 ```
 
 #### Multiple Time Series
-If you provide a vector to ```ts_id```, a list of tibbles will be returned. Each tibble
-is named according to the station name and the time series' parameter. 
 
 ```{r}
 # Specified date, multiple time series
-my_ts_ids <- c("948928042", "948603042")
+my_ts_ids <- c("1125831042","908195042")
 my_values <- ki_timeseries_values(
   hub = 'swmc',
   ts_id = my_ts_ids,
-  start_date = "2017-08-28",
-  end_date = "2017-09-13"
+  start_date = "2015-08-28",
+  end_date = "2018-09-13"
   )
 
 my_values
+
+unique(my_values$ts_name)
 ```
 
 ## Using Other Hubs

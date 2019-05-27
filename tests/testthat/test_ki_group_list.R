@@ -2,13 +2,17 @@ context("Testing group metadata retrieval and filtering")
 
 test_that("ki_group_list returns a tibble with three columns", {
   skip_if_net_down()
+  skip_if_exp_down()
 
-  group_test <- ki_group_list(hub = "kisters")
+  group_test <- ki_group_list(hub = example_hub)
   static_names <- c("group_name", "group_id", "group_type")
 
 
-  expect_is(group_test, "tbl_df")
-  expect(sum(static_names %in% names(group_test)) == 3)
+  expect_is(group_test, c("tbl_df", "tbl", "data.frame"))
+  expect(
+    sum(static_names %in% names(group_test)) == 3,
+    failure_message = "Group metadata doesn't contain expected columns"
+    )
 })
 
 test_that("ki_group_list throws error if no hub specified", {

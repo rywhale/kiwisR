@@ -9,56 +9,79 @@ test_that("ki_timeseries_values throws error if provided hub in not reachable", 
 })
 
 test_that("ki_timeseries_values throws error when no ts_id specified", {
-  expect_error(ki_timeseries_values(hub = "kisters"))
+  skip_if_net_down()
+  skip_if_exp_down()
+
+  expect_error(ki_timeseries_values(hub = example_hub))
 })
 
 test_that("ki_timeseries_values returns error if ts_id doesn't exist", {
-  expect_error(ki_timeseries_values(hub = "kisters", ts_id = "FAKE"))
+  skip_if_net_down()
+  skip_if_exp_down()
+
+  expect_error(ki_timeseries_values(hub = example_hub, ts_id = "FAKE"))
 })
 
 test_that("ki_timeseries_values returns error if no data for specified dates", {
-  test_ts <- "231042"
+  skip_if_net_down()
+  skip_if_exp_down()
+
   # Past 24 hours by default
-  expect_error(ki_timeseries_values(hub = "kisters", ts_id = test_ts))
+  expect_error(ki_timeseries_values(hub = example_hub, ts_id = test_ts_ids[[1]]))
+
   # Specified dates
-  expect_error(ki_timeseries_values(hub = "kisters",
-                                    ts_id = test_ts,
-                                    start_date = Sys.Date(),
-                                    end_date = Sys.Date() + 1))
+  expect_error(ki_timeseries_values(
+    hub = example_hub,
+    ts_id = test_ts_ids[[1]],
+    start_date = Sys.Date(),
+    end_date = Sys.Date() + 1
+  ))
 })
 
 test_that("ki_timeseries_values returns table with data", {
   skip_if_net_down()
+  skip_if_exp_down()
 
-  test_ts <- "231042"
-  ts_vals <- ki_timeseries_values(hub = "kisters",
-                                  ts_id = test_ts,
-                                  start_date = "2015-12-01",
-                                  end_date = "2018-01-01")
-  expect_is(ts_vals, "tbl_df")
+  ts_vals <- ki_timeseries_values(
+    hub = example_hub,
+    ts_id = test_ts_ids[[1]],
+    start_date = "2015-12-01",
+    end_date = "2018-01-01"
+  )
+  expect_is(ts_vals, c("tbl_df", "tbl", "data.frame"))
 })
 
 test_that("ki_timeseries_values can take a vector of ts_ids and return list of tables", {
   skip_if_net_down()
+  skip_if_exp_down()
 
-  test_ts <- c("231042","244042")
-  ts_vals <- ki_timeseries_values(hub = "kisters",
-                                  ts_id = test_ts,
-                                  start_date = "2015-12-01",
-                                  end_date = "2018-01-01")
-  expect_is(ts_vals, "list")
-  expect_is(ts_vals[[1]], "tbl_df")
-  expect_is(ts_vals[[2]], "tbl_df")
+  ts_vals <- ki_timeseries_values(
+    hub = example_hub,
+    ts_id = test_ts_ids,
+    start_date = "2015-12-01",
+    end_date = "2018-01-01"
+  )
+
+  expect_is(ts_vals, c("tbl_df", "tbl", "data.frame"))
+  expect(
+    length(unique(ts_vals$ts_name)) == 2,
+    failure_message = "Timeseries values query for multiple ts_ids didn't return multiple ts_names"
+  )
 })
 
 test_that("ki_timeseries_values returns three columns (two static) by default", {
   skip_if_net_down()
+  skip_if_exp_down()
 
-  test_ts <- "231042"
-  ts_vals <- ki_timeseries_values(hub = "kisters",
-                                  ts_id = test_ts,
-                                  start_date = "2015-12-01",
-                                  end_date = "2018-01-01")
+  ts_vals <- ki_timeseries_values(
+    hub = example_hub,
+    ts_id = test_ts_ids[[1]],
+    start_date = "2015-12-01",
+    end_date = "2018-01-01"
+  )
 
-  expect(sum(c("Timestamp", "Units") %in% names(ts_vals)) == 2)
+  expect(
+    sum(c("Timestamp", "Units") %in% names(ts_vals)) == 2,
+    failure_message = "Timeseries values query did not return expected columns."
+  )
 })

@@ -12,7 +12,7 @@ ki_timeseries_list(hub, station_id, ts_name, coverage = TRUE, group_id,
 \item{hub}{The KiWIS database you are querying. Either one of the defaults or a URL.
 See \href{https://github.com/rywhale/kiwisR}{README}.}
 
-\item{station_id}{Either a single station id or a vector of station id. Can be string or numeric.
+\item{station_id}{Either a single station id or a vector of station ids. Can be string or numeric.
 Station ids can be found using the ki_station_list function.}
 
 \item{ts_name}{(Optional) A specific time series short name to search for. Supports the use of "*" as a wildcard.}
@@ -33,8 +33,8 @@ Get list of available time series for station or
 list of stations.
 }
 \examples{
-ki_timeseries_list(hub = "kisters", station_id = "23445")
-ki_timeseries_list(hub = "kisters", group_id = "11919")
-ki_timeseries_list(hub = "kisters", ts_name = "A*")
+ki_timeseries_list(hub = "swmc", station_id = "146775")
+ki_timeseries_list(hub = "swmc", group_id = "499612")
+ki_timeseries_list(hub = "swmc", ts_name = "V*")
 
 }

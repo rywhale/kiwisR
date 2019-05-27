@@ -11,7 +11,7 @@ check_hub <- function(hub) {
   )
 
   # Hub selection
-  if (!is.character(hub)) {
+  if (!is.character(hub) | nchar(hub) == 0) {
     stop(
       "`hub` argument must be a character- either a URL or one of the following defaults: ",
       paste(c("", names(default_hubs)), collapse = "\n"),
@@ -59,7 +59,24 @@ check_date <- function(start_date, end_date){
 #' @author Sam Albers
 #' @keywords internal
 has_internet <- function(){
-  z <- try(suppressWarnings(readLines('https://www.google.ca', n = 1)),
-           silent = TRUE)
+  z <- try(suppressWarnings(
+    readLines('https://www.google.ca', n = 1)
+    ), silent = TRUE)
+  !inherits(z, "try-error")
+}
+
+#' Checking if example hub is live before running tests
+#' @noRd
+#' @description Checks if connection to KiWIS example hub can be made.
+#' @keywords internal
+exp_live <- function(exp_hub){
+  exp_hub_url <- paste0(
+    check_hub(exp_hub),
+    "datasource=0&service=kisters&type=queryServices&request=getrequestinfo"
+  )
+  z <- try(
+    suppressWarnings(httr::GET(exp_hub_url, httr::timeout(5))),
+    silent = TRUE
+  )
   !inherits(z, "try-error")
 }

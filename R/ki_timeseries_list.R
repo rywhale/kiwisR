@@ -4,7 +4,7 @@
 #' @export
 #' @param hub The KiWIS database you are querying. Either one of the defaults or a URL.
 #'  See \href{https://github.com/rywhale/kiwisR}{README}.
-#' @param station_id Either a single station id or a vector of station id. Can be string or numeric.
+#' @param station_id Either a single station id or a vector of station ids. Can be string or numeric.
 #' Station ids can be found using the ki_station_list function.
 #' @param ts_name (Optional) A specific time series short name to search for. Supports the use of "*" as a wildcard.
 #' @param coverage (Optional) Whether or not to return period of record columns.
@@ -14,9 +14,9 @@
 #' Should be a comma separate string or a vector.
 #' @return A tibble containing all available time series for selected stations.
 #' @examples
-#' ki_timeseries_list(hub = "kisters", station_id = "23445")
-#' ki_timeseries_list(hub = "kisters", group_id = "11919")
-#' ki_timeseries_list(hub = "kisters", ts_name = "A*")
+#' ki_timeseries_list(hub = "swmc", station_id = "146775")
+#' ki_timeseries_list(hub = "swmc", group_id = "499612")
+#' ki_timeseries_list(hub = "swmc", ts_name = "V*")
 #'
 
 ki_timeseries_list <- function(hub, station_id, ts_name, coverage = TRUE, group_id, return_fields) {
@@ -90,21 +90,25 @@ ki_timeseries_list <- function(hub, station_id, ts_name, coverage = TRUE, group_
   raw <- tryCatch({
     httr::GET(
       url = api_url,
-      query = api_query
+      query = api_query,
+      httr::timeout(180)
     )}, error = function(e){
       return(e)
     })
 
-  if(sum(grepl("error", class(raw)))){
-    stop("Query returned error: ", raw$message)
-  }
-
-  # Check for 404
-  if (raw$status_code == 404) {
+  # Check for timeout / 404
+  if(grepl("Timeout", raw)){
+    stop("Check that KiWIS hub is accessible via a web browser.")
+  }else if(raw$status_code == 404) {
     stop(
       "404 returned by selected hub.",
       "Check that you are able to access it via a web browser."
     )
+  }
+
+  # Check for query error
+  if(sum(grepl("error", class(raw)))){
+    stop("Query returned error: ", raw$message)
   }
 
   # Parse text
@@ -112,28 +116,35 @@ ki_timeseries_list <- function(hub, station_id, ts_name, coverage = TRUE, group_
 
   # Check for special case single ts return
   if(nrow(json_content) == 2){
-    content_dat <- tibble::as_tibble(json_content)[-1, ]
+    content_dat <- tibble::as_tibble(json_content, .name_repair = "minimal")[-1, ]
   }else{
     # Convert to  tibble
-    content_dat <- tibble::as_tibble(json_content[-1, ])
+    content_dat <- tibble::as_tibble(json_content[-1, ], .name_repair = "minimal")
   }
 
   # Add column names
-  names(content_dat) <- json_content[1, ]
+  colnames(content_dat) <- json_content[1, ]
 
-  # Cast lat/lon columns
-  if(sum(grepl("lat|lon", names(content_dat))) >= 2){
-    content_dat[which(grepl("lat|lon", names(content_dat)))] <- sapply(
-      content_dat[which(grepl("lat|lon", names(content_dat)))],
+  # Cast lat/lon columns if they exist
+  content_dat <- suppressWarnings(
+    dplyr::mutate_at(
+      content_dat,
+      dplyr::vars(
+        dplyr::one_of(c("station_latitude", "station_longitude"))
+      ),
       as.double
     )
-  }
+  )
 
-  # Cast date columns
-  if(coverage == TRUE){
-    content_dat$from <- lubridate::ymd_hms(content_dat$from)
-    content_dat$to <- lubridate::ymd_hms(content_dat$to)
-  }
+  content_dat <- suppressWarnings(
+    dplyr::mutate_at(
+      content_dat,
+      dplyr::vars(
+        dplyr::one_of(c("from", "to"))
+        ),
+      lubridate::ymd_hms
+    )
+  )
 
  return(content_dat)
 }

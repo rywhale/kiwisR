@@ -8,15 +8,14 @@
 #'  Time series ids can be found using the ki_timeseries_list function
 #' @param start_date A date string formatted "YYYY-MM-DD". Defaults to yesterday.
 #' @param end_date A date string formatted "YYYY-MM-DD". Defaults to today.
-#' @return Either: a single tibble or a list of tibbles (each named according to station and parameter).
-#'  Tibbles returned contain columns for Timestamp, Value and Unit. All timestamps are returned in UTC.
+#' @return A tibble with following columns: Timestamp, Value, ts_name, Units, station_name
 #' @examples
 #' ki_timeseries_values(
-#'   hub = "kisters",
-#'   ts_id = "231042",
+#'   hub = "swmc",
+#'   ts_id = "1125831042",
 #'   start_date = "2015-12-01",
 #'   end_date = "2018-01-01"
-#'   )
+#' )
 #'
 
 ki_timeseries_values <- function(hub, ts_id, start_date, end_date) {
@@ -26,7 +25,7 @@ ki_timeseries_values <- function(hub, ts_id, start_date, end_date) {
     message("No start or end date provided, trying to return data for past 24 hours")
     start_date <- Sys.Date() - 1
     end_date <- Sys.Date()
-  }else{
+  } else {
     check_date(start_date, end_date)
   }
 
@@ -44,6 +43,7 @@ ki_timeseries_values <- function(hub, ts_id, start_date, end_date) {
   ts_meta <- paste(c(
     "ts_unitname",
     "ts_unitsymbol",
+    "ts_name",
     "stationparameter_name",
     "station_name"
   ),
@@ -67,21 +67,26 @@ ki_timeseries_values <- function(hub, ts_id, start_date, end_date) {
   raw <- tryCatch({
     httr::GET(
       url = api_url,
-      query = api_query
-    )}, error = function(e){
-      return(e)
-    })
+      query = api_query,
+      httr::timeout(60)
+    )
+  }, error = function(e) {
+    return(e)
+  })
 
-  if(sum(grepl("error", class(raw)))){
-    stop("Query returned error: ", raw$message)
-  }
-
-  # Check for 404
-  if (raw$status_code == 404) {
+  # Check for timeout / 404
+  if(grepl("Timeout", raw)){
+    stop("Check that KiWIS hub is accessible via a web browser.")
+  }else if(raw$status_code == 404) {
     stop(
       "404 returned by selected hub.",
       "Check that you are able to access it via a web browser."
     )
+  }
+
+  # Check for query error
+  if(sum(grepl("error", class(raw)))){
+    stop("Query returned error: ", raw$message)
   }
 
   # Parse to JSON
@@ -93,56 +98,37 @@ ki_timeseries_values <- function(hub, ts_id, start_date, end_date) {
   if ("rows" %in% names(json_content)) {
     num_rows <- sum(as.numeric(json_content$rows))
     if (num_rows == 0) {
-      stop("No data available for selected ts_id.")
+      stop("No data available for selected ts_id(s).")
     }
   }
 
   # Grab data for each ts id
-  content_dat <- lapply(seq(length(ts_id)), function(x) {
+  content_dat <- lapply(1:length(json_content$data), function(x) {
 
     # Convert to data frame
-    current_dat <- tibble::as_tibble(json_content$data[[x]])
+    current_dat <- tibble::as_tibble(json_content$data[[x]], .name_repair = "minimal")
 
     if (nrow(current_dat) >= 1) {
       # Add column names
-      names(current_dat) <- c(
+      colnames(current_dat) <- c(
         "Timestamp",
-        json_content$stationparameter_name[[x]]
+        "Value"
       )
 
-      # Create units column
-      current_dat$Units <- rep(
-        json_content$ts_unitsymbol[[x]],
-        nrow(current_dat)
+      current_dat <- dplyr::mutate(
+        current_dat,
+        Timestamp = lubridate::ymd_hms(current_dat$Timestamp),
+        Value = as.numeric(current_dat$Value),
+        ts_name = json_content$ts_name[[x]],
+        Units = json_content$ts_unitsymbol[[x]],
+        station_name = json_content$station_name[[x]]
       )
-
-      # Cast date column
-      current_dat$Timestamp <- lubridate::ymd_hms(current_dat$Timestamp)
-
-      # Cast values column
-      current_dat[[2]] <- as.numeric(current_dat[[2]])
     }
     current_dat
   })
 
-  # Name data frames in list
-  if (sum(sapply(content_dat, tibble::is.tibble)) == length(content_dat)) {
-    names(content_dat) <- paste0(
-      json_content$station_name, " (",
-      json_content$stationparameter_name, ")"
-    )
-  }
 
-  # One time series returned
-  if (length(content_dat) > 1) {
-    # Get rid of empty list items
-    content_dat <- content_dat[!is.null(content_dat)]
-  }
-
-  # One ts_id
-  if (length(ts_id) == 1) {
-    content_dat <- content_dat[[1]]
-  }
+  content_dat <- dplyr::bind_rows(content_dat)
 
   return(content_dat)
 }

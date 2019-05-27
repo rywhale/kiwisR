@@ -1,8 +1,6 @@
 context("Testing functions in utils.R")
 
 test_that("check_hub accepts defaults and returns URL", {
-  skip_if_net_down()
-
   swmc_stat <- check_hub("swmc")
   kist_stat <- check_hub("kisters")
   quint_stat<- check_hub("quinte")

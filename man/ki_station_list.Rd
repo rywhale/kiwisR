@@ -27,9 +27,9 @@ Tibble containing station metdata.
 Returns all available stations by default and allows for search terms and other filters.
 }
 \examples{
-ki_station_list(hub = "kisters")
-ki_station_list(hub = "kisters", search_term = "A*")
-ki_station_list(hub = "kisters", bounding_box = "-131.7,-5.4,135.8,75.8")
-ki_station_list(hub = "kisters", group_id = "21219")
+ki_station_list(hub = "swmc")
+ki_station_list(hub = "swmc", search_term = "A*")
+ki_station_list(hub = "swmc", bounding_box = "-131.7,-5.4,135.8,75.8")
+ki_station_list(hub = "swmc", group_id = "518247")
 
 }

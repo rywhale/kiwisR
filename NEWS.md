@@ -1,3 +1,28 @@
+kiwisR 0.1.6
+=========================
+### BREAKING CHANGES
+* Rework of `ki_timeseries_values` to better conform to tidy principles (#6)
+  * Now returns a tibble with the column format 
+  
+    |Timestamp          | Value | ts_name | Units | station_name |
+    |-------------------| ----- | ------- | ----- | ------------ |
+    |2019-05-01 00:00:00| 12.0  | LVL.1.O |  m    | Station_1    |
+    |2019-05-02 00:00:00| 12.1  | LVL.1.O |  m    | Station_1    |
+    
+  * This makes querying data for multiple ts_ids/stations much more convienient
+  * May break existing code that referenced parameter value column by name (e.g.- "LVL", "Q", etc.)
+    
+### IMPROVEMENTS
+* Added `skip_if_exp_down` fun to handle skipping tests when configured example server is down
+  * Addresses issues related to CRAN tests failing when this server is down
+* Centralized test metadata to make switching between hubs easier for local testing web KISTERS example server is down
+* Added `.name_repair = "minimal"` to `as_tibble`
+
+### MINOR CHANGES
+* Reverted to using 'swmc' hub due to issues with KISTERS default KiWIS server
+* Fixed bug in `ki_station_list` that caused station_latitude to be returned as array (#5)
+* Added `dplyr` dependency to clean up table formatting
+
 kiwisR 0.1.5
 =========================
 ### IMPROVEMENTS

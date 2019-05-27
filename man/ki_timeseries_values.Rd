@@ -18,18 +18,17 @@ Time series ids can be found using the ki_timeseries_list function}
 \item{end_date}{A date string formatted "YYYY-MM-DD". Defaults to today.}
 }
 \value{
-Either: a single tibble or a list of tibbles (each named according to station and parameter).
- Tibbles returned contain columns for Timestamp, Value and Unit. All timestamps are returned in UTC.
+A tibble with following columns: Timestamp, Value, ts_name, Units, station_name
 }
 \description{
 Returns time series values for given time series id and date range.
 }
 \examples{
 ki_timeseries_values(
-  hub = "kisters",
-  ts_id = "231042",
+  hub = "swmc",
+  ts_id = "1125831042",
   start_date = "2015-12-01",
   end_date = "2018-01-01"
-  )
+)
 
 }

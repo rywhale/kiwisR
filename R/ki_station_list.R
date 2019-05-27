@@ -12,10 +12,10 @@
 #' Should be a comma separate string or a vector.
 #' @return Tibble containing station metdata.
 #' @examples
-#' ki_station_list(hub = "kisters")
-#' ki_station_list(hub = "kisters", search_term = "A*")
-#' ki_station_list(hub = "kisters", bounding_box = "-131.7,-5.4,135.8,75.8")
-#' ki_station_list(hub = "kisters", group_id = "21219")
+#' ki_station_list(hub = "swmc")
+#' ki_station_list(hub = "swmc", search_term = "A*")
+#' ki_station_list(hub = "swmc", bounding_box = "-131.7,-5.4,135.8,75.8")
+#' ki_station_list(hub = "swmc", group_id = "518247")
 #'
 
 ki_station_list <- function(hub, search_term, bounding_box, group_id, return_fields) {
@@ -78,21 +78,26 @@ ki_station_list <- function(hub, search_term, bounding_box, group_id, return_fie
   raw <- tryCatch({
     httr::GET(
       url = api_url,
-      query = api_query
+      query = api_query,
+      httr::timeout(15)
     )}, error = function(e){
     return(e)
   })
 
-  if(sum(grepl("error", raw))){
-    stop("Query returned error.")
-  }
 
-  # Check for 404
-  if (raw$status_code == 404) {
+  # Check for timeout / 404
+  if(grepl("Timeout", raw)){
+    stop("Check that KiWIS hub is accessible via a web browser.")
+  }else if(raw$status_code == 404) {
     stop(
       "404 returned by selected hub.",
       "Check that you are able to access it via a web browser."
       )
+  }
+
+  # Check for query error
+  if(sum(grepl("error", class(raw)))){
+    stop("Query returned error: ", raw$message)
   }
 
   # Parse text
@@ -104,7 +109,7 @@ ki_station_list <- function(hub, search_term, bounding_box, group_id, return_fie
   }
 
   # Convert to tibble
-  content_dat <- tibble::as_tibble(json_content)[-1, ]
+  content_dat <- tibble::as_tibble(json_content, .name_repair = "minimal")[-1, ]
 
   # Add column names
   colnames(content_dat) <- json_content[1, ]
@@ -115,13 +120,16 @@ ki_station_list <- function(hub, search_term, bounding_box, group_id, return_fie
     content_dat$station_name
   ), ]
 
-  # Cast lat/lon columns
-  if(sum(grepl("latitutde|longitude", names(content_dat))) >= 1){
-    content_dat[which(grepl("latitude|longitude", names(content_dat)))] <- sapply(
-      content_dat[which(grepl("latitude|longitude", names(content_dat)))],
+  # Cast lat/lon columns if they exist
+  content_dat <- suppressWarnings(
+    dplyr::mutate_at(
+      content_dat,
+      dplyr::vars(
+        dplyr::one_of(c("station_latitude", "station_longitude"))
+        ),
       as.double
-      )
-  }
+    )
+  )
 
   return(content_dat)
 }
