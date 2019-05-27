@@ -83,7 +83,7 @@ ki_timeseries_values <- function(hub, ts_id, start_date, end_date) {
   raw_content <- httr::content(raw)
 
   # Check for timeout / 404
-  if(grepl("Timeout", raw_content) || class(raw_content) != "list"){
+  if(class(raw) != "response" | class(raw_content) != "list"){
     stop("Check that KiWIS hub is accessible via a web browser.")
   }
 

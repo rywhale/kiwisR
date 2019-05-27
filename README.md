@@ -50,10 +50,6 @@ Then load the package with
 library(kiwisR)
 ```
 
-``` r
-devtools::load_all()
-```
-
 ## Usage
 
 ### Get Station Information
