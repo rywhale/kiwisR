@@ -84,20 +84,17 @@ ki_station_list <- function(hub, search_term, bounding_box, group_id, return_fie
     return(e)
   })
 
-
-  # Check for timeout / 404
-  if(grepl("Timeout", raw)){
-    stop("Check that KiWIS hub is accessible via a web browser.")
-  }else if(raw$status_code == 404) {
-    stop(
-      "404 returned by selected hub.",
-      "Check that you are able to access it via a web browser."
-      )
-  }
-
   # Check for query error
   if(sum(grepl("error", class(raw)))){
     stop("Query returned error: ", raw$message)
+  }
+
+  # Parse response
+  raw_content <- httr::content(raw)
+
+  # Check for timeout / 404
+  if(grepl("Timeout", raw_content) || class(raw_content) != "list"){
+    stop("Check that KiWIS hub is accessible via a web browser.")
   }
 
   # Parse text
@@ -110,6 +107,7 @@ ki_station_list <- function(hub, search_term, bounding_box, group_id, return_fie
 
   # Convert to tibble
   content_dat <- tibble::as_tibble(json_content, .name_repair = "minimal")[-1, ]
+
 
   # Add column names
   colnames(content_dat) <- json_content[1, ]

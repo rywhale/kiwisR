@@ -96,19 +96,17 @@ ki_timeseries_list <- function(hub, station_id, ts_name, coverage = TRUE, group_
       return(e)
     })
 
-  # Check for timeout / 404
-  if(grepl("Timeout", raw)){
-    stop("Check that KiWIS hub is accessible via a web browser.")
-  }else if(raw$status_code == 404) {
-    stop(
-      "404 returned by selected hub.",
-      "Check that you are able to access it via a web browser."
-    )
-  }
-
   # Check for query error
   if(sum(grepl("error", class(raw)))){
     stop("Query returned error: ", raw$message)
+  }
+
+  # Parse response
+  raw_content <- httr::content(raw)
+
+  # Check for timeout / 404
+  if(grepl("Timeout", raw_content) || class(raw_content) != "list"){
+    stop("Check that KiWIS hub is accessible via a web browser.")
   }
 
   # Parse text

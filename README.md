@@ -402,7 +402,7 @@ my_values <- ki_timeseries_values(
 #> No start or end date provided, trying to return data for past 24 hours
 
 my_values
-#> # A tibble: 489 x 5
+#> # A tibble: 501 x 5
 #>    Timestamp           Value ts_name Units station_name                    
 #>    <dttm>              <dbl> <chr>   <chr> <chr>                           
 #>  1 2019-05-26 00:00:00  24.8 LVL.1.O m     Attawapiskat River below Mukete~
@@ -415,7 +415,7 @@ my_values
 #>  8 2019-05-26 00:35:00  24.8 LVL.1.O m     Attawapiskat River below Mukete~
 #>  9 2019-05-26 00:40:00  24.8 LVL.1.O m     Attawapiskat River below Mukete~
 #> 10 2019-05-26 00:45:00  24.8 LVL.1.O m     Attawapiskat River below Mukete~
-#> # ... with 479 more rows
+#> # ... with 491 more rows
 ```
 
 #### Multiple Time Series
