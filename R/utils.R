@@ -1,6 +1,6 @@
 #' Hub selection handling
 #' @noRd
-#' @description Checks input against defaults and checks to make sure the server can be reached
+#' @description Checks input against defaults
 #' @keywords internal
 check_hub <- function(hub) {
   # Identify default hubs
@@ -72,11 +72,11 @@ has_internet <- function(){
 exp_live <- function(exp_hub){
   exp_hub_url <- paste0(
     check_hub(exp_hub),
-    "datasource=0&service=kisters&type=queryServices&request=getrequestinfo"
+    "datasource=0&service=kisters&type=queryServices&request=getstationlist&format=json"
   )
   z <- try(
     suppressWarnings(httr::GET(exp_hub_url, httr::timeout(5))),
     silent = TRUE
   )
-  !inherits(z, "try-error")
+  !inherits(z, "try-error") & !length(names(httr::content(z)))
 }

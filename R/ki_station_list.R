@@ -12,10 +12,12 @@
 #' Should be a comma separate string or a vector.
 #' @return Tibble containing station metdata.
 #' @examples
+#' \dontrun{
 #' ki_station_list(hub = "swmc")
 #' ki_station_list(hub = "swmc", search_term = "A*")
 #' ki_station_list(hub = "swmc", bounding_box = "-131.7,-5.4,135.8,75.8")
 #' ki_station_list(hub = "swmc", group_id = "518247")
+#' }
 #'
 
 ki_station_list <- function(hub, search_term, bounding_box, group_id, return_fields) {
@@ -113,10 +115,12 @@ ki_station_list <- function(hub, search_term, bounding_box, group_id, return_fie
   colnames(content_dat) <- json_content[1, ]
 
   # Remove garbage stations
-  content_dat <- content_dat[!grepl(
-    paste(garbage, collapse = "|"),
-    content_dat$station_name
-  ), ]
+  if("station_name" %in% names(content_dat)){
+    content_dat <- content_dat[!grepl(
+      paste(garbage, collapse = "|"),
+      content_dat$station_name
+    ), ]
+  }
 
   # Cast lat/lon columns if they exist
   content_dat <- suppressWarnings(

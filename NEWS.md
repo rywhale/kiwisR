@@ -1,3 +1,12 @@
+kiwisR 0.1.7
+=========================
+### MINOR CHANGES
+* All examples are now wrapped in `\dontrun{}` to avoid failing when a specific KiWIS server used for testing goes down (#7)
+* Improvements to `exp_live` utility function should avoid tests failing when server is unreachable (#7)
+* Removed hard-coded reference to `station_name` column in `ki_station_list` (#8)
+* Minor tweaks to tests for `ki_timeseries_list` to hopefully lower time required for testing
+* **Note:** CRAN staff on vaycay until 08/18/2019. Waiting to submit. 
+
 kiwisR 0.1.6
 =========================
 ### BREAKING CHANGES

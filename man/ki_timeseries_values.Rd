@@ -24,11 +24,13 @@ A tibble with following columns: Timestamp, Value, ts_name, Units, station_name
 Returns time series values for given time series id and date range.
 }
 \examples{
+\dontrun{
 ki_timeseries_values(
   hub = "swmc",
   ts_id = "1125831042",
   start_date = "2015-12-01",
   end_date = "2018-01-01"
 )
+}
 
 }

@@ -33,8 +33,9 @@ Get list of available time series for station or
 list of stations.
 }
 \examples{
+\dontrun{
 ki_timeseries_list(hub = "swmc", station_id = "146775")
-ki_timeseries_list(hub = "swmc", group_id = "499612")
-ki_timeseries_list(hub = "swmc", ts_name = "V*")
+ki_timeseries_list(hub = "swmc", ts_name = "Vel*")
+}
 
 }

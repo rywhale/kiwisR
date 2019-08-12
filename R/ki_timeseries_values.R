@@ -10,12 +10,14 @@
 #' @param end_date A date string formatted "YYYY-MM-DD". Defaults to today.
 #' @return A tibble with following columns: Timestamp, Value, ts_name, Units, station_name
 #' @examples
+#' \dontrun{
 #' ki_timeseries_values(
 #'   hub = "swmc",
 #'   ts_id = "1125831042",
 #'   start_date = "2015-12-01",
 #'   end_date = "2018-01-01"
 #' )
+#' }
 #'
 
 ki_timeseries_values <- function(hub, ts_id, start_date, end_date) {

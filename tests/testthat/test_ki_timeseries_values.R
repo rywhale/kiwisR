@@ -1,10 +1,16 @@
 context("Testing time series value retrieval and filters")
 
 test_that("ki_timeseries_values throws error when no hub specified", {
+  skip_if_net_down()
+  skip_if_exp_down()
+
   expect_error(ki_timeseries_values(hub = "", ts_id = "1234"))
 })
 
 test_that("ki_timeseries_values throws error if provided hub in not reachable", {
+  skip_if_net_down()
+  skip_if_exp_down()
+
   expect_error(ki_timeseries_values(hub = "https://xxxx", ts_id = "1234"))
 })
 

@@ -16,9 +16,11 @@ test_that("ki_group_list returns a tibble with three columns", {
 })
 
 test_that("ki_group_list throws error if no hub specified", {
+  skip_if_net_down()
   expect_error(ki_group_list())
 })
 
 test_that("ki_group_list throws error if provided hub in not reachable", {
+  skip_if_net_down()
   expect_error(ki_group_list(hub = "https://xxxxx"))
 })

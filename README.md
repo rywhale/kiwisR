@@ -62,20 +62,20 @@ for all available stations for the selected hub.
 ``` r
 # With swmc as the hub
 ki_station_list(hub = 'swmc')
-#> # A tibble: 3,560 x 5
+#> # A tibble: 3,697 x 5
 #>    station_name     station_no station_id station_latitude station_longitu~
 #>    <chr>            <chr>      <chr>                 <dbl>            <dbl>
-#>  1 2019SurgeUpgrad~ New-000019 642499                 NA               NA  
-#>  2 2019SurgeUpgrad~ New-000020 642538                 NA               NA  
-#>  3 ABBOTSFORD A     CLIM-MSC-~ 133535                 49.0           -122. 
-#>  4 ABERDEEN         CLIM-MSC-~ 121939                 45.5            -98.4
-#>  5 ABITIBI CANYON   ZZSNOW-OP~ 148200                 49.9            -81.6
-#>  6 ABITIBI LAKE     CLIM-MNR-~ 121135                 48.7            -80.1
-#>  7 ABITIBI RIVER A~ HYDAT-04M~ 136328                 49.9            -81.6
-#>  8 ABITIBI RIVER A~ HYDAT-04M~ 136304                 48.8            -80.7
-#>  9 ABITIBI RIVER A~ HYDAT-04M~ 136324                 49.6            -81.4
-#> 10 ABITIBI RIVER A~ HYDAT-04M~ 136332                 50.2            -81.6
-#> # ... with 3,550 more rows
+#>  1 A SNOW TEMPLATE  SNOW-WLF-~ 859904                 NA               NA  
+#>  2 ABBOTSFORD A     CLIM-MSC-~ 133535                 49.0           -122. 
+#>  3 ABERDEEN         CLIM-MSC-~ 121939                 45.5            -98.4
+#>  4 ABITIBI CANYON   ZZSNOW-OP~ 148200                 49.9            -81.6
+#>  5 ABITIBI LAKE     CLIM-MNR-~ 121135                 48.7            -80.1
+#>  6 ABITIBI RIVER A~ HYDAT-04M~ 136328                 49.9            -81.6
+#>  7 ABITIBI RIVER A~ HYDAT-04M~ 136304                 48.8            -80.7
+#>  8 ABITIBI RIVER A~ HYDAT-04M~ 136324                 49.6            -81.4
+#>  9 ABITIBI RIVER A~ HYDAT-04M~ 136332                 50.2            -81.6
+#> 10 ABITIBI RIVER A~ HYDAT-04M~ 136308                 48.7            -80.6
+#> # ... with 3,687 more rows
 ```
 
 #### Within Bounding Box
@@ -97,7 +97,7 @@ my_stations <- ki_station_list(
   )
 
 my_stations
-#> # A tibble: 173 x 5
+#> # A tibble: 165 x 5
 #>    station_name     station_no station_id station_latitude station_longitu~
 #>    <chr>            <chr>      <chr>                 <dbl>            <dbl>
 #>  1 ALBION HILLS     SNOW-MNR-~ 137457                 43.9            -79.8
@@ -110,13 +110,13 @@ my_stations
 #>  8 BUTTONVILLE A    CLIM-MSC-~ 132165                 43.9            -79.4
 #>  9 Black Creek bel~ WSC-02HB0~ 247406                 43.6            -80.0
 #> 10 Black Creek nea~ WSC-02HC0~ 144081                 43.7            -79.5
-#> # ... with 163 more rows
+#> # ... with 155 more rows
 
 # With comma separated string
 my_bounding_box <- "-80.126038,43.458297,-79.002481,43.969098"
 my_stations <- ki_station_list(hub = 'swmc', bounding_box = my_bounding_box)
 my_stations
-#> # A tibble: 173 x 5
+#> # A tibble: 165 x 5
 #>    station_name     station_no station_id station_latitude station_longitu~
 #>    <chr>            <chr>      <chr>                 <dbl>            <dbl>
 #>  1 ALBION HILLS     SNOW-MNR-~ 137457                 43.9            -79.8
@@ -129,7 +129,7 @@ my_stations
 #>  8 BUTTONVILLE A    CLIM-MSC-~ 132165                 43.9            -79.4
 #>  9 Black Creek bel~ WSC-02HB0~ 247406                 43.6            -80.0
 #> 10 Black Creek nea~ WSC-02HC0~ 144081                 43.7            -79.5
-#> # ... with 163 more rows
+#> # ... with 155 more rows
 ```
 
 #### By Search Term
@@ -145,20 +145,20 @@ my_stations <- ki_station_list(
   )
 
 my_stations
-#> # A tibble: 127 x 5
+#> # A tibble: 132 x 5
 #>    station_name     station_no station_id station_latitude station_longitu~
 #>    <chr>            <chr>      <chr>                 <dbl>            <dbl>
-#>  1 ABBOTSFORD A     CLIM-MSC-~ 133535                 49.0           -122. 
-#>  2 ABERDEEN         CLIM-MSC-~ 121939                 45.5            -98.4
-#>  3 ABITIBI CANYON   ZZSNOW-OP~ 148200                 49.9            -81.6
-#>  4 ABITIBI LAKE     CLIM-MNR-~ 121135                 48.7            -80.1
-#>  5 ABITIBI RIVER A~ HYDAT-04M~ 136328                 49.9            -81.6
-#>  6 ABITIBI RIVER A~ HYDAT-04M~ 136304                 48.8            -80.7
-#>  7 ABITIBI RIVER A~ HYDAT-04M~ 136324                 49.6            -81.4
-#>  8 ABITIBI RIVER A~ HYDAT-04M~ 136332                 50.2            -81.6
-#>  9 ABITIBI RIVER A~ HYDAT-04M~ 136308                 48.7            -80.6
-#> 10 ACTINOLITE (PRI~ ZZSNOW-MN~ 147948                 44.5            -77.3
-#> # ... with 117 more rows
+#>  1 A SNOW TEMPLATE  SNOW-WLF-~ 859904                 NA               NA  
+#>  2 ABBOTSFORD A     CLIM-MSC-~ 133535                 49.0           -122. 
+#>  3 ABERDEEN         CLIM-MSC-~ 121939                 45.5            -98.4
+#>  4 ABITIBI CANYON   ZZSNOW-OP~ 148200                 49.9            -81.6
+#>  5 ABITIBI LAKE     CLIM-MNR-~ 121135                 48.7            -80.1
+#>  6 ABITIBI RIVER A~ HYDAT-04M~ 136328                 49.9            -81.6
+#>  7 ABITIBI RIVER A~ HYDAT-04M~ 136304                 48.8            -80.7
+#>  8 ABITIBI RIVER A~ HYDAT-04M~ 136324                 49.6            -81.4
+#>  9 ABITIBI RIVER A~ HYDAT-04M~ 136332                 50.2            -81.6
+#> 10 ABITIBI RIVER A~ HYDAT-04M~ 136308                 48.7            -80.6
+#> # ... with 122 more rows
 
 # All stations starting with 'Oshawa'
 my_stations <- ki_station_list(
@@ -183,7 +183,7 @@ using `ki_group_list`
 ``` r
 all_groups <- ki_group_list(hub = 'swmc')
 all_groups
-#> # A tibble: 167 x 3
+#> # A tibble: 166 x 3
 #>    group_name                         group_id group_type
 #>    <chr>                              <chr>    <chr>     
 #>  1 Ausable Bayfield CA                169270   station   
@@ -196,7 +196,7 @@ all_groups
 #>  8 Bancroft MNR                       199831   station   
 #>  9 Bracebridge MNR                    199832   station   
 #> 10 Cataraqui CA                       199833   station   
-#> # ... with 157 more rows
+#> # ... with 156 more rows
 ```
 
 You can then pass values from the `group_id` column to `ki_station_list`
@@ -247,26 +247,26 @@ available_ts
 #> # A tibble: 179 x 6
 #>    station_name station_id ts_id ts_name from               
 #>    <chr>        <chr>      <chr> <chr>   <dttm>             
-#>  1 Jackson Cre~ 144659     1184~ SMoist~ 2019-01-16 00:00:00
-#>  2 Jackson Cre~ 144659     1184~ SMoist~ 2019-01-01 00:00:00
-#>  3 Jackson Cre~ 144659     1184~ SMoist~ 2019-01-16 14:00:00
-#>  4 Jackson Cre~ 144659     1184~ SMoist~ 2019-01-01 00:00:00
-#>  5 Jackson Cre~ 144659     1184~ SMoist~ 2019-01-16 00:00:00
-#>  6 Jackson Cre~ 144659     1184~ SMoist~ 2019-01-01 00:00:00
-#>  7 Jackson Cre~ 144659     1184~ SMoist~ 2019-01-01 00:00:00
-#>  8 Jackson Cre~ 144659     1184~ SMoist~ 2019-01-16 14:00:00
-#>  9 Jackson Cre~ 144659     1184~ SMoist~ 2019-01-01 00:00:00
-#> 10 Jackson Cre~ 144659     1184~ SMoist~ 2019-01-01 00:00:00
+#>  1 Jackson Cre~ 144659     9490~ Q.DayM~ 2005-12-26 05:00:00
+#>  2 Jackson Cre~ 144659     9490~ Q.1.O   NA                 
+#>  3 Jackson Cre~ 144659     9490~ Q.DayM~ 2005-12-26 05:00:00
+#>  4 Jackson Cre~ 144659     9490~ Q.15    2005-12-26 05:00:00
+#>  5 Jackson Cre~ 144659     9490~ Q.Mont~ 2005-12-01 05:00:00
+#>  6 Jackson Cre~ 144659     9490~ Q.Year~ 2005-01-01 05:00:00
+#>  7 Jackson Cre~ 144659     9490~ Q.DayM~ 2006-04-01 05:00:00
+#>  8 Jackson Cre~ 144659     9490~ Q.Year~ 2007-01-01 05:00:00
+#>  9 Jackson Cre~ 144659     1126~ Q.DayB~ 2005-12-26 05:00:00
+#> 10 Jackson Cre~ 144659     1126~ Q.DayR~ 2005-12-26 05:00:00
 #> # ... with 169 more rows, and 1 more variable: to <dttm>
 
 str(available_ts)
 #> Classes 'tbl_df', 'tbl' and 'data.frame':    179 obs. of  6 variables:
 #>  $ station_name: chr  "Jackson Creek at Jackson Heights" "Jackson Creek at Jackson Heights" "Jackson Creek at Jackson Heights" "Jackson Creek at Jackson Heights" ...
 #>  $ station_id  : chr  "144659" "144659" "144659" "144659" ...
-#>  $ ts_id       : chr  "1184282042" "1184279042" "1184280042" "1184283042" ...
-#>  $ ts_name     : chr  "SMoisture.DayMax" "SMoisture.YearMax" "SMoisture.1.O" "SMoisture.MonthMax" ...
-#>  $ from        : POSIXct, format: "2019-01-16 00:00:00" "2019-01-01 00:00:00" ...
-#>  $ to          : POSIXct, format: "2019-05-28 00:00:00" "2020-01-01 00:00:00" ...
+#>  $ ts_id       : chr  "949057042" "949048042" "949056042" "949049042" ...
+#>  $ ts_name     : chr  "Q.DayMean" "Q.1.O" "Q.DayMax" "Q.15" ...
+#>  $ from        : POSIXct, format: "2005-12-26 05:00:00" NA ...
+#>  $ to          : POSIXct, format: "2019-08-12 05:00:00" NA ...
 ```
 
 #### Multiple Stations
@@ -285,7 +285,7 @@ available_ts <- ki_timeseries_list(
   )
 
 available_ts
-#> # A tibble: 254 x 6
+#> # A tibble: 253 x 6
 #>    station_name station_id ts_id ts_name from               
 #>    <chr>        <chr>      <chr> <chr>   <dttm>             
 #>  1 Jackson Cre~ 144659     9489~ Precip~ 2007-06-01 05:00:00
@@ -298,7 +298,7 @@ available_ts
 #>  8 Jackson Cre~ 144659     1143~ Precip~ 2007-06-18 05:00:00
 #>  9 Jackson Cre~ 144659     1184~ Precip~ 2018-10-18 05:00:00
 #> 10 Jackson Cre~ 144659     9489~ Precip~ 2007-06-18 20:15:00
-#> # ... with 244 more rows, and 1 more variable: to <dttm>
+#> # ... with 243 more rows, and 1 more variable: to <dttm>
 
 unique(available_ts$ts_name)
 #>   [1] "Precip.MonthTotal"         "Precip.6hrTotal"          
@@ -338,40 +338,40 @@ unique(available_ts$ts_name)
 #>  [69] "TSoil.MonthMin"            "TSoil.YearMin"            
 #>  [71] "TSoil.1.P"                 "TSoil.MonthMean"          
 #>  [73] "3Month%"                   "18Month%"                 
-#>  [75] "MonthToDate%"              "BAT.1.O"                  
-#>  [77] "SMoisture.DayMax"          "SMoisture.YearMax"        
-#>  [79] "SMoisture.1.O"             "SMoisture.MonthMax"       
-#>  [81] "SMoisture.DayMin"          "SMoisture.YearMean"       
-#>  [83] "SMoisture.YearMin"         "SMoisture.1.P"            
-#>  [85] "SMoisture.MonthMean"       "SMoisture.MonthMin"       
-#>  [87] "SMoisture.DayMean"         "Water Frac.DayMin"        
-#>  [89] "Water Frac.MonthMax"       "Water Frac.MonthMean"     
-#>  [91] "Soil Moisture.1.O"         "SoilMoisture.Year.Max"    
-#>  [93] "Soil Moisture.1.P"         "Water Frac.DayMax"        
-#>  [95] "Water Frac.DayMean"        "Water Frac.MonthMin"      
-#>  [97] "LowestSummerFlow%"         "Soil Cond.DayMin"         
-#>  [99] "SoilConduct MQ2.1.O"       "Soil Cond.DayMax"         
-#> [101] "Soil Cond.YrMax"           "Soil Cond.YrMean"         
-#> [103] "Soil Cond.DayMean"         "Soil Cond.MonthMean"      
-#> [105] "Soil Cond.YrMin"           "SoilConduct MQ2.1.P"      
-#> [107] "Soil Cond.MonthMax"        "Soil Cond.MonthMin"       
-#> [109] "TSoil.DayMin"              "TSoil.DayMax"             
-#> [111] "TAir.MonthMin"             "TAir.DayMean"             
-#> [113] "TAir.DayMin"               "TAir.MonthMax"            
-#> [115] "TAir.YearMax"              "TAir.6hr.Max"             
-#> [117] "TAir.24hrMax.P"            "TAir.1.O"                 
-#> [119] "TAir.24hrMax.O"            "TAir.24hrMin.P"           
-#> [121] "TAir.DayMax"               "TAir.MonthMean"           
-#> [123] "TAir.YearMean"             "TAir.YearMin"             
-#> [125] "TAir.1.P"                  "TAir.24hrMin.O"           
-#> [127] "TAir.6hr.Min"              "Q.Baseflow.1"             
-#> [129] "Q.RunOff.1"                "LowestSummerFlow2000"     
-#> [131] "LowestSummerFlow"          "SoilConduct.1.P"          
-#> [133] "SoilConduct.DayMean"       "SoilConduct.1.O"          
-#> [135] "SoilConduct.DayMin"        "SoilConduct.YearMin"      
-#> [137] "SoilConduct.MonthMean"     "SoilConduct.MonthMin"     
-#> [139] "SoilConduct.YearMax"       "SoilConduct.MonthMax"     
-#> [141] "SoilConduct.DayMax"        "SoilConduct MQ1.1.O"      
+#>  [75] "MonthToDate%"              "SMoisture.DayMax"         
+#>  [77] "SMoisture.YearMax"         "SMoisture.1.O"            
+#>  [79] "SMoisture.MonthMax"        "SMoisture.DayMin"         
+#>  [81] "SMoisture.YearMean"        "SMoisture.YearMin"        
+#>  [83] "SMoisture.1.P"             "SMoisture.MonthMean"      
+#>  [85] "SMoisture.MonthMin"        "SMoisture.DayMean"        
+#>  [87] "Water Frac.DayMin"         "Water Frac.MonthMax"      
+#>  [89] "Water Frac.MonthMean"      "Soil Moisture.1.O"        
+#>  [91] "SoilMoisture.Year.Max"     "Soil Moisture.1.P"        
+#>  [93] "Water Frac.DayMax"         "Water Frac.DayMean"       
+#>  [95] "Water Frac.MonthMin"       "LowestSummerFlow%"        
+#>  [97] "Soil Cond.DayMin"          "SoilConduct MQ2.1.O"      
+#>  [99] "Soil Cond.DayMax"          "Soil Cond.YrMax"          
+#> [101] "Soil Cond.YrMean"          "Soil Cond.DayMean"        
+#> [103] "Soil Cond.MonthMean"       "Soil Cond.YrMin"          
+#> [105] "SoilConduct MQ2.1.P"       "Soil Cond.MonthMax"       
+#> [107] "Soil Cond.MonthMin"        "TSoil.DayMin"             
+#> [109] "TSoil.DayMax"              "TAir.MonthMin"            
+#> [111] "TAir.DayMean"              "TAir.DayMin"              
+#> [113] "TAir.MonthMax"             "TAir.YearMax"             
+#> [115] "TAir.6hr.Max"              "TAir.24hrMax.P"           
+#> [117] "TAir.1.O"                  "TAir.24hrMax.O"           
+#> [119] "TAir.24hrMin.P"            "TAir.DayMax"              
+#> [121] "TAir.MonthMean"            "TAir.YearMean"            
+#> [123] "TAir.YearMin"              "TAir.1.P"                 
+#> [125] "TAir.24hrMin.O"            "TAir.6hr.Min"             
+#> [127] "Q.Baseflow.1"              "Q.RunOff.1"               
+#> [129] "LowestSummerFlow2000"      "LowestSummerFlow"         
+#> [131] "SoilConduct.1.P"           "SoilConduct.DayMean"      
+#> [133] "SoilConduct.1.O"           "SoilConduct.DayMin"       
+#> [135] "SoilConduct.YearMin"       "SoilConduct.MonthMean"    
+#> [137] "SoilConduct.MonthMin"      "SoilConduct.YearMax"      
+#> [139] "SoilConduct.MonthMax"      "SoilConduct.DayMax"       
+#> [141] "BAT.1.O"                   "SoilConduct MQ1.1.O"      
 #> [143] "SoilConduct MQ1.1.P"
 ```
 
@@ -398,20 +398,20 @@ my_values <- ki_timeseries_values(
 #> No start or end date provided, trying to return data for past 24 hours
 
 my_values
-#> # A tibble: 501 x 5
+#> # A tibble: 465 x 5
 #>    Timestamp           Value ts_name Units station_name                    
 #>    <dttm>              <dbl> <chr>   <chr> <chr>                           
-#>  1 2019-05-26 00:00:00  24.8 LVL.1.O m     Attawapiskat River below Mukete~
-#>  2 2019-05-26 00:05:00  24.8 LVL.1.O m     Attawapiskat River below Mukete~
-#>  3 2019-05-26 00:10:00  24.8 LVL.1.O m     Attawapiskat River below Mukete~
-#>  4 2019-05-26 00:15:00  24.8 LVL.1.O m     Attawapiskat River below Mukete~
-#>  5 2019-05-26 00:20:00  24.8 LVL.1.O m     Attawapiskat River below Mukete~
-#>  6 2019-05-26 00:25:00  24.8 LVL.1.O m     Attawapiskat River below Mukete~
-#>  7 2019-05-26 00:30:00  24.8 LVL.1.O m     Attawapiskat River below Mukete~
-#>  8 2019-05-26 00:35:00  24.8 LVL.1.O m     Attawapiskat River below Mukete~
-#>  9 2019-05-26 00:40:00  24.8 LVL.1.O m     Attawapiskat River below Mukete~
-#> 10 2019-05-26 00:45:00  24.8 LVL.1.O m     Attawapiskat River below Mukete~
-#> # ... with 491 more rows
+#>  1 2019-08-11 00:00:00  23.7 LVL.1.O m     Attawapiskat River below Mukete~
+#>  2 2019-08-11 00:05:00  23.7 LVL.1.O m     Attawapiskat River below Mukete~
+#>  3 2019-08-11 00:10:00  23.7 LVL.1.O m     Attawapiskat River below Mukete~
+#>  4 2019-08-11 00:15:00  23.7 LVL.1.O m     Attawapiskat River below Mukete~
+#>  5 2019-08-11 00:20:00  23.7 LVL.1.O m     Attawapiskat River below Mukete~
+#>  6 2019-08-11 00:25:00  23.7 LVL.1.O m     Attawapiskat River below Mukete~
+#>  7 2019-08-11 00:30:00  23.7 LVL.1.O m     Attawapiskat River below Mukete~
+#>  8 2019-08-11 00:35:00  23.7 LVL.1.O m     Attawapiskat River below Mukete~
+#>  9 2019-08-11 00:40:00  23.7 LVL.1.O m     Attawapiskat River below Mukete~
+#> 10 2019-08-11 00:45:00  23.7 LVL.1.O m     Attawapiskat River below Mukete~
+#> # ... with 455 more rows
 ```
 
 #### Multiple Time Series
@@ -451,8 +451,7 @@ unique(my_values$ts_name)
 You can use this package for a KiWIS hub not included in this list by
 feeding the location of the API service to the `hub` argument.
 
-For instance: If your URL looks
-like
+For instance: If your URL looks like
 
 `http://kiwis.kisters.de/KiWIS/KiWIS?datasource=0&service=kisters&type=queryServices&request=getrequestinfo`
 

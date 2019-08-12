@@ -7,7 +7,9 @@
 #'  See \href{https://github.com/rywhale/kiwisR}{README}.
 #' @return A tibble with three columns: group_id, group_name and group_type
 #' @examples
+#' \dontrun{
 #' ki_group_list(hub = 'swmc')
+#' }
 #'
 
 ki_group_list <- function(hub) {

@@ -8,6 +8,9 @@ test_that("ki_timeseries_list throws error when no hub specified", {
 })
 
 test_that("ki_timeseries_list throws error if provided hub in not reachable", {
+  skip_if_net_down()
+  skip_if_exp_down()
+
   expect_error(ki_timeseries_list(hub = "https://xxxx", ts_name = "A*"))
 })
 
@@ -52,7 +55,7 @@ test_that("ki_timeseries_list returns coverage columns by default", {
   skip_if_net_down()
   skip_if_exp_down()
 
-  ts_meta <- ki_timeseries_list(hub = example_hub, ts_name = "A*")
+  ts_meta <- ki_timeseries_list(hub = example_hub, station_id = test_stn_id)
   expect(
     sum(c("from", "to") %in% names(ts_meta)) == 2,
     failure_message = "Timeseries metadata doesn't contain expected columns"
@@ -63,7 +66,7 @@ test_that("ki_timeseries_list allows for turning coverage off increase query spe
   skip_if_net_down()
   skip_if_exp_down()
 
-  ts_meta <- ki_timeseries_list(hub = example_hub, ts_name = "A*", coverage = FALSE)
+  ts_meta <- ki_timeseries_list(hub = example_hub, station_id = test_stn_id, coverage = FALSE)
   expect(
     sum(c("from", "to") %in% names(ts_meta)) == 0,
     failure_message = "Timeseries metadata doesn't contain expected columns"
@@ -79,12 +82,12 @@ test_that("ki_timeseries_list allows for custom return fields (vector or string)
 
   fake_ret_str <- "metadatathatdoesntactuallexist"
 
-  stn_cust_retr <- ki_timeseries_list(hub = example_hub, ts_name = "A*", return_fields = cust_ret_str)
-  stn_cust_retr2 <- ki_timeseries_list(hub = example_hub, ts_name = "A*", return_fields = cust_ret_v)
+  stn_cust_retr <- ki_timeseries_list(hub = example_hub, station_id = test_stn_id, return_fields = cust_ret_str)
+  stn_cust_retr2 <- ki_timeseries_list(hub = example_hub, station_id = test_stn_id, return_fields = cust_ret_v)
 
   expect_is(stn_cust_retr, c("tbl_df", "tbl", "data.frame"))
   expect_is(stn_cust_retr2, c("tbl_df", "tbl", "data.frame"))
   expect_equal(stn_cust_retr, stn_cust_retr2)
 
-  expect_error(ki_timeseries_list(hub = example_hub, ts_name = "A*", return_fields = fake_ret_str))
+  expect_error(ki_timeseries_list(hub = example_hub, station_id = test_stn_id, return_fields = fake_ret_str))
 })
