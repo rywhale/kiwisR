@@ -62,20 +62,20 @@ for all available stations for the selected hub.
 ``` r
 # With swmc as the hub
 ki_station_list(hub = 'swmc')
-#> # A tibble: 3,697 x 5
+#> # A tibble: 3,658 x 5
 #>    station_name     station_no station_id station_latitude station_longitu~
 #>    <chr>            <chr>      <chr>                 <dbl>            <dbl>
-#>  1 A SNOW TEMPLATE  SNOW-WLF-~ 859904                 NA               NA  
-#>  2 ABBOTSFORD A     CLIM-MSC-~ 133535                 49.0           -122. 
-#>  3 ABERDEEN         CLIM-MSC-~ 121939                 45.5            -98.4
-#>  4 ABITIBI CANYON   ZZSNOW-OP~ 148200                 49.9            -81.6
-#>  5 ABITIBI LAKE     CLIM-MNR-~ 121135                 48.7            -80.1
-#>  6 ABITIBI RIVER A~ HYDAT-04M~ 136328                 49.9            -81.6
-#>  7 ABITIBI RIVER A~ HYDAT-04M~ 136304                 48.8            -80.7
-#>  8 ABITIBI RIVER A~ HYDAT-04M~ 136324                 49.6            -81.4
-#>  9 ABITIBI RIVER A~ HYDAT-04M~ 136332                 50.2            -81.6
-#> 10 ABITIBI RIVER A~ HYDAT-04M~ 136308                 48.7            -80.6
-#> # ... with 3,687 more rows
+#>  1 A SNOW TEMPLATE  SNOW-WLF-~ 952125                 NA               NA  
+#>  2 AA SNOW TEMPLATE SNOW-WLF-~ 954599                 NA               NA  
+#>  3 ABBOTSFORD A     CLIM-MSC-~ 133535                 49.0           -122. 
+#>  4 ABERDEEN         CLIM-MSC-~ 121939                 45.5            -98.4
+#>  5 ABITIBI CANYON   ZZSNOW-OP~ 148200                 49.9            -81.6
+#>  6 ABITIBI LAKE     CLIM-MNR-~ 121135                 48.7            -80.1
+#>  7 ABITIBI RIVER A~ HYDAT-04M~ 136328                 49.9            -81.6
+#>  8 ABITIBI RIVER A~ HYDAT-04M~ 136304                 48.8            -80.7
+#>  9 ABITIBI RIVER A~ HYDAT-04M~ 136324                 49.6            -81.4
+#> 10 ABITIBI RIVER A~ HYDAT-04M~ 136332                 50.2            -81.6
+#> # ... with 3,648 more rows
 ```
 
 #### Within Bounding Box
@@ -145,20 +145,20 @@ my_stations <- ki_station_list(
   )
 
 my_stations
-#> # A tibble: 132 x 5
+#> # A tibble: 131 x 5
 #>    station_name     station_no station_id station_latitude station_longitu~
 #>    <chr>            <chr>      <chr>                 <dbl>            <dbl>
-#>  1 A SNOW TEMPLATE  SNOW-WLF-~ 859904                 NA               NA  
-#>  2 ABBOTSFORD A     CLIM-MSC-~ 133535                 49.0           -122. 
-#>  3 ABERDEEN         CLIM-MSC-~ 121939                 45.5            -98.4
-#>  4 ABITIBI CANYON   ZZSNOW-OP~ 148200                 49.9            -81.6
-#>  5 ABITIBI LAKE     CLIM-MNR-~ 121135                 48.7            -80.1
-#>  6 ABITIBI RIVER A~ HYDAT-04M~ 136328                 49.9            -81.6
-#>  7 ABITIBI RIVER A~ HYDAT-04M~ 136304                 48.8            -80.7
-#>  8 ABITIBI RIVER A~ HYDAT-04M~ 136324                 49.6            -81.4
-#>  9 ABITIBI RIVER A~ HYDAT-04M~ 136332                 50.2            -81.6
-#> 10 ABITIBI RIVER A~ HYDAT-04M~ 136308                 48.7            -80.6
-#> # ... with 122 more rows
+#>  1 A SNOW TEMPLATE  SNOW-WLF-~ 952125                 NA               NA  
+#>  2 AA SNOW TEMPLATE SNOW-WLF-~ 954599                 NA               NA  
+#>  3 ABBOTSFORD A     CLIM-MSC-~ 133535                 49.0           -122. 
+#>  4 ABERDEEN         CLIM-MSC-~ 121939                 45.5            -98.4
+#>  5 ABITIBI CANYON   ZZSNOW-OP~ 148200                 49.9            -81.6
+#>  6 ABITIBI LAKE     CLIM-MNR-~ 121135                 48.7            -80.1
+#>  7 ABITIBI RIVER A~ HYDAT-04M~ 136328                 49.9            -81.6
+#>  8 ABITIBI RIVER A~ HYDAT-04M~ 136304                 48.8            -80.7
+#>  9 ABITIBI RIVER A~ HYDAT-04M~ 136324                 49.6            -81.4
+#> 10 ABITIBI RIVER A~ HYDAT-04M~ 136332                 50.2            -81.6
+#> # ... with 121 more rows
 
 # All stations starting with 'Oshawa'
 my_stations <- ki_station_list(
@@ -266,7 +266,7 @@ str(available_ts)
 #>  $ ts_id       : chr  "949057042" "949048042" "949056042" "949049042" ...
 #>  $ ts_name     : chr  "Q.DayMean" "Q.1.O" "Q.DayMax" "Q.15" ...
 #>  $ from        : POSIXct, format: "2005-12-26 05:00:00" NA ...
-#>  $ to          : POSIXct, format: "2019-08-12 05:00:00" NA ...
+#>  $ to          : POSIXct, format: "2019-09-03 05:00:00" NA ...
 ```
 
 #### Multiple Stations
@@ -398,20 +398,20 @@ my_values <- ki_timeseries_values(
 #> No start or end date provided, trying to return data for past 24 hours
 
 my_values
-#> # A tibble: 465 x 5
+#> # A tibble: 417 x 5
 #>    Timestamp           Value ts_name Units station_name                    
 #>    <dttm>              <dbl> <chr>   <chr> <chr>                           
-#>  1 2019-08-11 00:00:00  23.7 LVL.1.O m     Attawapiskat River below Mukete~
-#>  2 2019-08-11 00:05:00  23.7 LVL.1.O m     Attawapiskat River below Mukete~
-#>  3 2019-08-11 00:10:00  23.7 LVL.1.O m     Attawapiskat River below Mukete~
-#>  4 2019-08-11 00:15:00  23.7 LVL.1.O m     Attawapiskat River below Mukete~
-#>  5 2019-08-11 00:20:00  23.7 LVL.1.O m     Attawapiskat River below Mukete~
-#>  6 2019-08-11 00:25:00  23.7 LVL.1.O m     Attawapiskat River below Mukete~
-#>  7 2019-08-11 00:30:00  23.7 LVL.1.O m     Attawapiskat River below Mukete~
-#>  8 2019-08-11 00:35:00  23.7 LVL.1.O m     Attawapiskat River below Mukete~
-#>  9 2019-08-11 00:40:00  23.7 LVL.1.O m     Attawapiskat River below Mukete~
-#> 10 2019-08-11 00:45:00  23.7 LVL.1.O m     Attawapiskat River below Mukete~
-#> # ... with 455 more rows
+#>  1 2019-09-02 00:00:00  23.2 LVL.1.O m     Attawapiskat River below Mukete~
+#>  2 2019-09-02 00:05:00  23.2 LVL.1.O m     Attawapiskat River below Mukete~
+#>  3 2019-09-02 00:10:00  23.2 LVL.1.O m     Attawapiskat River below Mukete~
+#>  4 2019-09-02 00:15:00  23.2 LVL.1.O m     Attawapiskat River below Mukete~
+#>  5 2019-09-02 00:20:00  23.2 LVL.1.O m     Attawapiskat River below Mukete~
+#>  6 2019-09-02 00:25:00  23.2 LVL.1.O m     Attawapiskat River below Mukete~
+#>  7 2019-09-02 00:30:00  23.2 LVL.1.O m     Attawapiskat River below Mukete~
+#>  8 2019-09-02 00:35:00  23.2 LVL.1.O m     Attawapiskat River below Mukete~
+#>  9 2019-09-02 00:40:00  23.2 LVL.1.O m     Attawapiskat River below Mukete~
+#> 10 2019-09-02 00:45:00  23.2 LVL.1.O m     Attawapiskat River below Mukete~
+#> # ... with 407 more rows
 ```
 
 #### Multiple Time Series
