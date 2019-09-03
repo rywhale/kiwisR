@@ -96,17 +96,38 @@ test_that("ki_timeseries_values accepts custom return fields (vector or string)"
   skip_if_net_down()
   skip_if_exp_down()
 
-  cust_ret_str <- "station_name,station_id,station_no"
-  cust_ret_v <- c("station_name", "station_id", "station_no")
+  cust_ret_str <- "Timeseries Comment"
+  cust_ret_v <- c("Timeseries Comment")
 
   fake_ret_str <- "metadatathatdoesntactuallexist"
 
-  stn_cust_retr <- ki_station_list(hub = example_hub, return_fields = cust_ret_str)
-  stn_cust_retr2 <- ki_station_list(hub = example_hub, return_fields = cust_ret_v)
+  ts_cust_retr <- ki_timeseries_values(
+    hub = example_hub,
+    ts_id = test_ts_ids[[1]],
+    start_date = "2015-12-01",
+    end_date = "2018-01-01",
+    return_fields = cust_ret_str
+  )
 
-  expect_is(stn_cust_retr, c("tbl_df", "tbl", "data.frame"))
-  expect_is(stn_cust_retr2, c("tbl_df", "tbl", "data.frame"))
-  expect_equal(stn_cust_retr, stn_cust_retr2)
+  ts_cust_retr2 <- ki_timeseries_values(
+    hub = example_hub,
+    ts_id = test_ts_ids[[1]],
+    start_date = "2015-12-01",
+    end_date = "2018-01-01",
+    return_fields = cust_ret_str
+  )
 
-  expect_error(ki_station_list(hub = example_hub, return_fields = fake_ret_str))
+  expect_is(ts_cust_retr, c("tbl_df", "tbl", "data.frame"))
+  expect_is(ts_cust_retr2, c("tbl_df", "tbl", "data.frame"))
+  expect_equal(ts_cust_retr, ts_cust_retr2)
+
+  expect_error(
+    ts_cust_retr2 <- ki_timeseries_values(
+      hub = example_hub,
+      ts_id = test_ts_ids[[1]],
+      start_date = "2015-12-01",
+      end_date = "2018-01-01",
+      return_fields = fake_ret_str
+    )
+  )
 })

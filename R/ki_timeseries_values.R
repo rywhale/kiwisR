@@ -10,8 +10,7 @@
 #' @param end_date A date string formatted "YYYY-MM-DD". Defaults to today.
 #' @param return_fields (Optional) Specific fields to return. Consult your KiWIS hub services documentation for available options.
 #' Should be a comma separate string or a vector.
-#' @return A tibble with following columns: Timestamp, Value, ts_name, Units, station_name
-#' @return Tibble containing station metdata.
+#' @return A tibble with following columns by default: Timestamp, Value, ts_name, Units, station_name
 #' @examples
 #' \dontrun{
 #' ki_timeseries_values(
