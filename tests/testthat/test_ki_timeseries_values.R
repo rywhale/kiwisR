@@ -91,3 +91,22 @@ test_that("ki_timeseries_values returns three columns (two static) by default", 
     failure_message = "Timeseries values query did not return expected columns."
   )
 })
+
+test_that("ki_timeseries_values accepts custom return fields (vector or string)", {
+  skip_if_net_down()
+  skip_if_exp_down()
+
+  cust_ret_str <- "station_name,station_id,station_no"
+  cust_ret_v <- c("station_name", "station_id", "station_no")
+
+  fake_ret_str <- "metadatathatdoesntactuallexist"
+
+  stn_cust_retr <- ki_station_list(hub = example_hub, return_fields = cust_ret_str)
+  stn_cust_retr2 <- ki_station_list(hub = example_hub, return_fields = cust_ret_v)
+
+  expect_is(stn_cust_retr, c("tbl_df", "tbl", "data.frame"))
+  expect_is(stn_cust_retr2, c("tbl_df", "tbl", "data.frame"))
+  expect_equal(stn_cust_retr, stn_cust_retr2)
+
+  expect_error(ki_station_list(hub = example_hub, return_fields = fake_ret_str))
+})
