@@ -59,8 +59,10 @@ ki_timeseries_values <- function(hub, ts_id, start_date, end_date, return_fields
     "ts_unitname",
     "ts_unitsymbol",
     "ts_name",
+    "ts_id",
     "stationparameter_name",
-    "station_name"
+    "station_name",
+    "station_id"
   ),
   collapse = ","
   )
@@ -137,8 +139,10 @@ ki_timeseries_values <- function(hub, ts_id, start_date, end_date, return_fields
         Timestamp = lubridate::ymd_hms(ts_data$Timestamp),
         Value = as.numeric(ts_data$Value),
         ts_name = json_content$ts_name[[ts_chunk]],
+        ts_id = json_content$ts_id[[ts_chunk]],
         Units = json_content$ts_unitsymbol[[ts_chunk]],
-        station_name = json_content$station_name[[ts_chunk]]
+        station_name = json_content$station_name[[ts_chunk]],
+        station_id = json_content$station_id[[ts_chunk]]
       )
     }
   )
