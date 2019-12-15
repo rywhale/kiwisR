@@ -1,6 +1,6 @@
 Package: kiwisR
 Title: A Wrapper for Querying KISTERS 'WISKI' Databases via the 'KiWIS' API
-Version: 0.1.7
+Version: 0.1.8
 Authors@R: c(person("Ryan", "Whaley", role = c("aut", "cre"), email = "rdgwhaley@gmail.com"),
   person("Sam", "Albers", role = "ctb", email = "sam.albers@gov.bc.ca")
   )
@@ -12,7 +12,7 @@ Description: A wrapper for querying 'WISKI' databases via the 'KiWIS' 'REST' API
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 URL: https://github.com/rywhale/kiwisR
 BugReports: https://github.com/rywhale/kiwisR/issues
 Depends: 

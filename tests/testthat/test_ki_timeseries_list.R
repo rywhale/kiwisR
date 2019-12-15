@@ -30,7 +30,7 @@ test_that("ki_timeseries_list accepts station_id for retrieving metadata", {
 
   ts_meta <- ki_timeseries_list(hub = example_hub, station_id = test_stn_id)
 
-  expect_is(ts_meta, c("tbl_df", "tbl", "data.frame"))
+  expect_type(ts_meta, "list")
 })
 
 test_that("ki_timeseries_list accepts ts_name for retrieving metadata", {
@@ -39,7 +39,7 @@ test_that("ki_timeseries_list accepts ts_name for retrieving metadata", {
 
   ts_meta <- ki_timeseries_list(hub = example_hub, ts_name = "Vel*")
 
-  expect_is(ts_meta, c("tbl_df", "tbl", "data.frame"))
+  expect_type(ts_meta, "list")
 })
 
 test_that("ki_timeseries_list accepts group_id for retrieving metadata", {
@@ -48,7 +48,7 @@ test_that("ki_timeseries_list accepts group_id for retrieving metadata", {
 
   ts_meta <- ki_timeseries_list(hub = example_hub, group_id = test_ts_group_id)
 
-  expect_is(ts_meta, c("tbl_df", "tbl", "data.frame"))
+  expect_type(ts_meta, "list")
 })
 
 test_that("ki_timeseries_list returns coverage columns by default", {
@@ -59,7 +59,7 @@ test_that("ki_timeseries_list returns coverage columns by default", {
   expect(
     sum(c("from", "to") %in% names(ts_meta)) == 2,
     failure_message = "Timeseries metadata doesn't contain expected columns"
-    )
+  )
 })
 
 test_that("ki_timeseries_list allows for turning coverage off increase query speed", {
@@ -70,7 +70,7 @@ test_that("ki_timeseries_list allows for turning coverage off increase query spe
   expect(
     sum(c("from", "to") %in% names(ts_meta)) == 0,
     failure_message = "Timeseries metadata doesn't contain expected columns"
-    )
+  )
 })
 
 test_that("ki_timeseries_list allows for custom return fields (vector or string)", {
@@ -80,14 +80,28 @@ test_that("ki_timeseries_list allows for custom return fields (vector or string)
   cust_ret_str <- "station_name,ts_name,ts_id"
   cust_ret_v <- c("station_name", "ts_name", "ts_id")
 
-  fake_ret_str <- "metadatathatdoesntactuallexist"
+  fake_ret_str <- "metadatathatdoesntactuallyexist"
 
-  stn_cust_retr <- ki_timeseries_list(hub = example_hub, station_id = test_stn_id, return_fields = cust_ret_str)
-  stn_cust_retr2 <- ki_timeseries_list(hub = example_hub, station_id = test_stn_id, return_fields = cust_ret_v)
+  stn_cust_retr <- ki_timeseries_list(
+    hub = example_hub,
+    station_id = test_stn_id,
+    return_fields = cust_ret_str
+  )
+  stn_cust_retr2 <- ki_timeseries_list(
+    hub = example_hub,
+    station_id = test_stn_id,
+    return_fields = cust_ret_v
+  )
 
-  expect_is(stn_cust_retr, c("tbl_df", "tbl", "data.frame"))
-  expect_is(stn_cust_retr2, c("tbl_df", "tbl", "data.frame"))
+  expect_type(stn_cust_retr, "list")
+  expect_type(stn_cust_retr2, "list")
   expect_equal(stn_cust_retr, stn_cust_retr2)
 
-  expect_error(ki_timeseries_list(hub = example_hub, station_id = test_stn_id, return_fields = fake_ret_str))
+  expect_error(
+    ki_timeseries_list(
+      hub = example_hub,
+      station_id = test_stn_id,
+      return_fields = fake_ret_str
+    )
+  )
 })

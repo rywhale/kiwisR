@@ -54,7 +54,7 @@ test_that("ki_timeseries_values returns table with data", {
     start_date = "2015-12-01",
     end_date = "2018-01-01"
   )
-  expect_is(ts_vals, c("tbl_df", "tbl", "data.frame"))
+  expect_type(ts_vals, "list")
 })
 
 test_that("ki_timeseries_values can take a vector of ts_ids and return list of tables", {
@@ -68,7 +68,7 @@ test_that("ki_timeseries_values can take a vector of ts_ids and return list of t
     end_date = "2018-01-01"
   )
 
-  expect_is(ts_vals, c("tbl_df", "tbl", "data.frame"))
+  expect_type(ts_vals, "list")
   expect(
     length(unique(ts_vals$ts_name)) == 2,
     failure_message = "Timeseries values query for multiple ts_ids didn't return multiple ts_names"
@@ -117,8 +117,8 @@ test_that("ki_timeseries_values accepts custom return fields (vector or string)"
     return_fields = cust_ret_str
   )
 
-  expect_is(ts_cust_retr, c("tbl_df", "tbl", "data.frame"))
-  expect_is(ts_cust_retr2, c("tbl_df", "tbl", "data.frame"))
+  expect_type(ts_cust_retr, "list")
+  expect_type(ts_cust_retr2, "list")
   expect_equal(ts_cust_retr, ts_cust_retr2)
 
   expect_error(

@@ -13,7 +13,7 @@ test_that("ki_station_list should return a tibble", {
   skip_if_exp_down()
 
   stns <- ki_station_list(hub = example_hub)
-  expect_is(stns, c("tbl_df", "tbl", "data.frame"))
+  expect_type(stns, "list")
 })
 
 test_that("ki_station_list accepts search_term filters", {
@@ -23,8 +23,8 @@ test_that("ki_station_list accepts search_term filters", {
   stn_filt <- ki_station_list(hub = example_hub, search_term = "A*")
   stn_empty <- ki_station_list(hub = example_hub, search_term = "")
 
-  expect_is(stn_filt, c("tbl_df", "tbl", "data.frame"))
-  expect_is(stn_empty, c("tbl_df", "tbl", "data.frame"))
+  expect_type(stn_filt, "list")
+  expect_type(stn_empty, "list")
   expect(
     nrow(stn_empty) == 0,
     failure_message = "Providing empty search term should return no data"
@@ -40,8 +40,8 @@ test_that("ki_station_list accepts bbox filter (vector or character)", {
   stn_bbox_filt <- ki_station_list(hub = example_hub, bounding_box = stn_bbox_str)
   stn_bbox_filt2 <- ki_station_list(hub = example_hub, bounding_box = stn_bbox_v)
 
-  expect_is(stn_bbox_filt, "tbl_df")
-  expect_is(stn_bbox_filt2, "tbl_df")
+  expect_type(stn_bbox_filt, "list")
+  expect_type(stn_bbox_filt2, "list")
   expect_equal(stn_bbox_filt, stn_bbox_filt2)
 })
 
@@ -51,7 +51,7 @@ test_that("ki_station_list accepts group_id filter", {
 
   #test_group_id <- test_group_id
   stns_group <- ki_station_list(hub = example_hub, group_id = test_group_id)
-  expect_is(stns_group, "tbl_df")
+  expect_type(stns_group, "list")
 })
 
 test_that("ki_station_list accepts custom return fields (vector or string)", {
@@ -66,8 +66,8 @@ test_that("ki_station_list accepts custom return fields (vector or string)", {
   stn_cust_retr <- ki_station_list(hub = example_hub, return_fields = cust_ret_str)
   stn_cust_retr2 <- ki_station_list(hub = example_hub, return_fields = cust_ret_v)
 
-  expect_is(stn_cust_retr, c("tbl_df", "tbl", "data.frame"))
-  expect_is(stn_cust_retr2, c("tbl_df", "tbl", "data.frame"))
+  expect_type(stn_cust_retr, "list")
+  expect_type(stn_cust_retr2, "list")
   expect_equal(stn_cust_retr, stn_cust_retr2)
 
   expect_error(ki_station_list(hub = example_hub, return_fields = fake_ret_str))

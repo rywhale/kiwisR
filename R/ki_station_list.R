@@ -32,9 +32,9 @@ ki_station_list <- function(hub, search_term, bounding_box, group_id, return_fie
   if(missing(return_fields)){
     return_fields <- "station_name,station_no,station_id,station_latitude,station_longitude"
   }else{
-    if(!is.vector(return_fields) & !is.character(return_fields)){
+    if(!inherits(return_fields, "character")){
       stop(
-        "User supplied return_fields must be comma separate string or vector of fields."
+        "User supplied return_fields must be comma separated string or vector of strings"
         )
     }
   }
@@ -86,33 +86,27 @@ ki_station_list <- function(hub, search_term, bounding_box, group_id, return_fie
     return(e)
   })
 
-  # Check for query error
-  if(sum(grepl("error", class(raw)))){
-    stop("Query returned error: ", raw$message)
-  }
+ check_ki_response(raw)
 
   # Parse response
-  raw_content <- httr::content(raw)
-
-  # Check for timeout / 404
-  if(class(raw) != "response" | class(raw_content) != "list"){
-    stop("Check that KiWIS hub is accessible via a web browser.")
-  }
+  raw_content <- httr::content(raw, "text")
 
   # Parse text
-  json_content <- jsonlite::fromJSON(httr::content(raw, "text"))
+  json_content <- jsonlite::fromJSON(raw_content)
 
   # Check for empty search results
-  if (class(json_content) == "character") {
+  if (inherits(json_content, "character")) {
     return("No matches for search term.")
   }
 
   # Convert to tibble
-  content_dat <- tibble::as_tibble(json_content, .name_repair = "minimal")[-1, ]
-
+  content_dat <- tibble::as_tibble(
+    json_content,
+    .name_repair = "minimal"
+    )[-1, ]
 
   # Add column names
-  colnames(content_dat) <- json_content[1, ]
+  names(content_dat) <- json_content[1, ]
 
   # Remove garbage stations
   if("station_name" %in% names(content_dat)){

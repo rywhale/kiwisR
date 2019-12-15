@@ -25,7 +25,6 @@ check_hub <- function(hub) {
   }else{
     api_url <- default_hubs[[which(names(default_hubs) == hub)]]
   }
-
   return(api_url)
 }
 
@@ -79,4 +78,20 @@ exp_live <- function(exp_hub){
     silent = TRUE
   )
   !inherits(z, "try-error") & !length(names(httr::content(z)))
+}
+
+#' Verifying HTTP response
+#' @noRd
+#' @description Checks HTTP response from KiWIS server
+#' @keywords internal
+check_ki_response <- function(response){
+  # Check for query error
+  if(inherits(response, "error")){
+    stop("Query returned error: ", raw$message)
+  }
+
+  # Check for timeout / 404
+  if(!inherits(response, "response")){
+    stop("Check that KiWIS hub is accessible via a web browser.")
+  }
 }

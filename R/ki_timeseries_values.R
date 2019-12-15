@@ -36,9 +36,9 @@ ki_timeseries_values <- function(hub, ts_id, start_date, end_date, return_fields
   if (missing(return_fields)) {
     return_fields <- "Timestamp,Value"
   } else {
-    if (!is.vector(return_fields) & !is.character(return_fields)) {
+    if(!inherits(return_fields, "character")){
       stop(
-        "User supplied return_fields must be comma separate string or vector of fields."
+        "User supplied return_fields must be comma separated string or vector of strings"
       )
     }
     return_fields <- c("Timestamp", "Value", return_fields)
@@ -95,21 +95,13 @@ ki_timeseries_values <- function(hub, ts_id, start_date, end_date, return_fields
     return(e)
   })
 
-  # Check for query error
-  if (sum(grepl("error", class(raw)))) {
-    stop("Query returned error: ", raw$message)
-  }
+  check_ki_response(raw)
 
   # Parse response
-  raw_content <- httr::content(raw)
-
-  # Check for timeout / 404
-  if (class(raw) != "response" | class(raw_content) != "list") {
-    stop("Check that KiWIS hub is accessible via a web browser.")
-  }
+  raw_content <- httr::content(raw, "text")
 
   # Parse text
-  json_content <- jsonlite::fromJSON(httr::content(raw, "text"))
+  json_content <- jsonlite::fromJSON(raw_content)
 
   if (length(names(json_content)) == 3) {
     stop(json_content$message)
@@ -123,7 +115,6 @@ ki_timeseries_values <- function(hub, ts_id, start_date, end_date, return_fields
 
   ts_cols <- unlist(strsplit(json_content$columns[[1]], ","))
 
-
   content_dat <- purrr::map_df(
     1:length(json_content$data),
     function(ts_chunk) {
@@ -132,7 +123,7 @@ ki_timeseries_values <- function(hub, ts_id, start_date, end_date, return_fields
         .name_repair = "minimal",
       )
 
-      colnames(ts_data) <- ts_cols
+      names(ts_data) <- ts_cols
 
       dplyr::mutate(
         ts_data,

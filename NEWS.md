@@ -1,3 +1,9 @@
+kiwisR 0.1.8
+=========================
+### MINOR CHANGES
+* Replaced instances of `if(class(x, "foo"))` with `inherits(x, "foo")` (#11)
+* `ki_timeseries_values` now returns two more columns: `ts_id` and `station_id` (#10) 
+
 kiwisR 0.1.7
 =========================
 ### MINOR CHANGES

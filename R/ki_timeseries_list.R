@@ -31,9 +31,9 @@ ki_timeseries_list <- function(hub, station_id, ts_name, coverage = TRUE, group_
     # Default
     return_fields <- "station_name,station_id,ts_id,ts_name"
   }else{
-    if(!is.vector(return_fields) & !is.character(return_fields)){
+    if(!inherits(return_fields, "character")){
       stop(
-        "User supplied return_fields must be comma separate string or vector of fields."
+        "User supplied return_fields must be comma separated string or vector of strings"
       )
     }
 
@@ -97,32 +97,30 @@ ki_timeseries_list <- function(hub, station_id, ts_name, coverage = TRUE, group_
       return(e)
     })
 
-  # Check for query error
-  if(sum(grepl("error", class(raw)))){
-    stop("Query returned error: ", raw$message)
-  }
+  check_ki_response(raw)
 
   # Parse response
-  raw_content <- httr::content(raw)
-
-  # Check for timeout / 404
-  if(class(raw) != "response" | class(raw_content) != "list"){
-    stop("Check that KiWIS hub is accessible via a web browser.")
-  }
+  raw_content <- httr::content(raw, "text")
 
   # Parse text
-  json_content <- jsonlite::fromJSON(httr::content(raw, "text"))
+  json_content <- jsonlite::fromJSON(raw_content)
 
   # Check for special case single ts return
   if(nrow(json_content) == 2){
-    content_dat <- tibble::as_tibble(json_content, .name_repair = "minimal")[-1, ]
+    content_dat <- tibble::as_tibble(
+      json_content,
+      .name_repair = "minimal"
+      )[-1, ]
   }else{
     # Convert to  tibble
-    content_dat <- tibble::as_tibble(json_content[-1, ], .name_repair = "minimal")
+    content_dat <- tibble::as_tibble(
+      json_content[-1, ],
+      .name_repair = "minimal"
+      )
   }
 
   # Add column names
-  colnames(content_dat) <- json_content[1, ]
+  names(content_dat) <- json_content[1, ]
 
   # Cast lat/lon columns if they exist
   content_dat <- suppressWarnings(

@@ -5,8 +5,14 @@
 \title{Get list of available time series for station or
 list of stations.}
 \usage{
-ki_timeseries_list(hub, station_id, ts_name, coverage = TRUE, group_id,
-  return_fields)
+ki_timeseries_list(
+  hub,
+  station_id,
+  ts_name,
+  coverage = TRUE,
+  group_id,
+  return_fields
+)
 }
 \arguments{
 \item{hub}{The KiWIS database you are querying. Either one of the defaults or a URL.

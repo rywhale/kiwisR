@@ -35,25 +35,20 @@ ki_group_list <- function(hub) {
       return(e)
     })
 
-  # Check for query error
-  if(sum(grepl("error", class(raw)))){
-    stop("Query returned error: ", raw$message)
-  }
+  check_ki_response(raw)
 
   # Parse response
-  raw_content <- httr::content(raw)
-
-  # Check for timeout / 404
-  if(class(raw) != "response" | class(raw_content) != "list"){
-    stop("Check that KiWIS hub is accessible via a web browser.")
-  }
+  raw_content <- httr::content(raw, "text")
 
   # Parse text
-  json_content <- jsonlite::fromJSON(httr::content(raw, "text"))
+  json_content <- jsonlite::fromJSON(raw_content)
 
-  content_dat <- tibble::as_tibble(json_content[2:nrow(json_content), ], .name_repair = "minimal")
+  content_dat <- tibble::as_tibble(
+    json_content[2:nrow(json_content), ],
+    .name_repair = "minimal"
+    )
 
-  colnames(content_dat) <- json_content[1, ]
+  names(content_dat) <- json_content[1, ]
 
   return(content_dat)
 }

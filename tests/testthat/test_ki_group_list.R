@@ -8,7 +8,7 @@ test_that("ki_group_list returns a tibble with three columns", {
   static_names <- c("group_name", "group_id", "group_type")
 
 
-  expect_is(group_test, c("tbl_df", "tbl", "data.frame"))
+  expect_type(group_test, "list")
   expect(
     sum(static_names %in% names(group_test)) == 3,
     failure_message = "Group metadata doesn't contain expected columns"
