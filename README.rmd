@@ -59,8 +59,6 @@ devtools::load_all()
 
 ### Get Station Information
 
-#### All Available Stations
-
 By default, ```ki_station_list()``` returns a tibble containing information for all available stations for the selected hub. 
 
 ```{r}
@@ -68,79 +66,10 @@ By default, ```ki_station_list()``` returns a tibble containing information for 
 ki_station_list(hub = 'swmc')
 ```
 
-#### Within Bounding Box
-
-You can also specify a bounding box to look within for stations. The bounding box should be either
-
-* A vector like this ```c(min_x, min_y, max_x, max_y)```
-* Or a comma separated string like this ```"min_x,min_y,max_x,max_y"```
-
-```{r}
-# With vector
-my_bounding_box <- c("-80.126038", "43.458297", "-79.002481", "43.969098")
-my_stations <- ki_station_list(
-  hub = 'swmc', 
-  bounding_box = my_bounding_box
-  )
-
-my_stations
-
-# With comma separated string
-my_bounding_box <- "-80.126038,43.458297,-79.002481,43.969098"
-my_stations <- ki_station_list(hub = 'swmc', bounding_box = my_bounding_box)
-my_stations
-
-```
-
-#### By Search Term
-You can also narrow search results using a search term. This supports the use of ```*``` as a wildcard.
-
-```{r}
-# All stations starting with 'A'
-my_stations <- ki_station_list(
-  hub = 'swmc', 
-  search_term = "A*"
-  )
-
-my_stations
-
-# All stations starting with 'Oshawa'
-my_stations <- ki_station_list(
-  hub = 'swmc', 
-  search_term = "Oshawa*"
-  )
-
-my_stations
-```
-
-#### By Group
-You can retrieve a list of available station and time series groups using ```ki_group_list```
-
-```{r}
-all_groups <- ki_group_list(hub = 'swmc')
-all_groups
-```
-
-You can then pass values from the ```group_id``` column to ```ki_station_list``` to filter for only stations
-included in the group
-
-```{r}
-group_stations <- ki_station_list(
-  hub = 'swmc', 
-  group_id = '169270'
-  )
-
-group_stations
-```
-
 ### Get Time Series Information
 
 You can use the ```station_id``` column returned using ```ki_station_list()``` to figure out
 which time series are available for a given station. 
-
-By default, this will also return ```to``` and ```from``` columns 
-indicating the period of record for that time series. You can speed
-up queries by setting the ```coverage``` argument to `FALSE`. 
 
 
 #### One Station
@@ -153,9 +82,6 @@ available_ts <- ki_timeseries_list(
   )
 
 available_ts
-
-str(available_ts)
-
 ```
 
 #### Multiple Stations
@@ -173,8 +99,6 @@ available_ts <- ki_timeseries_list(
   )
 
 available_ts
-
-unique(available_ts$ts_name)
 ```
 
 ### Get Time Series Values
@@ -212,8 +136,6 @@ my_values <- ki_timeseries_values(
   )
 
 my_values
-
-unique(my_values$ts_name)
 ```
 
 ## Using Other Hubs
@@ -229,3 +151,7 @@ specify the ```hub``` argument with
 `http://kiwis.kisters.de/KiWIS/KiWIS?`
 
 If you'd like to have a hub added to the defaults, please [Submit an Issue](https://github.com/rywhale/kiwisR/issues)
+
+
+## Contributing
+See [here](./.github/CONTRIBUTING.md) if you'd like to contribute.

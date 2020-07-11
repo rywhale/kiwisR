@@ -19,7 +19,6 @@
 #' ki_station_list(hub = "swmc", group_id = "518247")
 #' }
 #'
-
 ki_station_list <- function(hub, search_term, bounding_box, group_id, return_fields) {
   # Common strings for culling bogus stations
   garbage <- c(
@@ -29,13 +28,13 @@ ki_station_list <- function(hub, search_term, bounding_box, group_id, return_fie
   )
 
   # Account for user-provided return fields
-  if(missing(return_fields)){
+  if (missing(return_fields)) {
     return_fields <- "station_name,station_no,station_id,station_latitude,station_longitude"
-  }else{
-    if(!inherits(return_fields, "character")){
+  } else {
+    if (!inherits(return_fields, "character")) {
       stop(
         "User supplied return_fields must be comma separated string or vector of strings"
-        )
+      )
     }
   }
 
@@ -77,16 +76,20 @@ ki_station_list <- function(hub, search_term, bounding_box, group_id, return_fie
   }
 
   # Send request
-  raw <- tryCatch({
-    httr::GET(
-      url = api_url,
-      query = api_query,
-      httr::timeout(15)
-    )}, error = function(e){
-    return(e)
-  })
+  raw <- tryCatch(
+    {
+      httr::GET(
+        url = api_url,
+        query = api_query,
+        httr::timeout(15)
+      )
+    },
+    error = function(e) {
+      return(e)
+    }
+  )
 
- check_ki_response(raw)
+  check_ki_response(raw)
 
   # Parse response
   raw_content <- httr::content(raw, "text")
@@ -101,15 +104,15 @@ ki_station_list <- function(hub, search_term, bounding_box, group_id, return_fie
 
   # Convert to tibble
   content_dat <- tibble::as_tibble(
-    json_content,
+    x = json_content,
     .name_repair = "minimal"
-    )[-1, ]
+  )[-1, ]
 
   # Add column names
   names(content_dat) <- json_content[1, ]
 
   # Remove garbage stations
-  if("station_name" %in% names(content_dat)){
+  if ("station_name" %in% names(content_dat)) {
     content_dat <- content_dat[!grepl(
       paste(garbage, collapse = "|"),
       content_dat$station_name
@@ -122,7 +125,7 @@ ki_station_list <- function(hub, search_term, bounding_box, group_id, return_fie
       content_dat,
       dplyr::vars(
         dplyr::one_of(c("station_latitude", "station_longitude"))
-        ),
+      ),
       as.double
     )
   )
