@@ -1,3 +1,10 @@
+kiwisR 0.1.9
+=========================
+### MINOR CHANGES
+* Fixed issues related to ``exp_live`` 
+* Added CONTRIBUTING (#11)
+* Cleaned up README for readability
+
 kiwisR 0.1.8
 =========================
 ### MINOR CHANGES
