@@ -60,13 +60,6 @@ for all available stations for the selected hub.
 ``` r
 # With swmc as the hub
 ki_station_list(hub = 'swmc')
-#> Warning: `...` is not empty.
-#> 
-#> We detected these problematic arguments:
-#> * `needs_dots`
-#> 
-#> These dots only exist to allow future extensions and should be empty.
-#> Did you misspecify an argument?
 #> # A tibble: 3,903 x 5
 #>    station_name        station_no   station_id station_latitude station_longitu~
 #>    <chr>               <chr>        <chr>                 <dbl>            <dbl>
@@ -98,13 +91,6 @@ available_ts <- ki_timeseries_list(
   )
 
 available_ts
-#> Warning: `...` is not empty.
-#> 
-#> We detected these problematic arguments:
-#> * `needs_dots`
-#> 
-#> These dots only exist to allow future extensions and should be empty.
-#> Did you misspecify an argument?
 #> # A tibble: 180 x 6
 #>    station_name station_id ts_id ts_name from                to                 
 #>    <chr>        <chr>      <chr> <chr>   <dttm>              <dttm>             
@@ -137,13 +123,6 @@ available_ts <- ki_timeseries_list(
   )
 
 available_ts
-#> Warning: `...` is not empty.
-#> 
-#> We detected these problematic arguments:
-#> * `needs_dots`
-#> 
-#> These dots only exist to allow future extensions and should be empty.
-#> Did you misspecify an argument?
 #> # A tibble: 257 x 6
 #>    station_name station_id ts_id ts_name from                to                 
 #>    <chr>        <chr>      <chr> <chr>   <dttm>              <dttm>             
@@ -183,14 +162,7 @@ my_values <- ki_timeseries_values(
 #> No start or end date provided, trying to return data for past 24 hours
 
 my_values
-#> Warning: `...` is not empty.
-#> 
-#> We detected these problematic arguments:
-#> * `needs_dots`
-#> 
-#> These dots only exist to allow future extensions and should be empty.
-#> Did you misspecify an argument?
-#> # A tibble: 417 x 7
+#> # A tibble: 429 x 7
 #>    Timestamp           Value ts_name ts_id   Units station_name       station_id
 #>    <dttm>              <dbl> <chr>   <chr>   <chr> <chr>              <chr>     
 #>  1 2020-07-10 00:00:00  24.2 LVL.1.O 966435~ m     Attawapiskat Rive~ 146273    
@@ -203,7 +175,7 @@ my_values
 #>  8 2020-07-10 00:35:00  24.3 LVL.1.O 966435~ m     Attawapiskat Rive~ 146273    
 #>  9 2020-07-10 00:40:00  24.2 LVL.1.O 966435~ m     Attawapiskat Rive~ 146273    
 #> 10 2020-07-10 00:45:00  24.2 LVL.1.O 966435~ m     Attawapiskat Rive~ 146273    
-#> # ... with 407 more rows
+#> # ... with 419 more rows
 ```
 
 #### Multiple Time Series
@@ -219,13 +191,6 @@ my_values <- ki_timeseries_values(
   )
 
 my_values
-#> Warning: `...` is not empty.
-#> 
-#> We detected these problematic arguments:
-#> * `needs_dots`
-#> 
-#> These dots only exist to allow future extensions and should be empty.
-#> Did you misspecify an argument?
 #> # A tibble: 1,264 x 7
 #>    Timestamp           Value ts_name   ts_id   Units station_name     station_id
 #>    <dttm>              <dbl> <chr>     <chr>   <chr> <chr>            <chr>     

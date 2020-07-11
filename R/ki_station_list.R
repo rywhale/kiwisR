@@ -100,10 +100,12 @@ ki_station_list <- function(hub, search_term, bounding_box, group_id, return_fie
   }
 
   # Convert to tibble
-  content_dat <- tibble::as_tibble(
-    json_content,
-    .name_repair = "minimal"
-    )[-1, ]
+  content_dat <- suppressWarnings(
+      tibble::as_tibble(
+      x = json_content,
+      .name_repair = "minimal"
+      )[-1, ]
+  )
 
   # Add column names
   names(content_dat) <- json_content[1, ]
