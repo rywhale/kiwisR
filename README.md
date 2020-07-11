@@ -222,3 +222,7 @@ specify the `hub` argument with
 
 If you’d like to have a hub added to the defaults, please [Submit an
 Issue](https://github.com/rywhale/kiwisR/issues)
+
+## Contributing
+
+See [here](./.github/CONTRIBUTING.md) if you’d like to contribute.
