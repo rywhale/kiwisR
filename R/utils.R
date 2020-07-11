@@ -73,11 +73,20 @@ exp_live <- function(exp_hub){
     check_hub(exp_hub),
     "datasource=0&service=kisters&type=queryServices&request=getstationlist&format=json"
   )
-  z <- try(
-    suppressWarnings(httr::GET(exp_hub_url, httr::timeout(5))),
-    silent = TRUE
+
+  raw <- tryCatch(
+    {
+      httr::GET(
+        exp_hub_url,
+        httr::timeout(15)
+      )
+    },
+    error = function(e) {
+      return(e)
+    }
   )
-  !inherits(z, "try-error") & !length(names(httr::content(z)))
+
+  !inherits(raw, "error")
 }
 
 #' Verifying HTTP response
