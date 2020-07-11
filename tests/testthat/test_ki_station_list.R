@@ -42,7 +42,7 @@ test_that("ki_station_list accepts bbox filter (vector or character)", {
 
   expect_type(stn_bbox_filt, "list")
   expect_type(stn_bbox_filt2, "list")
-  expect_equal(stn_bbox_filt, stn_bbox_filt2)
+  expect_equal(nrow(stn_bbox_filt), nrow(stn_bbox_filt2))
 })
 
 test_that("ki_station_list accepts group_id filter", {
