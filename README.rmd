@@ -154,4 +154,4 @@ If you'd like to have a hub added to the defaults, please [Submit an Issue](http
 
 
 ## Contributing
-See [here](./.github/CONTRIBUTING.md) if you'd like to contribute.
+See [here](https://github.com/rywhale/kiwisR/blob/master/CONTRIBUTING.md) if you'd like to contribute.
