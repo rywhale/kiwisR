@@ -226,5 +226,5 @@ Issue](https://github.com/rywhale/kiwisR/issues)
 ## Contributing
 
 See
-[here](https://github.com/rywhale/kiwisR/blob/master/CONTRIBUTING.md) if
-you’d like to contribute.
+[here](https://github.com/rywhale/kiwisR/blob/master/.github/CONTRIBUTING.md)
+if you’d like to contribute.
