@@ -5,11 +5,12 @@
 #' @param hub The KiWIS database you are querying. Either one of the defaults or a URL.
 #'  See \href{https://github.com/rywhale/kiwisR}{README}.
 #' @param ts_id Either: a single time series id or a vector of time series ids.
-#'  Time series ids can be found using the ki_timeseries_list function
+#'  Time series ids can be found using the `ki_timeseries_list` function.
 #' @param start_date A date string formatted "YYYY-MM-DD". Defaults to yesterday.
 #' @param end_date A date string formatted "YYYY-MM-DD". Defaults to today.
 #' @param return_fields (Optional) Specific fields to return. Consult your KiWIS hub services documentation for available options.
 #' Should be a comma separate string or a vector.
+#' @param datasource (Optional) The data source to be used, defaults to 0.
 #' @return A tibble with following columns by default: Timestamp, Value, ts_name, Units, station_name
 #' @examples
 #' \dontrun{
@@ -21,7 +22,7 @@
 #' )
 #' }
 #'
-ki_timeseries_values <- function(hub, ts_id, start_date, end_date, return_fields) {
+ki_timeseries_values <- function(hub, ts_id, start_date, end_date, return_fields, datasource=0) {
 
   # Default to past 24 hours
   if (missing(start_date) || missing(end_date)) {
@@ -69,6 +70,7 @@ ki_timeseries_values <- function(hub, ts_id, start_date, end_date, return_fields
 
   api_query <- list(
     service = "kisters",
+    datasource = datasource,
     type = "queryServices",
     request = "getTimeseriesValues",
     format = "json",
