@@ -11,7 +11,8 @@ ki_timeseries_list(
   ts_name,
   coverage = TRUE,
   group_id,
-  return_fields
+  return_fields,
+  datasource = 0
 )
 }
 \arguments{
@@ -26,10 +27,12 @@ Station ids can be found using the ki_station_list function.}
 \item{coverage}{(Optional) Whether or not to return period of record columns.
 Defaults to TRUE, change to FALSE for faster queries.}
 
-\item{group_id}{(Optional) A time series group id (see ki_group_list)}
+\item{group_id}{(Optional) A time series group id (see ki_group_list).}
 
 \item{return_fields}{(Optional) Specific fields to return. Consult your KiWIS hub services documentation for available options.
 Should be a comma separate string or a vector.}
+
+\item{datasource}{(Optional) The data source to be used, defaults to 0.}
 }
 \value{
 A tibble containing all available time series for selected stations.
