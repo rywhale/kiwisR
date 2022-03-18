@@ -20,7 +20,8 @@
 #' ki_station_list(hub = "swmc", group_id = "518247")
 #' }
 #'
-ki_station_list <- function(hub, search_term, bounding_box, group_id, return_fields, datasource=0) {
+ki_station_list <- function(hub, search_term, bounding_box, group_id, 
+                            return_fields, datasource =0 ) {
   # Common strings for culling bogus stations
   garbage <- c(
     "^#", "^--", "testing",

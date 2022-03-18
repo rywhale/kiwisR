@@ -1,3 +1,10 @@
+kiwisR 0.2.1
+=========================
+### MINOR CHANGES
+* All queries now have an optional argument `datasource` to allow for cases
+where multiple KiWIS end points are available. See your KiWIS documentation for
+more information on this parameter (#21)
+
 kiwisR 0.1.9
 =========================
 ### MINOR CHANGES

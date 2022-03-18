@@ -13,7 +13,7 @@
 #' }
 #'
 
-ki_group_list <- function(hub, datasource=0) {
+ki_group_list <- function(hub, datasource = 0) {
 
   # Identify hub
   api_url <- check_hub(hub)
