@@ -18,9 +18,11 @@ knitr::opts_chunk$set(
 
 # kiwisR <img src="tools/readme/kiwisR_small.png" align="right" />
 
-![Travis-CI Build Status](https://travis-ci.org/rywhale/kiwisR.svg?branch=master)
+<!-- badges: start -->
+  [![R-CMD-check](https://github.com/rywhale/kiwisR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rywhale/kiwisR/actions/workflows/R-CMD-check.yaml)
 [![LICENSE](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/kiwisR)](https://cran.r-project.org/package=kiwisR) [![CRAN Download](https://cranlogs.r-pkg.org/badges/kiwisR?color=brightgreen)](https://CRAN.R-project.org/package=kiwisR)
+<!-- badges: end -->
 
 ## Overview
 A wrapper for querying [KISTERS WISKI databases](https://www.kisters.net/NA/products/wiski/) via the [KiWIS API](https://water.kisters.de/en/technology-trends/kisters-and-open-data/). Users can toggle between various databases by specifying the `hub` argument. Currently, the default hubs are:
