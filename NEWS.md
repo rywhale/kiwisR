@@ -3,6 +3,7 @@ kiwisR 0.2.2
 ### MINOR CHANGES
 * Now using `httr2` for all queries (#27)
 * Minimum R version bumped to 4.2.0 to allow for use of `|>` internally (#28)
+* Added code of conduct for contributing
 
 kiwisR 0.2.1
 =========================
