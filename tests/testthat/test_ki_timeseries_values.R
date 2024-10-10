@@ -2,35 +2,35 @@ context("Testing time series value retrieval and filters")
 
 test_that("ki_timeseries_values throws error when no hub specified", {
   skip_if_net_down()
-  skip_if_exp_down()
+  skip_on_cran()
 
   expect_error(ki_timeseries_values(hub = "", ts_id = "1234"))
 })
 
 test_that("ki_timeseries_values throws error if provided hub in not reachable", {
   skip_if_net_down()
-  skip_if_exp_down()
+  skip_on_cran()
 
   expect_error(ki_timeseries_values(hub = "https://xxxx", ts_id = "1234"))
 })
 
 test_that("ki_timeseries_values throws error when no ts_id specified", {
   skip_if_net_down()
-  skip_if_exp_down()
+  skip_on_cran()
 
   expect_error(ki_timeseries_values(hub = example_hub))
 })
 
 test_that("ki_timeseries_values returns error if ts_id doesn't exist", {
   skip_if_net_down()
-  skip_if_exp_down()
+  skip_on_cran()
 
   expect_error(ki_timeseries_values(hub = example_hub, ts_id = "FAKE"))
 })
 
 test_that("ki_timeseries_values returns error if no data for specified dates", {
   skip_if_net_down()
-  skip_if_exp_down()
+  skip_on_cran()
 
   # Past 24 hours by default
   expect_error(ki_timeseries_values(hub = example_hub, ts_id = test_ts_ids[[1]]))
@@ -46,7 +46,7 @@ test_that("ki_timeseries_values returns error if no data for specified dates", {
 
 test_that("ki_timeseries_values returns table with data", {
   skip_if_net_down()
-  skip_if_exp_down()
+  skip_on_cran()
 
   ts_vals <- ki_timeseries_values(
     hub = example_hub,
@@ -59,7 +59,7 @@ test_that("ki_timeseries_values returns table with data", {
 
 test_that("ki_timeseries_values can take a vector of ts_ids and return list of tables", {
   skip_if_net_down()
-  skip_if_exp_down()
+  skip_on_cran()
 
   ts_vals <- ki_timeseries_values(
     hub = example_hub,
@@ -77,7 +77,7 @@ test_that("ki_timeseries_values can take a vector of ts_ids and return list of t
 
 test_that("ki_timeseries_values returns three columns (two static) by default", {
   skip_if_net_down()
-  skip_if_exp_down()
+  skip_on_cran()
 
   ts_vals <- ki_timeseries_values(
     hub = example_hub,
@@ -94,7 +94,7 @@ test_that("ki_timeseries_values returns three columns (two static) by default", 
 
 test_that("ki_timeseries_values accepts custom return fields (vector or string)", {
   skip_if_net_down()
-  skip_if_exp_down()
+  skip_on_cran()
 
   cust_ret_str <- "Timeseries Comment"
   cust_ret_v <- c("Timeseries Comment")

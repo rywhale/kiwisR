@@ -10,7 +10,7 @@ test_that("ki_station_list throws error if provided hub in not reachable", {
 
 test_that("ki_station_list should return a tibble", {
   skip_if_net_down()
-  skip_if_exp_down()
+  skip_on_cran()
 
   stns <- ki_station_list(hub = example_hub)
   expect_type(stns, "list")
@@ -18,7 +18,7 @@ test_that("ki_station_list should return a tibble", {
 
 test_that("ki_station_list accepts search_term filters", {
   skip_if_net_down()
-  skip_if_exp_down()
+  skip_on_cran()
 
   stn_filt <- ki_station_list(hub = example_hub, search_term = "A*")
   stn_empty <- ki_station_list(hub = example_hub, search_term = "")
@@ -33,7 +33,7 @@ test_that("ki_station_list accepts search_term filters", {
 
 test_that("ki_station_list accepts bbox filter (vector or character)", {
   skip_if_net_down()
-  skip_if_exp_down()
+  skip_on_cran()
 
   stn_bbox_str <- "-131.7,-5.4,135.8,75.8"
   stn_bbox_v <- c("-131.7","-5.4","135.8","75.8")
@@ -47,7 +47,7 @@ test_that("ki_station_list accepts bbox filter (vector or character)", {
 
 test_that("ki_station_list accepts group_id filter", {
   skip_if_net_down()
-  skip_if_exp_down()
+  skip_on_cran()
 
   #test_group_id <- test_group_id
   stns_group <- ki_station_list(hub = example_hub, group_id = test_group_id)
@@ -56,7 +56,7 @@ test_that("ki_station_list accepts group_id filter", {
 
 test_that("ki_station_list accepts custom return fields (vector or string)", {
   skip_if_net_down()
-  skip_if_exp_down()
+  skip_on_cran()
 
   cust_ret_str <- "station_name,station_id,station_no"
   cust_ret_v <- c("station_name", "station_id", "station_no")

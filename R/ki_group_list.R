@@ -27,24 +27,18 @@ ki_group_list <- function(hub, datasource = 0) {
     kvp = "true"
   )
 
-  # Send request
-  raw <- tryCatch({
-    httr::GET(
-      url = api_url,
-      query = api_query,
-      httr::timeout(15)
-    )}, error = function(e){
-      return(e)
-    })
+  req <- httr2::request(api_url) |>
+    httr2::req_user_agent("kiwisR") |>
+    httr2::req_url_query(!!!api_query)
 
-  check_ki_response(raw)
+  resp <- httr2::req_perform(req)
 
-  # Parse response
-  raw_content <- httr::content(raw, "text")
+  httr2::resp_check_status(resp)
 
-  # Parse text
-  json_content <- jsonlite::fromJSON(raw_content)
+  # Parse JSON response
+  json_content <- httr2::resp_body_json(resp, simplifyVector = TRUE)
 
+  # Convert to tibble
   content_dat <- tibble::as_tibble(
     json_content[2:nrow(json_content), ],
     .name_repair = "minimal"
@@ -52,5 +46,5 @@ ki_group_list <- function(hub, datasource = 0) {
 
   names(content_dat) <- json_content[1, ]
 
-  return(content_dat)
+  content_dat
 }

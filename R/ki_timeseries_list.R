@@ -21,7 +21,7 @@
 #'}
 #'
 
-ki_timeseries_list <- function(hub, station_id, ts_name, coverage = TRUE, group_id, 
+ki_timeseries_list <- function(hub, station_id, ts_name, coverage = TRUE, group_id,
                                return_fields, datasource = 0) {
   # Check for no input
   if (missing(station_id) & missing(ts_name) & missing(group_id)) {
@@ -90,23 +90,16 @@ ki_timeseries_list <- function(hub, station_id, ts_name, coverage = TRUE, group_
 
   }
 
-  # Send request
-  raw <- tryCatch({
-    httr::GET(
-      url = api_url,
-      query = api_query,
-      httr::timeout(180)
-    )}, error = function(e){
-      return(e)
-    })
+  req <- httr2::request(api_url) |>
+    httr2::req_user_agent("kiwisR") |>
+    httr2::req_url_query(!!!api_query)
 
-  check_ki_response(raw)
+  resp <- httr2::req_perform(req)
 
-  # Parse response
-  raw_content <- httr::content(raw, "text")
+  httr2::resp_check_status(resp)
 
-  # Parse text
-  json_content <- jsonlite::fromJSON(raw_content)
+  # Parse JSON response
+  json_content <- httr2::resp_body_json(resp, simplifyVector = TRUE)
 
   # Check for special case single ts return
   if(nrow(json_content) == 2){
@@ -147,5 +140,5 @@ ki_timeseries_list <- function(hub, station_id, ts_name, coverage = TRUE, group_
     )
   )
 
- return(content_dat)
+ content_dat
 }

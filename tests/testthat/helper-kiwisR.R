@@ -23,12 +23,3 @@ skip_if_net_down <- function(){
   }
   testthat::skip("No internet")
 }
-
-# Skip if unable to connect to example KiWIS server
-skip_if_exp_down <- function(exp = example_hub){
-  if(exp_live(exp_hub = exp)){
-    return()
-  }
-  testthat::skip("Example KiWIS server offline.")
-}
-

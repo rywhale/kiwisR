@@ -22,7 +22,7 @@
 #' )
 #' }
 #'
-ki_timeseries_values <- function(hub, ts_id, start_date, end_date, 
+ki_timeseries_values <- function(hub, ts_id, start_date, end_date,
                                  return_fields, datasource = 0) {
 
   # Default to past 24 hours
@@ -87,28 +87,21 @@ ki_timeseries_values <- function(hub, ts_id, start_date, end_date,
     )
   )
 
-  # Send request
-  raw <- tryCatch({
-    httr::GET(
-      url = api_url,
-      query = api_query,
-      httr::timeout(60)
-    )
-  }, error = function(e) {
-    return(e)
-  })
+  req <- httr2::request(api_url) |>
+    httr2::req_user_agent("kiwisR") |>
+    httr2::req_url_query(!!!api_query)
 
-  check_ki_response(raw)
+  resp <- httr2::req_perform(req)
 
-  # Parse response
-  raw_content <- httr::content(raw, "text")
+  httr2::resp_check_status(resp)
 
-  # Parse text
-  json_content <- jsonlite::fromJSON(raw_content)
+  # Parse JSON response
+  json_content <- httr2::resp_body_json(resp, simplifyVector = TRUE)
 
   if (length(names(json_content)) == 3) {
     stop(json_content$message)
   }
+
   if ("rows" %in% names(json_content)) {
     num_rows <- sum(as.numeric(json_content$rows))
     if (num_rows == 0) {
@@ -141,5 +134,5 @@ ki_timeseries_values <- function(hub, ts_id, start_date, end_date,
     }
   )
 
-  return(content_dat)
+  content_dat
 }

@@ -20,7 +20,7 @@
 #' ki_station_list(hub = "swmc", group_id = "518247")
 #' }
 #'
-ki_station_list <- function(hub, search_term, bounding_box, group_id, 
+ki_station_list <- function(hub, search_term, bounding_box, group_id,
                             return_fields, datasource = 0) {
   # Common strings for culling bogus stations
   garbage <- c(
@@ -78,27 +78,16 @@ ki_station_list <- function(hub, search_term, bounding_box, group_id,
     api_query[["stationgroup_id"]] <- group_id
   }
 
-  # Send request
-  raw <- tryCatch(
-    {
-      httr::GET(
-        url = api_url,
-        query = api_query,
-        httr::timeout(15)
-      )
-    },
-    error = function(e) {
-      return(e)
-    }
-  )
+  req <- httr2::request(api_url) |>
+    httr2::req_user_agent("kiwisR") |>
+    httr2::req_url_query(!!!api_query)
 
-  check_ki_response(raw)
+  resp <- httr2::req_perform(req)
 
-  # Parse response
-  raw_content <- httr::content(raw, "text")
+  httr2::resp_check_status(resp)
 
-  # Parse text
-  json_content <- jsonlite::fromJSON(raw_content)
+  # Parse JSON response
+  json_content <- httr2::resp_body_json(resp, simplifyVector = TRUE)
 
   # Check for empty search results
   if (inherits(json_content, "character")) {
@@ -133,5 +122,5 @@ ki_station_list <- function(hub, search_term, bounding_box, group_id,
     )
   )
 
-  return(content_dat)
+  content_dat
 }
