@@ -99,7 +99,7 @@ kiwisR 0.1.2
 * Added better HTTP request error handling using `tryCatch`
 * Added a `NEWS.md` file to track changes to the package.
 * Added Travis-Cl 
-* Removed broken hubs and added the [KISTERS example KiWIS server](http://kiwis.kisters.de/KiWIS/KiWIS?datasource=0&service=kisters&type=queryServices&request=getrequestinfo) as a default
+* Removed broken hubs and added the KISTERS example KiWIS server
   * This hub is now used for the unit tests
 * Default hubs now stored in list to streamline adding/removing/matching
 * Added badges to README

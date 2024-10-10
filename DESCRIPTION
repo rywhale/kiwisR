@@ -6,7 +6,7 @@ Authors@R: c(person("Ryan", "Whaley", role = c("aut", "cre"), email = "rdgwhaley
   )
 Description: A wrapper for querying 'WISKI' databases via the 'KiWIS' 'REST' API. 'WISKI' is an 'SQL' relational database 
   used for the collection and storage of water data developed by KISTERS and 'KiWIS' is a 'REST' service that provides
-  access to 'WISKI' databases via HTTP requests (<https://water.kisters.de/en/technology-trends/kisters-and-open-data/>). 
+  access to 'WISKI' databases via HTTP requests (<https://www.kisters.eu/water-weather-and-environment/>). 
   Contains a list of default databases (called 'hubs') and also allows users to provide their own 'KiWIS' URL. 
   Supports the entire query process- from metadata to specific time series values. All data is returned as tidy tibbles.
 License: MIT + file LICENSE
