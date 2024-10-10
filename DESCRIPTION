@@ -1,6 +1,6 @@
 Package: kiwisR
 Title: A Wrapper for Querying KISTERS 'WISKI' Databases via the 'KiWIS' API
-Version: 0.2.1
+Version: 0.2.2
 Authors@R: c(person("Ryan", "Whaley", role = c("aut", "cre"), email = "rdgwhaley@gmail.com"),
   person("Sam", "Albers", role = "ctb", email = "sam.albers@gov.bc.ca")
   )
