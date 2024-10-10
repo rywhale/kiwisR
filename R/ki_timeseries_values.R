@@ -24,7 +24,6 @@
 #'
 ki_timeseries_values <- function(hub, ts_id, start_date, end_date,
                                  return_fields, datasource = 0) {
-
   # Default to past 24 hours
   if (missing(start_date) || missing(end_date)) {
     message("No start or end date provided, trying to return data for past 24 hours")
@@ -38,7 +37,7 @@ ki_timeseries_values <- function(hub, ts_id, start_date, end_date,
   if (missing(return_fields)) {
     return_fields <- "Timestamp,Value"
   } else {
-    if(!inherits(return_fields, "character")){
+    if (!inherits(return_fields, "character")) {
       stop(
         "User supplied return_fields must be comma separated string or vector of strings"
       )
@@ -57,16 +56,17 @@ ki_timeseries_values <- function(hub, ts_id, start_date, end_date,
   }
 
   # Metadata to return
-  ts_meta <- paste(c(
-    "ts_unitname",
-    "ts_unitsymbol",
-    "ts_name",
-    "ts_id",
-    "stationparameter_name",
-    "station_name",
-    "station_id"
-  ),
-  collapse = ","
+  ts_meta <- paste(
+    c(
+      "ts_unitname",
+      "ts_unitsymbol",
+      "ts_name",
+      "ts_id",
+      "stationparameter_name",
+      "station_name",
+      "station_id"
+    ),
+    collapse = ","
   )
 
   api_query <- list(

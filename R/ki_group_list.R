@@ -9,12 +9,10 @@
 #' @return A tibble with three columns: group_id, group_name and group_type.
 #' @examples
 #' \dontrun{
-#' ki_group_list(hub = 'swmc')
+#' ki_group_list(hub = "swmc")
 #' }
 #'
-
 ki_group_list <- function(hub, datasource = 0) {
-
   # Identify hub
   api_url <- check_hub(hub)
 
@@ -42,7 +40,7 @@ ki_group_list <- function(hub, datasource = 0) {
   content_dat <- tibble::as_tibble(
     json_content[2:nrow(json_content), ],
     .name_repair = "minimal"
-    )
+  )
 
   names(content_dat) <- json_content[1, ]
 

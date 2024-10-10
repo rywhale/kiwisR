@@ -18,9 +18,8 @@
 #' \dontrun{
 #' ki_timeseries_list(hub = "swmc", station_id = "146775")
 #' ki_timeseries_list(hub = "swmc", ts_name = "Vel*")
-#'}
+#' }
 #'
-
 ki_timeseries_list <- function(hub, station_id, ts_name, coverage = TRUE, group_id,
                                return_fields, datasource = 0) {
   # Check for no input
@@ -29,18 +28,18 @@ ki_timeseries_list <- function(hub, station_id, ts_name, coverage = TRUE, group_
   }
 
   # Account for user-provided return fields
-  if(missing(return_fields)){
+  if (missing(return_fields)) {
     # Default
     return_fields <- "station_name,station_id,ts_id,ts_name"
-  }else{
-    if(!inherits(return_fields, "character")){
+  } else {
+    if (!inherits(return_fields, "character")) {
       stop(
         "User supplied return_fields must be comma separated string or vector of strings"
       )
     }
 
     # Account for user listing coverage in return_fields
-    if(length(grepl("coverage", return_fields))){
+    if (length(grepl("coverage", return_fields))) {
       return_fields <- gsub(
         ",coverage|coverage,",
         "",
@@ -62,8 +61,8 @@ ki_timeseries_list <- function(hub, station_id, ts_name, coverage = TRUE, group_
     returnfields = paste(
       return_fields,
       collapse = ","
-      )
     )
+  )
 
   if (!missing(station_id)) {
     # Account for multiple station_ids
@@ -71,10 +70,10 @@ ki_timeseries_list <- function(hub, station_id, ts_name, coverage = TRUE, group_
     api_query[["station_id"]] <- station_id
   }
 
-  if(coverage == TRUE){
+  if (coverage == TRUE) {
     # Turn coverage columns on
-    api_query[['returnfields']] <- paste0(
-      api_query[['returnfields']],
+    api_query[["returnfields"]] <- paste0(
+      api_query[["returnfields"]],
       ",coverage"
     )
   }
@@ -85,9 +84,8 @@ ki_timeseries_list <- function(hub, station_id, ts_name, coverage = TRUE, group_
   }
 
   # Check for group_id
-  if(!missing(group_id)){
+  if (!missing(group_id)) {
     api_query[["timeseriesgroup_id"]] <- group_id
-
   }
 
   req <- httr2::request(api_url) |>
@@ -102,17 +100,17 @@ ki_timeseries_list <- function(hub, station_id, ts_name, coverage = TRUE, group_
   json_content <- httr2::resp_body_json(resp, simplifyVector = TRUE)
 
   # Check for special case single ts return
-  if(nrow(json_content) == 2){
+  if (nrow(json_content) == 2) {
     content_dat <- tibble::as_tibble(
       json_content,
       .name_repair = "minimal"
-      )[-1, ]
-  }else{
+    )[-1, ]
+  } else {
     # Convert to  tibble
     content_dat <- tibble::as_tibble(
       json_content[-1, ],
       .name_repair = "minimal"
-      )
+    )
   }
 
   # Add column names
@@ -135,10 +133,10 @@ ki_timeseries_list <- function(hub, station_id, ts_name, coverage = TRUE, group_
       content_dat,
       dplyr::vars(
         dplyr::one_of(c("from", "to"))
-        ),
+      ),
       lubridate::ymd_hms
     )
   )
 
- content_dat
+  content_dat
 }
