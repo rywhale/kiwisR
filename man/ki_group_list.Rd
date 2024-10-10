@@ -21,7 +21,7 @@ further filter down other queries like `ki_station_list`.
 }
 \examples{
 \dontrun{
-ki_group_list(hub = 'swmc')
+ki_group_list(hub = "swmc")
 }
 
 }
