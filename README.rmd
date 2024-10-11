@@ -25,7 +25,7 @@ knitr::opts_chunk$set(
 <!-- badges: end -->
 
 ## Overview
-A wrapper for querying [KISTERS WISKI databases](https://www.kisters.net/NA/products/wiski/) via the [KiWIS API](https://water.kisters.de/en/technology-trends/kisters-and-open-data/). Users can toggle between various databases by specifying the `hub` argument. Currently, the default hubs are:
+A wrapper for querying [KISTERS WISKI databases](https://www.kisters.net/NA/products/wiski/) via the [KiWIS API](https://www.kisters.eu/water-weather-and-environment/). Users can toggle between various databases by specifying the `hub` argument. Currently, the default hubs are:
 
 * _kisters_ : [KISTERS KiWIS Example Server](https://kiwis.kisters.de/KiWIS/)
 * _swmc_ : [Ontario Surface Water Monitoring Centre](https://www.ontario.ca/page/surface-water-monitoring)
